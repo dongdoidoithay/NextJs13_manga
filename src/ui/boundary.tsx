@@ -41,7 +41,7 @@ export const Boundary = ({
 }) => {
   return (
     <div
-      className={clsx("relative rounded-lg border border-dashed", {
+    /*   className={clsx("relative rounded-lg border border-dashed ", {
         "p-3 lg:p-5": size === "small",
         "p-4 lg:p-9": size === "default",
         "border-gray-700": color === "default",
@@ -53,7 +53,9 @@ export const Boundary = ({
         "animate-[rerender_1s_ease-in-out_1] text-vercel-pink":
           animateRerendering,
       })}
-    >
+ */
+      style={{"background": "rgba( 139, 255, 10, 0.1 )","boxShadow":"0 8px 32px 0 rgba( 31, 38, 135, 0.37 )","backdropFilter":"blur( 1px )","WebkitBackdropFilter":"blur( 1px )","borderRadius":"10px","border":"1px solid rgba( 255, 255, 255, 0.18 )"}} 
+      >
       <div
         className={clsx(
           "absolute -top-2.5 flex gap-x-1 text-[9px] uppercase leading-4 tracking-widest",
