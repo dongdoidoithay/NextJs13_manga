@@ -41,20 +41,22 @@ export const metadata: Metadata = {
       should_fallback:false
     } 
     },
+    icons:baseSeo.Icon
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) 
 {
   return (
     <html lang="en" className="[color-scheme:dark]">
-      <body className="overflow-y-scroll bg-gray-950 bg-[url('/grid.svg')]">
+      <body className="antialiased text-slate-500 dark:text-slate-400 dark:bg-slate-900  overflow-y-scroll bg-gray-950 bg-[url('/grid.svg')]">
         <GlobalNav/>
-        <div className="lg">
-          <div className="mx-auto max-w-4xl space-y-8 px-1 pt-1 lg:py-8 lg:px-8">
+       
+        <div className="lg:pl-72 flex flex-row">
+          <div className="grow px-1 max-w-4xl space-y-2 pt-1 lg:py-2 ">
             <div className="rounded-lg bg-vc-border-gradient p-px shadow-lg shadow-black/20">
               <div className="rounded-lg bg-black">
                 {/* <AddressBar /> */}
-                đâsd
+                breacrum
               </div>
             </div>
 
@@ -63,8 +65,10 @@ export default function RootLayout({children}: {children: React.ReactNode})
             </div>
           
           </div>
-          <div className="mx-auto max-w-xs">
-            sugget manga
+          <div className="flex-none max-w-xs space-y-2 pt-1 lg:py-2 ">
+              <div className="rounded-lg bg-black p-3.5 lg:p-6">
+                sugges
+              </div>
           </div>
         </div>
       </body>

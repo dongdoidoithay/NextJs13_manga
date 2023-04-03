@@ -5,6 +5,7 @@ export default {
     canonical:"https://1stheavenmanga.xyz",
     domainName:"1st Heaven Manga",
     archives:'https://1stheavenmanga.xyz',
+    Icon:'/vercel.svg',
     images: [
         {
             url: 'https://1stheavenmanga.xyz/image/bg.jpg',
