@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 export default function Type() {
   return (
     <main className="px-2">
-      <GroupStyle labels="Manga Info">
+      <GroupStyle labels="Manga Page type">
         <div> Type</div>
       </GroupStyle>
     </main>
