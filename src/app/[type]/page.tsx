@@ -1,22 +1,15 @@
-import "@/styles/globals.css";
-
+import baseSeo from "@/constants/baseSeo";
+import { GroupStyle } from "@/ui/group-stype";
 import { Metadata } from "next";
 
-import baseSeo from "@/constants/baseSeo";
-import { GlobalNav } from "@/ui/global-nav";
-import { Boundary } from "@/ui/boundary";
-
 export const metadata: Metadata = {
-  title: {
-    default: baseSeo.title,
-    template: "%s | " + baseSeo.domainName,
-  },
+  title: "Type Page",
   description: baseSeo.description,
   keywords: baseSeo.keywords,
   openGraph: {
     title: baseSeo.title,
     description: baseSeo.description,
-    type: "website",
+    type: "article",
     images: baseSeo.images,
     siteName: baseSeo.domainName,
   },
@@ -44,23 +37,12 @@ export const metadata: Metadata = {
   },
   icons: baseSeo.Icon,
 };
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Type() {
   return (
-    <html
-      lang="en"
-      className="dark [--scroll-mt:9.875rem] lg:[--scroll-mt:6.3125rem] js-focus-visible lg:mx-40"
-    >
-      <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 bg-[url('/grid.svg')]">
-        <GlobalNav />
-        <div className="lg:pl-60 ">
-          {children}
-        </div>
-      </body>
-    </html>
+    <main className="px-2">
+      <GroupStyle labels="Manga Info">
+        <div> Type</div>
+      </GroupStyle>
+    </main>
   );
 }

@@ -3,7 +3,7 @@ export const TableLastUpdate = () => {
     <table className="w-full text-left border-collapse text-sm table-fixed">
         <tbody >
           <tr>
-            <td className="py-2  leading-6 text-sky-500 whitespace-nowrap dark:text-sky-400">
+            <td className="py-2  leading-6 text-sky-500 whitespace-nowrap dark:text-sky-400 border-collapse">
               Manga 01
             </td>
             <td className="py-2 leading-6 text-indigo-600 whitespace-pre dark:text-indigo-300">

@@ -16,7 +16,7 @@ export function GlobalNav() {
   return (
     <>
       {/* backdrop-blur  */}
-      <div className="sticky lg:pl-72 lg:pr-8 top-0 z-40 w-full  flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75">
+      <div className="sticky lg:pl-60 lg:pr-8 top-0 z-40 w-full  flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75">
         <div className="max-w-8xl mx-auto">
           <div className="relative flex items-center">
             <div className="top-0 pointer-events-none text-xs  rounded-full py-1 max-w-screen-lg">
@@ -70,7 +70,7 @@ export function GlobalNav() {
           </div>
         </div>
       </div>
-      <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-b-0 lg:border-r lg:border-gray-800">
+      <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-60 lg:border-b-0 lg:border-r lg:border-gray-800">
         <div className="flex h-14 items-center py-4 px-4 lg:h-auto">
           <Link
             href="/"
