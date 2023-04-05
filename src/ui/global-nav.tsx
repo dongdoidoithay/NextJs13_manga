@@ -16,10 +16,10 @@ export function GlobalNav() {
   return (
     <>
       {/* backdrop-blur  */}
-      <div className="sticky lg:pl-60 lg:pr-8 top-0 z-40 w-full  flex-none transition-colors duration-500 lg:z-50 lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75">
+      <div className="sticky lg:pl-60 lg:pr-8 top-0 z-40 w-full flex-none transition-colors duration-500 lg:z-50 border-b border-slate-900/10 dark:border-slate-700 supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75">
         <div className="max-w-8xl mx-auto">
           <div className="relative flex items-center">
-            <div className="top-0 pointer-events-none text-xs  rounded-full py-1 max-w-screen-lg">
+            <div className="top-0 pointer-events-none text-xs rounded-full py-1 max-w-screen-lg">
               <div className="bg-current dark:bg-slate-900 pointer-events-auto rounded w-96">
                 <button
                   type="button"
@@ -71,36 +71,29 @@ export function GlobalNav() {
         </div>
       </div>
       <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-60 lg:border-b-0 lg:border-r lg:border-gray-800">
-        <div className="flex h-14 items-center py-4 px-4 lg:h-auto">
-          <Link
-            href="/"
-            className="group flex w-full items-center gap-x-2.5"
-            onClick={close}
-          >
-            <div className="h-7 w-7 rounded-full border border-white/30 group-hover:border-white/50">
-              M
-            </div>
-
-            <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
-              Web Name
-            </h3>
-          </Link>
-        </div>
-        <button
+      <div className="flex h-14 items-center py-4 px-4 lg:h-auto">
+      <button
           type="button"
-          className="group absolute right-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden"
+          className="group absolute left-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden mr-7"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <div className="font-medium text-gray-100 group-hover:text-gray-400">
-            Menu
-          </div>
+          {/* <div className="font-medium text-gray-100 group-hover:text-gray-400">
+            Menu 1
+          </div> */}
           {isOpen ? (
             <XMarkIcon className="block w-6 text-gray-400" />
           ) : (
             <Bars4Icon className="block w-6 text-gray-400" />
           )}
         </button>
-
+        Name Web Site
+        //
+        Search
+        //Icon Login
+        
+      </div>
+        
+       
         <div
           className={clsx("overflow-y-auto lg:static lg:block", {
             "fixed inset-x-0 bottom-0 top-14 mt-px bg-black": isOpen,
