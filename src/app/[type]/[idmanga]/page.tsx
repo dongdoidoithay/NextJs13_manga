@@ -15,7 +15,7 @@ export default function Info() {
             <div className="flex-1 text-xl text-white font-semibold border-t border-b border-t-transparent border-b-sky-300  first-letter:text-2xl">
               Tensei Shitara Slime Datta Ken
             </div>
-            <div className="grid lg:grid-cols-4 flex-1 border-t border-b border-t-transparent border-b-sky-300 font-thin">
+            <div className="grid lg:grid-cols-4 gap-1 flex-1 border-t border-b border-t-transparent border-b-sky-300 font-thin">
               <button
                 type="button"
                 className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
@@ -31,14 +31,14 @@ export default function Info() {
 
               <button
                 type="button"
-                className="hidden w-full lg:flex items-center text-sm leading-6 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+                className="hidden mx-1 w-full lg:flex items-center text-sm leading-6 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
               >
                <TagIcon className="block w-6 text-gray-400" /> READ LATER
               </button>
 
               <button
                 type="button"
-                className="hidden w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+                className="hidden mx-1 w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-2 pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
               >
                 <QueueListIcon className="block w-6 text-gray-400" /> COLLECTION
               </button>
