@@ -90,7 +90,7 @@ export default function Info() {
                       <HashtagIcon className="w-2 inline"/><a href="#" className="first-letter:uppercase pr-1 hover:text-white  hover:font-semibold">adventure</a>
                   </div>
                   <h3 className="font-semibold text-white/80 first-letter:uppercase">release</h3>
-                  <CalendarIcon className="w-2 inline"/><a href="#" className="first-letter:uppercase pr-1 hover:text-white  hover:font-semibold"> 2019</a>
+                      <CalendarIcon className="w-2 inline"/><a href="#" className="first-letter:uppercase pr-1 hover:text-white  hover:font-semibold"> 2019</a>
               </div>
             </div>
           </div>
