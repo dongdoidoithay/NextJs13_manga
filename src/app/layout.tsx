@@ -56,10 +56,11 @@ export default function RootLayout({
       className="dark [--scroll-mt:9.875rem] lg:[--scroll-mt:6.3125rem] js-focus-visible lg:mx-24"
     >
       <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 bg-[url('/grid.svg')]">
-       {/*  <GlobalNav /> */}
+       {/* <GlobalNav />
         <div className="lg:pl-60 ">
           {children}
-        </div>
+        </div> */}
+        {children}
       </body>
     </html>
   );
