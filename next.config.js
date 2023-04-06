@@ -14,6 +14,9 @@ reactMode: 'concurrent', //chưa rõ
   experimental: {
     appDir: true,
   },
+ /*  images: {
+    cacheDuration: 30 * 24 * 60 * 60, // 30 days
+  }, */
 }
 
 module.exports = nextConfig
