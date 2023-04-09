@@ -130,7 +130,7 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
       });
     }
   };
-  console.log("chapter", dataChapter)
+
   const PageAction = () => {
     return (
       <div id="next-prev" className="my-3 flex flex-row gap-2 mr-2">

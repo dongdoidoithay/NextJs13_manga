@@ -24,8 +24,8 @@ const FetchDataSlide = async (config: MangaLang) => {
   return await FetchApi(config.apiPath + config.endPointPath.homeSlide);
 };
 const SliderHome = ({ typeManga }: any) => {
-  const[imangeSlide,setImangeSlide]=useState<any>(null)
-  const[imangeSlideError,setImangeSlideError]=useState<boolean>(false)
+  const [imangeSlide, setImangeSlide] = useState<any>(null)
+  const [imangeSlideError, setImangeSlideError] = useState<boolean>(false)
 
   let config = SelectMangaTypeByPage(typeManga);
   const _fetchDataSlide = useQuery(
@@ -50,54 +50,35 @@ const SliderHome = ({ typeManga }: any) => {
       refetchOnWindowFocus: false,
     }
   );
+  const trending = (data: any) => {
 
-  const trending = (data: any) => 
-  {
-    /* const _defaultimg="/loading.gif";
-    setImangeSlide(data.image);
-   
-    const img = new Image();
-    if(!imangeSlideError){
-      img.onerror=( e)=>{
-        console.log('error image',e)
-        setImangeSlide(_defaultimg);
-        setImangeSlideError(true);
-      }
-    }
-    if(imangeSlideError){
-      img.onerror=null;
-    }
-    
-    img.src=data.image; */
-    
-   // console.log("_img",imangeSlide);
-    return(
-    <a
-      key={data.idDoc}
-      rel="nofollow"
-      href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
-      className="border rounded-md hover:border-dashed hover:border-sky-400"
-    >
-      <div
-        className="relative h-64 bg-cover bg-no-repeat bg-inherit bg-center rounded-md xs:w-full"
-        style={{ backgroundImage: "url(" + data.image/* imangeSlide */ + ")", width: "340px" }}
+    return (
+      <a
+        key={data.idDoc}
+        rel="nofollow"
+        href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
+        className="border rounded-md hover:border-dashed hover:border-sky-400 w-full h-64 overflow-hidden"
       >
-        <div className="absolute inset-0  bg-stripes-gray bg-slate-800/95 mt-32 text-sm rounded-md"></div>
-        <div className="absolute mt-32 text-sm px-1 ">
-          <h2 className="py-1 truncate ... font-semibold first-line:uppercase text-sky-500 dark:text-sky-400 first-letter:text-2xl first-letter:font-bold " >
-            {data.name}
-          </h2>
-          <div className="block text-slate-300 dark:text-slate-400 toverflow-hidden">
-            {config.configSetting.lbl_inf_Genres}:<span className="font-semibold runcate ... inline"> {data.genres}</span>
-          </div>
-          <span className="block text-slate-300 dark:text-slate-400">
-            {config.configSetting.lbl_inf_date}:<span className="font-semibold"> {getDate(data.date, config)}</span>
-          </span>
+        <div className="relative bg-red-950 ">
+           <ImageLoading url={data.image} title="silde" classStyle="w-full object-cover"/>
+           <div className="absolute inset-0  bg-stripes-gray bg-slate-800/95 mt-32 text-sm rounded-md"></div>
+          
+            <div className="absolute mt-32 text-sm px-1 inset-0">
+              <h2 className="py-1 truncate ... font-semibold first-line:uppercase text-sky-500 dark:text-sky-400 first-letter:text-2xl first-letter:font-bold w-80" >
+                {data.name}
+              </h2>
+              <div className="block text-slate-300 dark:text-slate-400 toverflow-hidden">
+                {config.configSetting.lbl_inf_Genres}:<span className="font-semibold runcate ... inline"> {data.genres}</span>
+              </div>
+              <span className="block text-slate-300 dark:text-slate-400">
+                {config.configSetting.lbl_inf_date}:<span className="font-semibold"> {getDate(data.date, config)}</span>
+              </span>
+            </div> 
         </div>
-      </div>
-    </a>
-  )
-};
+      </a>
+    )
+  };
+
   const blockSlide = (dataArr: any) => {
     return (
       dataArr &&
@@ -171,7 +152,7 @@ const SliderHome = ({ typeManga }: any) => {
         <div className="lg:flex-row flex-wrap">
           {skeletonSlide()}
           {skeletonSlide()}
-        
+
         </div>
       </>
     );
@@ -181,7 +162,7 @@ const SliderHome = ({ typeManga }: any) => {
       <>
         <div className="relative h-64 bg-cover bg-no-repeat bg-inherit bg-center rounded-md xs:w-full">
           {skeletonSlide()}
-        
+
         </div>
       </>
     );
@@ -192,7 +173,7 @@ const SliderHome = ({ typeManga }: any) => {
         {config.configSetting.Lbl_Home_Hot}
       </div>
       <div className="flex flex-col lg:flex-row">
-        <div className="flex w-full lg:w-1/3 justify-center">
+        <div className="flex w-full lg:w-1/3 ">
           {_fetchDataTrend.isLoading && trendingkeleton()}
           {!_fetchDataTrend.isLoading &&
             _fetchDataTrend.data &&

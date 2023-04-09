@@ -2,6 +2,7 @@
 import { ITEM_PAGE_COUNT } from "@/constants/Endpoint";
 import { FetchApi } from "@/constants/FetchApi";
 import { MangaLang, SelectMangaTypeByPage } from "@/constants/configBase";
+import ImageLoading from "@/ui/ImageLoading";
 import getDate from "@/utils/caldate";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
@@ -12,10 +13,11 @@ const FetchDataPage = async (config: MangaLang, pageParam: number) => {
     config.apiPath + config.endPointPath.homeLastUpdate + pageParam
   );
 };
-const LastUpdateHome = ({ typeManga }: any) => {
+const LastRelease = ({ typeManga }: any) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  
   let config = SelectMangaTypeByPage(typeManga);
-const [page, setPage] = useState(0);
+  const [page, setPage] = useState(0);
 
   const { isLoading, isError, error, data, isFetching } = useQuery(
     ["LastUpdate", typeManga, page],
@@ -28,17 +30,22 @@ const [page, setPage] = useState(0);
       refetchOnWindowFocus: false,
     }
   );
-
+  const scrollAction = () => {
+    const anchor = document.querySelector('#newReleaseUpdate')
+    if (anchor) {
+      anchor.scrollIntoView( /* { behavior: 'smooth' } */)
+    }
+  }
   if (!isFetching && data && page > 0) {
-    /*  setTimeout(
-       () => scrollAction(), 
-       100
-     );  */
-     setTimeout(() => {
+   /*  setTimeout(
+      () => scrollAction(), 
+      100
+    );  */
+    setTimeout(() => {
       sectionRef.current?.scrollIntoView();
     }, 0);
-     
-   }
+    
+  }
 
   const FnNext = () => {
     if (data&& (page+1) < data.totalPage)
@@ -50,10 +57,10 @@ const [page, setPage] = useState(0);
   }
   const _renderItem = (data: any, index: number) => {
     return (
-      <tr key={index + "-" + data.idDoc} className="border-b border-dashed hover:border-dashed hover:border-sky-400">
+      <tr key={index + "-" + data.idDoc} className="border-b border-dotted border-slate-700 hover:border-dashed hover:border-sky-400">
         <td className="w-1/12 justify-center text-center text-lg font-semibold">
-          <div className="font-semibold border border-dotted rounded-full justify-center w-2/3 bg-slate-950/70 hover:border-dashed hover:border-sky-400">
-            {(page * ITEM_PAGE_COUNT)+ index + 1}
+          <div className="border border-dashed justify-center w-10/12 bg-slate-950/70 overflow-hidden rounded-md p-1 m-2">
+           <ImageLoading url={data.image} title={`${config.configSetting.lbl_start_manga} ${data.name}`} classStyle={"w-full object-cover"}/>
           </div>
         </td>
         <td className="w-1/2">
@@ -158,7 +165,7 @@ const [page, setPage] = useState(0);
   };
   return (
     <>
-      <div  ref={sectionRef} id="newUpdate" className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
+      <div ref={sectionRef} id="newReleaseUpdate" className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
         {config.configSetting.Lbl_Home_New_Upadte}
       </div>
 
@@ -196,4 +203,4 @@ const tableSkeleton=()=>{
     </>
   )
 }
-export default LastUpdateHome;
+export default LastRelease;

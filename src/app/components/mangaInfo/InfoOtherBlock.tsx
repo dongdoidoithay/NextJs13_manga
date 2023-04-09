@@ -21,15 +21,15 @@ const InfoOtherBlock = ({
             <HashtagIcon className="w-2 inline" />
           </h3>
       </div>
-      <div className="ml-1 flex flex-row flex-wrap ">
+      <div className="flex flex-row flex-wrap">
         <a
             rel="nofollow"
             href={`https://www.facebook.com/sharer/sharer.php?u=${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}&t=${dataManga.name}`}
             target="_blank"
             title="Follow us on Facebook"
-            className="flex w-1/4 flex-grow"
+            className="flex w-1/2  lg:w-1/4 "
           >
-            <div className="flex py-2 gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
+            <div className="m-1 flex py-2 gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
               <ImageLoading url={`/facebook.svg`} title="Follow us on Facebook" classStyle="w-5 inline flex"/>
               <span  className="flex ">Facebook</span>
             </div>
@@ -40,9 +40,9 @@ const InfoOtherBlock = ({
           href={`https://www.twitter.com/intent/tweet?url=${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}&text=${dataManga.name}`}
           target="_blank"
           title="Follow us on Twitter"
-          className="flex w-1/4 "
+          className="flex w-1/2  lg:w-1/4"
           >
-            <div className="flex py-2 gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
+            <div className="m-1 flex py-2 gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
               <ImageLoading url={`/twitter.svg`} title="Follow us on Twitter" classStyle="w-5 inline flex"/>
               <span  className="flex ">Twitter</span>
             </div>
@@ -53,9 +53,9 @@ const InfoOtherBlock = ({
           href={`whatsapp://send?text=${dataManga.name} ${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}`}
           target="_blank"
           title="Follow us on WhatsApp"
-          className="flex w-1/4 "
+          className="flex w-1/2  lg:w-1/4"
           >
-            <div className="flex py-2  gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
+            <div className="m-1 flex py-2  gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
               <ImageLoading url={`/whatsapp.svg`} title="Follow us on WhatsApp" classStyle="w-6 inline flex"/>
               <span  className="flex ">WhatsApp</span>
             </div>
@@ -66,9 +66,9 @@ const InfoOtherBlock = ({
             href={`https://pinterest.com/pin/create/button/?url=${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}&media=${dataManga.image}&description=${dataManga.name}`}
             target="_blank"
             title="Follow us on Pinterest"
-            className="flex w-1/4 "
+            className="flex w-1/2  lg:w-1/4"
             >
-              <div className="flex py-2  gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
+              <div className="m-1 flex py-2  gap-2 text-xl items-center border  border-slate-700  w-full mr-3 px-3 rounded-md hover:font-semibold hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400">
                 <ImageLoading url={`/pinterest.svg`} title="Follow us on Pinterest" classStyle="w-6 inline flex"/>
                 <span  className="flex ">Pinterest</span>
               </div>

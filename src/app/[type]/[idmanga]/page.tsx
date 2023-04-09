@@ -101,7 +101,7 @@ const FetchData = async (config: MangaLang, idmanga: string) => {
     <>
       <GlobalNav />
       <div className="lg:pl-60 ">
-        <main className=" bg-slate-900/60 border">
+        <main className=" bg-slate-900/60 border border-slate-700">
           <div id="wapper" className="mt-4 px-2">
           {_dataManga.isLoading && breadcrumbSkeleton()}
           {!_dataManga.isLoading && breadcrumb()}

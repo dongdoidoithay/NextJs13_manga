@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       <GlobalNav />
-      <div className="lg:pl-60  bg-slate-900/70 border">
+      <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
          {/*  <Suspense fallback={<SlideSkeleton />}> */}
             <SliderHome typeManga={null}/>

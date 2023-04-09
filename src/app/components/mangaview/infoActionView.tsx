@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
-
-
-import { ArticleJsonLd, BreadcrumbJsonLd, NextSeo } from "next-seo";
+import React, {  } from "react";
 
 import { toast } from "react-toastify";
-import { AxiosPostApi, FetchApi } from "@/constants/FetchApi";
 import { MangaLang } from "@/constants/configBase";
-import { getStorage, setStorage } from "@/utils/localFx";
-import StoreLocalView from "./storeLocalView";
-import ContenView from "./contenView";
+import { getStorage } from "@/utils/localFx";
 import { BookOpenIcon, BookmarkIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ExclamationTriangleIcon, HeartIcon, Square2StackIcon, Square3Stack3DIcon, TagIcon } from "@heroicons/react/20/solid";
 
 const FnSubscribe = () => {
@@ -57,9 +51,7 @@ const FnSubscribe = () => {
   };
 const InfoActionView = ({ config, data, fnChangeVidewMode, listImg, CurrentImage, SetCurrentImage, ImageSelect,SetImageSelect,prev_img,next_img,viewMode}: 
     { config: MangaLang, data: any, fnChangeVidewMode: any, listImg: any, CurrentImage: any , SetCurrentImage:any, ImageSelect:any,SetImageSelect:any,prev_img:any,next_img:any,viewMode:any}) => {
-    let _viewmode = getStorage("View-Mode-Option");
-    if (_viewmode == '' || _viewmode == null)
-        _viewmode = 'N';
+    
 
 
     return (
@@ -67,7 +59,7 @@ const InfoActionView = ({ config, data, fnChangeVidewMode, listImg, CurrentImage
             <div id="info" className="my-1 mx-2">
                 <h1 className="font-semibold text-2xl  text-white/80 first-line:uppercase">
                     {data?.nameDoc}
-                    <span className="pl-2 first-line:uppercase text-current before:content-['_↗']">{config.configSetting.lbl_text_chapter} {data.idDetail} {_viewmode == 'N' && <strong className="text-sky-500 dark:text-sky-400"><BookOpenIcon className="inline w-8" />{`[${CurrentImage + 1}/${listImg.length}]`}</strong>}</span>
+                    <span className="pl-2 first-line:uppercase text-current before:content-['_↗']">{config.configSetting.lbl_text_chapter} {data.idDetail} {viewMode == 'N' && <strong className="text-sky-500 dark:text-sky-400"><BookOpenIcon className="inline w-8" />{`[${CurrentImage + 1}/${listImg.length}]`}</strong>}</span>
                 </h1>
             </div>
             <div id="action-info" className="flex flex-wrap flex-col sm:flex-row">
@@ -76,8 +68,8 @@ const InfoActionView = ({ config, data, fnChangeVidewMode, listImg, CurrentImage
                         onClick={fnChangeVidewMode}
                         type="button"
                         className="px-2 text-sm hover:text-sky-500 dark:hover:text-sky-400 h-9 text-sky-500 dark:text-sky-400 font-semibold relative " >
-                        {_viewmode == 'Y' && <div><Square3Stack3DIcon className="inline w-4 " /> All Page </div>}
-                        {_viewmode == 'N' && <div><Square2StackIcon className="inline w-4" /> One Page </div>}
+                        {viewMode == 'Y' && <div><Square3Stack3DIcon className="inline w-4 " /> All Page </div>}
+                        {viewMode == 'N' && <div><Square2StackIcon className="inline w-4" /> One Page </div>}
                         <span className="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>

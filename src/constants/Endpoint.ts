@@ -1,11 +1,11 @@
 
-const ITEM_SLIDE=10
-const ITEM_TREND=1
-const ITEM_POPULAR=6
-const ITEM_SERIES=6
+export const ITEM_SLIDE=10
+export const ITEM_TREND=1
+export const ITEM_POPULAR=6
+export const ITEM_SERIES=6
 
-const ITEM_HOME_COUNT=12
-const ITEM_PAGE_COUNT=24
+export const ITEM_HOME_COUNT=12
+export const ITEM_PAGE_COUNT=24
 export type EndpointType={
     homeSlide:string;
     homeTren:string;
