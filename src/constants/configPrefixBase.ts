@@ -1,7 +1,7 @@
-const _host="http://localhost:5075";
-const _hostwww="http://localhost:5075";  
-/* const _host="https://www.mangayabu.xyz";
-const _hostwww="https://www.mangayabu.xyz"; */
+/* const _host="http://localhost:5075";
+const _hostwww="http://localhost:5075";   */
+const _host="https://www.mangayabu.xyz";
+const _hostwww="https://www.mangayabu.xyz";
 
 
 export const _Prefix_Root_Manga_Br='manga-br';

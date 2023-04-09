@@ -13,6 +13,7 @@ import {
   RectangleGroupIcon,
 } from "@heroicons/react/20/solid";
 import { BreadcrumbJsonLd } from "next-seo";
+import Head from "next/head";
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
@@ -289,11 +290,55 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
       )
     );
   };
-
+  const ComicSeries=()=> {
+    const jsonLdData = {
+      "@context": "https://schema.org/",
+      "@type": "ComicSeries",
+      "name": "Tên truyện tranh",
+      "author": {
+        "@type": "Person",
+        "name": "Tên tác giả"
+      },
+      "illustrator": {
+        "@type": "Person",
+        "name": "Tên họa sĩ"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Tên nhà xuất bản"
+      },
+      "description": "Mô tả truyện tranh",
+      "image": "URL ảnh đại diện",
+      "thumbnailUrl": "URL ảnh thumbnail",
+      "url": "URL trang truyện tranh",
+      "numberOfSeasons": "Số tập",
+      "containsSeason": {
+        "@type": "ComicIssue",
+        "name": "Tên chương",
+        "issueNumber": "Số chương",
+        "isPartOf": {
+          "@type": "ComicSeries",
+          "name": "Tên truyện tranh",
+          "url": "URL trang truyện tranh"
+        }
+      }
+    };
+  
+    return (
+      <>
+        <Head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+          />
+        </Head>
+      </>
+    );
+  }
   return (
     <>
       {ChapterListSeo()}
-
+      {ComicSeries()}
       <div id="chapter-list" className="">
         <div id="header-list" className="flex flex-row h-8 my-3">
           <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['≣_'] mr-3">
