@@ -6,6 +6,8 @@ export default {
     domainName:"1st Heaven Manga",
     archives:'https://1stheavenmanga.xyz',
     Icon:'/vercel.svg',
+    locale: 'en-Gb',
+    twitterSite:'@VnManga',
     images: [
         {
             url: 'https://1stheavenmanga.xyz/image/bg.jpg',
@@ -14,5 +16,4 @@ export default {
             alt: 'Read Manga  Heaven |Raw|Scan|Adult|Comics For Free 🦚 1stheavenmanga.xyz',
         }
     ],
-   
   };

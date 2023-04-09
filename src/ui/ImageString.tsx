@@ -1,19 +1,16 @@
 /* "use client"; */
 import LRU from "lru-cache";
 import { useState, useEffect } from "react";
+/* import { LazyImageFull, ImageState, LazyImage } from "react-lazy-images"; */
 
 const cache = new LRU({ max: 100 });
-import Images from 'next/image'
-const myLoader = ({ src}:any) => {
-  return `${src}`
-}
 
-const ImageLoading = ({url, title,classStyle}:any) => {
+const ImageString = (url:any) => {
   const loadingUrl = "/loading.gif";
-  const [imgSrc, setImgSrc] = useState<string>(loadingUrl);
+  const [imgSrc, setImgSrc] = useState<any>();
   const errorUrl = "/next.svg";
   const noImageUrl = "/noimage.jpg";
-
+//console.log("ImageString=>:",url);
 
   useEffect(() => {
     if (cache.has(url)) {
@@ -28,24 +25,14 @@ const ImageLoading = ({url, title,classStyle}:any) => {
       cache.set(url, url);
     };
     img.onerror=( e)=>{
-      //console.log('error image',e)
+      console.log('error image',e)
       setImgSrc(noImageUrl);
       cache.set(url, noImageUrl);
     }
     img.src = url;
-    img.alt = title;
   }, [url]);
 
-
-  //return <img src={imgSrc} alt={title} className={classStyle}/>;
-  return <Images  
-            loader={myLoader}
-            src={imgSrc}
-            alt={title}
-            width={20}
-            height={20}
-            className={`bg-white ${classStyle}`}
-            />
+return imgSrc;
 };
 
-export default ImageLoading;
+export default ImageString;

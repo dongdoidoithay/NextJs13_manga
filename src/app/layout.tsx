@@ -3,8 +3,8 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 
 import baseSeo from "@/constants/baseSeo";
-import { GlobalNav } from "@/ui/global-nav";
-import { Boundary } from "@/ui/boundary";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const metadata: Metadata = {
   title: {
@@ -19,10 +19,11 @@ export const metadata: Metadata = {
     type: "website",
     images: baseSeo.images,
     siteName: baseSeo.domainName,
+    locale:baseSeo.locale
   },
   twitter: {
     card: "summary_large_image",
-    site: baseSeo.canonical,
+    site: baseSeo.twitterSite,
     creator: baseSeo.domainName,
     images: baseSeo.images,
   },

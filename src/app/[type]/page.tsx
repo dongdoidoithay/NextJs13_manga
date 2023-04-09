@@ -1,4 +1,5 @@
 import baseSeo from "@/constants/baseSeo";
+import { GlobalNav } from "@/ui/global-nav";
 import { GroupStyle } from "@/ui/group-stype";
 import { Metadata } from "next";
 
@@ -37,12 +38,17 @@ export const metadata: Metadata = {
   },
   icons: baseSeo.Icon,
 };
-export default function Type() {
+export default function PageInTye() {
   return (
-    <main className="px-2">
-      <GroupStyle labels="Manga Page type">
-        <div> Type</div>
-      </GroupStyle>
-    </main>
+    <>
+     {/*  <GlobalNav />
+      <div className="lg:pl-60 ">
+        <main className="px-2">
+          <GroupStyle labels="Manga Page type">
+            <div> Type</div>
+          </GroupStyle>
+        </main>
+      </div> */}
+    </>
   );
 }

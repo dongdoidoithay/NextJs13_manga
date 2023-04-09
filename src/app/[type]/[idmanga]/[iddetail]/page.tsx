@@ -1,192 +1,118 @@
+"use client"
+import InfoViewManga from "@/app/components/mangaview/infoView";
+import { FetchApi } from "@/constants/FetchApi";
+import { MangaLang, SelectMangaTypeByPage, SelectMangaTypeName } from "@/constants/configBase";
+import { GlobalNavView } from "@/ui/global-nav-view";
 import {
-  BarsArrowDownIcon,
-  BarsArrowUpIcon,
-  BookmarkIcon,
-  CheckCircleIcon,
-  ChevronLeftIcon,
   ChevronRightIcon,
-  HashtagIcon,
-  HeartIcon,
   HomeIcon,
-  QueueListIcon,
-  RectangleGroupIcon,
-  TagIcon,
 } from "@heroicons/react/20/solid";
-import Link from "next/link";
+import { useQuery } from "react-query";
+const FetchData = async (config: MangaLang, idmanga: string, iddetail: string) => {
+  // console.log("url trend", config.apiPath + config.endPointPath.checkTrend + idmanga)
+  return await await FetchApi(config.apiPath + config.endPointPath.viewmanga + idmanga + "/" + iddetail)
+}
+export default function DetaiView({ params }: { params: { type: string, idmanga: string, iddetail: string } }) {
+  let config = SelectMangaTypeByPage('');
+  let _idmanga = '';
+  let _iddetail = '';
+  if (params.type != undefined)
+    config = SelectMangaTypeByPage(params.type.toString());
+  if (params.idmanga != undefined) {
+    _idmanga = params.idmanga.toString().replace(config.configPrefix.startManga, '').replace(config.configPrefix.endManga, '');
+  }
+  if (params.iddetail != undefined) {
+    _iddetail = params.iddetail.toString().replace(config.configPrefix.startViewmanga, '').replace(config.configPrefix.endViewmanga, '');
+  }
 
-export default function detaiView() {
+  let _dataManga = useQuery(['GetDetailManga', _idmanga, _iddetail, config.typeName], () => FetchData(config, _idmanga, _iddetail,), { retry: 10, staleTime: 10000, cacheTime: 5000, keepPreviousData: true, refetchOnWindowFocus: false });
+
+  //console.log("_dataManga", _dataManga)
+
+  const breadcrumb = () => {
     return (
-      <main className="px-2 mt-5 xs:mt-14  bg-slate-900/60">
-      <div id="wapper">
-        <div id="breadcrumb" className="group block xs:hidden font-semibold mb-4">
-          <ol className="list-outside list-none flex flex-wrap gap-1">
-            <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400">
-              <HomeIcon className="block w-6 mx-1" />
-              <a href="/" className="hover:text-sky-500 dark:hover:text-sky-400">Home</a>
-            </li>
-            <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400">
-              <ChevronRightIcon className="block w-4 mx-1" />
-              <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400"> type Manga </a>
-            </li>
-            <li className="flex flex-row">
-              <ChevronRightIcon className="block w-4 text-gray-400 mx-1" /> Info
-              Manga
-            </li>
-          </ol>
-        </div>
-        <div id="info" className="my-2 mr-2">
-          <div className="flex flex-wrap flex-col sm:flex-row">
-            <div id="name-info" className="flex-1 text-2xl">
-              <h1 className="font-semibold first-letter:text-3xl text-white/80">
-                Tensei Shitara Slime Datta Ken
-              </h1>
-              <h2 className="text-sm">転生したらスライムだった件</h2>
-            </div>
-            {/** dday len hang tren / flex-1 /  */}
-            <div id="action-info" className="flex flex-wrap gap-1 font-semibold my-1 items-center">
-              <button
-                type="button"
-                className="px-2  xs:text-xs sm:text-sm bg-slate-700 hover:bg-slate-800  hover:text-sky-500 dark:hover:text-sky-400 h-9"
-              >
-                <BookmarkIcon className="inline w-6 xs:w-2" /> Subscribe
-              </button>
-              <button
-                type="button"
-                className="px-2 sm:text-sm bg-slate-700 hover:bg-slate-800  hover:text-sky-500 dark:hover:text-sky-400 h-9"
-              >
-                <HeartIcon className="inline w-6" /> Favorite
-              </button>
-
-              <button
-                type="button"
-                className=" px-2 sm:text-sm bg-slate-700 hover:bg-slate-800  hover:text-sky-500 dark:hover:text-sky-400 h-9"
-              >
-                <TagIcon className="inline w-6 " /> Read Later
-              </button>
-              <button
-                type="button"
-                className="px-2 sm:text-sm bg-slate-700 hover:bg-slate-800  hover:text-sky-500 dark:hover:text-sky-400 h-9"
-              >
-                <QueueListIcon className="inline w-6" />{" "}
-                Collection
-              </button>
-            </div>
-          </div>
-        </div>
-        <div id="info-act" className="mr-2">
-          <div className="flex flex-wrap flex-col sm:flex-row text-sm">
-            <div className="w-full sm:w-1/4">
-              <div className="box-content border-2 rounded mr-4">
-                <div className="object-cover w-full h-48 bg-cover bg-no-repeat bg-center bg-[url(https://readm.org/uploads/chapter_files/cover/tbn/1589047514_198x0.jpg)]">
-                  {/* <ImageLoading url={"https://readm.org/uploads/chapter_files/cover/tbn/1589047514_198x0.jpg"} title={"oke"} /> */}
-                  {/*  <img src="/loading.gif" className=""/> */}
-                </div>
-              </div>
-            </div>
-            <div className="w-full sm:w-3/4 xs:hidden">
-              <div className="ml-1 overflow">
-                  <h3 className="font-semibold text-white/80 first-letter:uppercase">SUMMARY</h3>
-                  <p className="sx:text-xs lg:text-md first-letter:text-lg first-letter:font-semibold break-word overflow-hidden first-line:uppercase"> The journey to the martial peak is a lonely, solitary and long one.In the face of adversity,you must survive and remain unyielding.Only then can you break through and and continue on your journey to become the strongest. Sky Tower tests its disciples in the harshest ways to prepare them for this journey.One day the lowly sweeper Yang Kai managed to obtain a black book, setting him on the road to the peak of the martials world. </p>
-                  <h3 className="font-semibold text-white/80 first-letter:uppercase">Genres <HashtagIcon className="w-2 inline"/></h3>
-                  <div className="flex flex-row flex-nowrap">
-                      <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold after:content-[',']">action</a>
-                      <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold after:content-[',']">adventure</a>
-                  </div>
-                  <h3 className="font-semibold text-white/80 first-letter:uppercase">release <HashtagIcon className="w-2 inline"/></h3>
-                      <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold before:content-['_↗']"> 2019</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="chapter-list" className="">
-          <div id="header-list" className="flex flex-row h-8 my-3">
-             <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['≣_'] mr-3">List Chapters</h3>
-             <b>Tensei Shitara Slime Datta Ken</b>
-          </div>
-          <div id="search-chapter" className="flex flex-row h-8 my-2 mr-2">
-            <input className="flex-1 mr-4 text-sm text-white focus:border-sky-500 leading-6 rounded shadow-sm py-1.5 pl-4 pr-3  dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700" placeholder="Search Chapter. Example: 25 or 178" />
-            <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400"> 
-              <BarsArrowUpIcon className="w-6 inline hover:text-sky-500 dark:hover:text-sky-400"/>
-              <BarsArrowDownIcon className="w-6 inline hover:text-sky-500 dark:hover:text-sky-400" /> 
-              Sort
+      <div id="breadcrumb" className="group block xs:hidden font-semibold mb-4 mt-4">
+        <ol className="list-outside list-none flex flex-wrap gap-1" itemScope itemType="http://schema.org/BreadcrumbList">
+          <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <HomeIcon className="block w-6 mx-1" />
+            <a href={`${config.configPrefix.url_host}`}
+              className="hover:text-sky-500 dark:hover:text-sky-400"
+              itemProp="name">
+              {config.configSetting.lbl_domain_home}
             </a>
-          </div>   
-          {/** co thoi gian sua dang gird */}
-          <div className="flex flex-wrap flex-row">
-              <div className="w-1/2 md:w-1/4"> 
-                <Link href={'#'} title="Chapter-x" className="mr-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700 rounded border-curent hover:border-sky-500 dark:hover:border-sky-400 p-1" >
-                    <CheckCircleIcon className="w-4 inline " />
-                    <div className="flex-0">
-                      <p className="ml-3 font-semibold first-letter:uppercase gap-2">
-                        <RectangleGroupIcon className="w-4 inline"/> Chapter 01</p>
-                      <i className="ml-3">Date: 2 day</i>
-                    </div>
-                </Link>
-              </div>
-              <div className="w-1/2 md:w-1/4"> 
-                <Link href={'#'} title="Chapter-x" className="mr-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700 rounded border-curent hover:border-sky-500 dark:hover:border-sky-400 p-1" >
-                    <CheckCircleIcon className="w-4 inline " />
-                    <div className="flex-0">
-                      <p className="ml-3 font-semibold first-letter:uppercase gap-2">
-                        <RectangleGroupIcon className="w-4 inline"/> Chapter 01</p>
-                      <i className="ml-3">Date: 2 day</i>
-                    </div>
-                </Link>
-              </div>
-              <div className="w-1/2 md:w-1/4"> 
-                <Link href={'#'} title="Chapter-x" className="mr-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700 rounded border-curent hover:border-sky-500 dark:hover:border-sky-400 p-1" >
-                    <CheckCircleIcon className="w-4 inline " />
-                    <div className="flex-0">
-                      <p className="ml-3 font-semibold first-letter:uppercase gap-2">
-                        <RectangleGroupIcon className="w-4 inline"/> Chapter 01</p>
-                      <i className="ml-3">Date: 2 day</i>
-                    </div>
-                </Link>
-              </div>
-              <div className="w-1/2 md:w-1/4"> 
-                <Link href={'#'} title="Chapter-x" className="mr-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700 rounded border-curent hover:border-sky-500 dark:hover:border-sky-400 p-1" >
-                    <CheckCircleIcon className="w-4 inline " />
-                    <div className="flex-0">
-                      <p className="ml-3 font-semibold first-letter:uppercase gap-2">
-                        <RectangleGroupIcon className="w-4 inline"/> Chapter 01</p>
-                      <i className="ml-3">Date: 2 day</i>
-                    </div>
-                </Link>
-              </div>
-           
-          </div>
-          <div id="next-prev" className="my-3 flex flex-row gap-2 mr-2" >
-            <Link href={'#'} title="Chapter-x" className="w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400" >
-              <ChevronLeftIcon className="w-4 inline " />
-              <b className="ml-3 font-semibold first-letter:uppercase">Prev Chapter</b>
-            </Link>
-            <Link href={'#'} title="Chapter-x" className="w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400" >
-              <b className="mr-3 font-semibold first-letter:uppercase">Next Chapter</b>
-              <ChevronRightIcon className="w-4 inline " />
-            </Link>
-          </div>        
-        </div>
-        <div id="info-more" className="w-full bg-slate-900/70 ">
-          <div className="ml-1 overflow">
-              <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['_↗']">Info other </h3>
-              <h3 className="font-semibold text-white/80 first-letter:uppercase">Auths <HashtagIcon className="w-2 inline"/></h3>
-              <div className="flex flex-row flex-nowrap">
-                  <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold after:content-[',']">action</a>
-                  <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1  hover:font-semibold after:content-[',']">adventure</a>
-              </div>
-              <h3 className="font-semibold text-white/80 first-letter:uppercase">Status <HashtagIcon className="w-2 inline"/></h3>
-                  <a href="#" className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold before:content-['_↗']"> 2019</a>
-          </div>
-        </div>
-        <div id="manga-more" className="w-full bg-slate-900/70 ">
-            <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['_↗']">Sugges Manga </h3>
+            <meta itemProp="position" content="1" />
+          </li>
+          <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <ChevronRightIcon className="block w-4 mx-1" />
+            <a href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}`}
+              className="hover:text-sky-500 dark:hover:text-sky-400"
+              itemProp="name">
+              {SelectMangaTypeName(config.typeName)}
 
-        </div>
-        <div id="manga-comments" className="w-full bg-slate-900/70 ">
-            <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['_↗']">Comments </h3>
-            
-        </div>
+            </a>
+            <meta itemProp="position" content="2" />
+          </li>
+          <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <ChevronRightIcon className="block w-4 mx-1" />
+            <a href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${_dataManga.data.idDoc}${config.configPrefix.endManga}`}
+              className="hover:text-sky-500 dark:hover:text-sky-400"
+              itemProp="name">
+              {_dataManga.data.nameDoc}
+
+            </a>
+            <meta itemProp="position" content="3" />
+          </li>
+
+          <li className="flex flex-row" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <ChevronRightIcon className="block w-4 text-gray-400 mx-1" />{" "}
+            {config.configSetting.lbl_start_chapter} {_dataManga.data?.idDetail}
+            <meta itemProp="name" content={`${config.configSetting.lbl_start_chapter} ${_dataManga.data?.idDetail}`} />
+            <meta itemProp="position" content="4" />
+          </li>
+        </ol>
       </div>
-    </main>
+    )
+  }
+  const breadcrumbSkeleton = () => {
+    return (
+      <div id="breadcrumb" className="group block xs:hidden font-semibold mb-4 mt-4 animate-pulse border">
+        <ol className="list-outside list-none flex flex-wrap gap-1" itemScope itemType="http://schema.org/BreadcrumbList">
+          <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <HomeIcon className="block w-6 mx-1 " />
+            <a href={`${config.configPrefix.url_host}`}
+              className="hover:text-sky-500 dark:hover:text-sky-400"
+              itemProp="name">
+              {config.configSetting.lbl_domain_home}
+            </a>
+            <meta itemProp="position" content="1" />
+          </li>
+          <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <ChevronRightIcon className="block w-4 mx-1" />
+            <a href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}`} className="hover:text-sky-500 dark:hover:text-sky-400">
+              {SelectMangaTypeName(config.typeName)}
+            </a>
+            <meta itemProp="position" content="2" />
+          </li>
+          <li className="flex flex-row rounded-full" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+            <ChevronRightIcon className="block w-4 text-gray-400 mx-1" />
+          </li>
+        </ol>
+      </div>
+
     );
   }
+  return (
+    <>
+      <GlobalNavView />
+      <main className="px-2 mt-5 xs:mt-14 bg-slate-900/60 border">
+        {_dataManga.isLoading && breadcrumbSkeleton()}
+        {!_dataManga.isLoading && breadcrumb()}
+
+         <InfoViewManga config={config} data={_dataManga.data} loading={_dataManga.isLoading} />
+
+        <div id="manga suggets"></div>
+
+      </main>
+    </>
+  );
+}

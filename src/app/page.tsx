@@ -1,12 +1,12 @@
 /* "use client"; */
-import { GroupStyle } from "@/ui/group-stype";
-import Image from "next/image";
-
-import { ItemPopular } from "@/ui/item-popular";
-import { TableLastUpdate } from "@/ui/table-last-update";
-import { Metadata } from "next";
+import { Metadata } from 'next'; 
 import baseSeo from "@/constants/baseSeo";
-import { SlideComponent } from "./components/components-slide";
+import  {GlobalNav}  from "@/ui/global-nav";
+import { Suspense } from "react";
+import SliderHome from "./components/homePage/slideHome";
+import PopupHome from "./components/homePage/popupHome";
+import LastUpdateHome from "./components/homePage/lastUpdate";
+import TopComment from './components/homePage/topComments';
 export const metadata: Metadata = {
   title: "Home page",
   description: baseSeo.description,
@@ -43,29 +43,26 @@ export const metadata: Metadata = {
   icons: baseSeo.Icon,
 };
 
+
 export default function Home() {
+  
   return (
-    <main className="px-2">
-      <SlideComponent/>
-      <GroupStyle labels="Manga Poppular">
-        <div className="flex flex-wrap items-stretch pt-1">
-          <ItemPopular text="Tensei Shitara Slime Datta" />
-          <ItemPopular text="Tensei Shitara Slime Datta" />
-          <ItemPopular text="Tensei Shitara Slime Datta" />
-          <ItemPopular text="Tensei Shitara Slime Datta" />
-        </div>
-      </GroupStyle>
-      <GroupStyle labels="Manga last Update">
-        <div className="">
-          <TableLastUpdate />
-        </div>
-      </GroupStyle>
-      <button
-        type="button"
-        className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 ..."
-      >
-        Hover me
-      </button>
-    </main>
+    <>
+      <GlobalNav />
+      <div className="lg:pl-60  bg-slate-900/70 border">
+        <main className="px-2">
+         {/*  <Suspense fallback={<SlideSkeleton />}> */}
+            <SliderHome typeManga={null}/>
+          {/* </Suspense>
+          <Suspense fallback={<SlideSkeleton />}> */}
+            <PopupHome typeManga={null}/>
+         {/*  </Suspense>
+          <Suspense fallback={<SlideSkeleton />}> */}
+            <LastUpdateHome typeManga={null}/>
+          {/* </Suspense> */}
+            <TopComment />
+        </main>
+      </div>
+    </>
   );
 }
