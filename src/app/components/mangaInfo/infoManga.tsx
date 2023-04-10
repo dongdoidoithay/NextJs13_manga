@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import React, {  } from "react";
 
-import { ArticleJsonLd, BreadcrumbJsonLd, NextSeo } from "next-seo";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
-import { AxiosPostApi, FetchApi } from "@/constants/FetchApi";
 import { MangaLang } from "@/constants/configBase";
-import { getStorage } from "@/utils/localFx";
 import  InfoActionBlock  from "./InfoBlock";
 import RenderChapterList from "./renderChapterList";
 import InfoHeaderBlock from "./InfoHeaderBlock";
 import InfoOtherBlock from "./InfoOtherBlock";
+import { Helmet } from 'react-helmet';
 
 
  const InfoManga = ({id,config,dataManga}:{id: string;config: MangaLang;dataManga: any}) => {
@@ -72,79 +67,11 @@ import InfoOtherBlock from "./InfoOtherBlock";
   const _worstRating = Math.round((Math.random() * (10 - 3) + 3) * 10);
   const _bestRating = _ratingCount - _worstRating;
 
-  const SeoPageManga = () => {
-    return (
-      <>
-        <NextSeo
-          title={title}
-          description={des_meta}
-          canonical={url}
-          openGraph={{
-            title: title,
-            description: des_full,
-            url: url,
-            type: "article",
-            article: {
-              publishedTime: new Date().toISOString(),
-              modifiedTime: new Date().toISOString(),
-              expirationTime: new Date().toISOString(),
-              section: "News",
-              authors: [
-                dataManga.listAuthors &&
-                  dataManga.listAuthors.map((auth: any) => {
-                    return `${config.configPrefix.url_host}${config.configPrefix.pageAuth}/${config.configPrefix.startAuth}${auth.id}${config.configPrefix.endAuth}`;
-                  }),
-              ],
-              tags: [key_word],
-            },
-            images: [
-              {
-                url: dataManga.image,
-                alt: dataManga.name,
-              },
-            ],
-          }}
-          additionalMetaTags={[
-            {
-              property: "keywords",
-              content: key_word,
-            },
-          ]}
-          additionalLinkTags={[
-            {
-              rel: "alternate",
-              href: `${config.configPrefix.url_host}/api${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}/feed`,
-              type: "application/rss+xml",
-            },
-            {
-              rel: "alternate",
-              href: `${config.configPrefix.url_host}/api${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}/rss.xml`,
-              type: "application/rss+xml",
-            },
-          ]}
-        />
-
-        <ArticleJsonLd
-          url={url}
-          title={title}
-          images={[dataManga.image]}
-          datePublished={new Date().toISOString()}
-          dateModified={new Date().toISOString()}
-          authorName={[name_author_org]}
-          publisherName={name_author_org}
-          publisherLogo={dataManga.image}
-          description={des_full}
-        />
-      </>
-    );
-  };
-
-
+ 
 
   return (
     <>
-      {SeoPageManga()}
-    
+     
      <InfoHeaderBlock config={config} dataManga={dataManga}/>
      <InfoActionBlock id={id}  des_full={des_full} config={config} dataManga={dataManga}/>
      <RenderChapterList id={id} config={config} mangaName={dataManga.name} />

@@ -12,9 +12,9 @@ import {
   ClockIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/20/solid";
-import { BreadcrumbJsonLd } from "next-seo";
 import Head from "next/head";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 
@@ -262,83 +262,81 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
       </>
     )
   }
-
-  const ChapterListSeo = () => {
-    return (
-      dataChapter &&
-      dataChapter.data &&
-      dataChapter.data.length > 0 && (
-        <BreadcrumbJsonLd
-          itemListElements={dataChapter.data.map((item: any, indx: any) => {
-            const _name = item.nameDoc ? item.nameDoc.replace(/"/gi, "") : "";
-            if (item.idDetail != null && item.idDetail != undefined) {
-              return {
-                position: indx + 1,
-                name: `${_name} ${config.configSetting.lbl_text_chapter} ${item.idDetail}`,
-                item: `${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}${config.configPrefix.endManga}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`,
-              };
-            }
-            if (item.id != null && item.id != undefined) {
-              return {
-                position: indx + 1,
-                name: `${_name} ${config.configSetting.lbl_text_chapter} ${item.idDetail}`,
-                item: `${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}${config.configPrefix.endManga}/${config.configPrefix.startViewmanga}${item.id}${config.configPrefix.endViewmanga}`,
-              };
-            }
-          })}
-        />
-      )
-    );
-  };
-  const ComicSeries=()=> {
-    const jsonLdData = {
-      "@context": "https://schema.org/",
+  const comicJson={
+    "@context": "https://schema.org/",
+    "@type": "ComicSeries",
+    "name": "The Amazing Spider-Man",
+    "url": "https://example.com/comics/spider-man",
+    "image": "https://example.com/comics/spider-man.jpg",
+    "description": "The Amazing Spider-Man is a comic book series featuring the character Spider-Man, published by Marvel Comics.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Marvel Comics",
+      "url": "https://www.marvel.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.marvel.com/etc/designs/marvel/clientlibs/images/logo-marvel.svg",
+        "width": 283,
+        "height": 81
+      }
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Stan Lee"
+    },
+    "keywords": "comic book, superhero, Spider-Man",
+    "genre": "Superhero",
+    "inLanguage": "English",
+    "isPartOf": {
       "@type": "ComicSeries",
-      "name": "Tên truyện tranh",
-      "author": {
-        "@type": "Person",
-        "name": "Tên tác giả"
-      },
-      "illustrator": {
-        "@type": "Person",
-        "name": "Tên họa sĩ"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Tên nhà xuất bản"
-      },
-      "description": "Mô tả truyện tranh",
-      "image": "URL ảnh đại diện",
-      "thumbnailUrl": "URL ảnh thumbnail",
-      "url": "URL trang truyện tranh",
-      "numberOfSeasons": "Số tập",
-      "containsSeason": {
+      "name": "Spider-Man Universe",
+      "url": "https://example.com/comics/spider-man-universe"
+    },
+    "alternateName": "The Amazing Spiderman",
+    "startDate": "1963-03-10",
+    "endDate": "present",
+    "sameAs": [
+      "https://www.wikidata.org/wiki/Q262204",
+      "https://en.wikipedia.org/wiki/The_Amazing_Spider-Man"
+    ],
+    
+    "hasPart": [
+      {
         "@type": "ComicIssue",
-        "name": "Tên chương",
-        "issueNumber": "Số chương",
-        "isPartOf": {
-          "@type": "ComicSeries",
-          "name": "Tên truyện tranh",
-          "url": "URL trang truyện tranh"
+        "name": "The Amazing Spider-Man #1",
+        "url": "https://example.com/comics/spider-man/1",
+        "issueNumber": "1",
+        "datePublished": "1963-03-10",
+        "image": "https://example.com/comics/spider-man/1.jpg",
+        "description": "The Amazing Spider-Man #1 is the first issue of the comic book series The Amazing Spider-Man, published by Marvel Comics.",
+        "about": {
+          "@type": "Thing",
+          "name": "Spider-Man",
+          "url": "https://example.com/characters/spider-man"
+        }
+      },
+      {
+       "@type": "ComicIssue",
+        "name": "The Amazing Spider-Man #2",
+        "url": "https://example.com/comics/spider-man/1",
+        "issueNumber": "1",
+        "datePublished": "1963-03-10",
+        "image": "https://example.com/comics/spider-man/1.jpg",
+        "description": "The Amazing Spider-Man #1 is the first issue of the comic book series The Amazing Spider-Man, published by Marvel Comics.",
+        "about": {
+          "@type": "Thing",
+          "name": "Spider-Man",
+          "url": "https://example.com/characters/spider-man"
         }
       }
-    };
-  
-    return (
-      <>
-        <Head>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
-          />
-        </Head>
-      </>
-    );
-  }
+    ]
+  };
+
   return (
     <>
-      {ChapterListSeo()}
-      {ComicSeries()}
+     <Helmet>
+        <script type="application/ld+json">{JSON.stringify(comicJson)}</script>
+      </Helmet>
       <div id="chapter-list" className="">
         <div id="header-list" className="flex flex-row h-8 my-3">
           <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['≣_'] mr-3">

@@ -1,21 +1,8 @@
 "use client";
-import { FetchApi } from "@/constants/FetchApi";
 import { MangaLang } from "@/constants/configBase";
-import getDate from "@/utils/caldate";
-import { getStorage, setStorage } from "@/utils/localFx";
 import {
-  BarsArrowDownIcon,
   BarsArrowUpIcon,
-  CheckCircleIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ClockIcon,
-  RectangleGroupIcon,
 } from "@heroicons/react/20/solid";
-import { BreadcrumbJsonLd } from "next-seo";
-import { useState, useEffect } from "react";
-import { useQuery } from "react-query";
-import { toast } from "react-toastify";
 
 
  const RenderChapterListSkeletion = ({config}:{config: MangaLang}) => {

@@ -27,7 +27,7 @@ const FetchData = async (config: MangaLang, idmanga: string) => {
     }
   
 
-  console.log("configSelect",params.type)
+  //console.log("configSelect",params.type)
   let _dataManga= useQuery(['GetInfoManga', _idmanga, config.typeName], () => FetchData(config, _idmanga), { retry: 10,staleTime: 10000, cacheTime: 5000, keepPreviousData: true, refetchOnWindowFocus: false });
 
 

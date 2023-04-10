@@ -21,6 +21,10 @@ const nextConfig = {
         '.mdx': ['@mdx-js/loader'],
       },
     },
+    webpack(config, options) {
+      config.resolve.modules.push(path.resolve('./src'));
+      return config;
+    },
   },
 
   // stream
