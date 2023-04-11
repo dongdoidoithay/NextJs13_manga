@@ -59,27 +59,62 @@ export const ActMangaSource: MangaSource[] = [
   }, 
   {
     lable: "Comic DC/MARVEL ",
-    value: _Prefix_Root_Dc,
+    value: _Prefix_Root_Dc, 
   },
   {
     lable: "Manga Adult",
     value: _Prefix_Root_Adult,
   },
-  {
+/*   {
     lable: "Novel Light",
     value: _Prefix_Root_Novel,
-  },
+  }, */
   {
     lable: "Mangás português",
     value: _Prefix_Root_Manga_Br,
   },
-  {
+/*   {
     lable: "Mangás adulto",
     value: _Prefix_Root_Adult_Br,
-  },
+  }, */
 
 ];
 
+export const ActSourceList: MangaSource[] = [
+  {
+    lable: "All",
+    value: 'all',
+  }, 
+  {
+    lable: "Manga Scan",
+    value: _Prefix_Root_Scan,
+  }, 
+  {
+    lable: "Manga Raw",
+    value: _Prefix_Root_Raw,
+  }, 
+  {
+    lable: "Comic DC/MARVEL ",
+    value: _Prefix_Root_Dc, 
+  },
+  {
+    lable: "Manga Adult",
+    value: _Prefix_Root_Adult,
+  },
+/*   {
+    lable: "Novel Light",
+    value: _Prefix_Root_Novel,
+  }, */
+  {
+    lable: "Mangás português",
+    value: _Prefix_Root_Manga_Br,
+  },
+/*   {
+    lable: "Mangás adulto",
+    value: _Prefix_Root_Adult_Br,
+  }, */
+
+];
 export const FontSource: MangaSource[] = [
   {
     lable: "Lucida Sans",
@@ -115,13 +150,14 @@ export type MangaLang = {
   configPrefix: ConfigPrefix;
   configSetting: ConfigSetting;
   activeSource: MangaSource[];
+  listSource: MangaSource[];
   localKey: LocalKeyType;
 };
 
 const MangaAdultBr: MangaLang = {
   typeName: _Prefix_Root_Adult_Br,
   typeManga: _Prefix_Type_Adult_Br,
-  apiPath: apiRootPath+"/v3/br-hwa",
+  apiPath: apiRootPath + "/v3/br-hwa",
   // apiPath:"http://localhost:5111/api/v3/br-hwa",
   endPointPath: EndpointSetting,
   localKey: LocalKey,
@@ -129,12 +165,13 @@ const MangaAdultBr: MangaLang = {
   configPrefix: AdultBrPrefix,
   activeSource: ActMangaSource,
   configSetting: AdultBrSetting,
+  listSource: ActSourceList
 };
 
 const MangaBr: MangaLang = {
   typeName: _Prefix_Root_Manga_Br,
   typeManga: _Prefix_Type_Manga_Br,
-  apiPath: apiRootPath+"/v3/po",
+  apiPath: apiRootPath + "/v3/po",
   //apiPath:"http://localhost:5111/api/v3/po",
   endPointPath: EndpointSetting,
   localKey: LocalKey,
@@ -142,35 +179,38 @@ const MangaBr: MangaLang = {
   configPrefix: MangaBrPrefix,
   activeSource: ActMangaSource,
   configSetting: MangaBrSetting,
+  listSource: ActSourceList
 };
 
 
 const MangaScan: MangaLang = {
   typeName: _Prefix_Root_Scan,
   typeManga: _Prefix_Type_Scan,
-  apiPath: apiRootPath+"/kumascans",
+  apiPath: apiRootPath + "/kumascans",
   endPointPath: EndpointSetting,
   localKey: LocalKey,
 
   configPrefix: ScanPrefix,
   activeSource: ActMangaSource,
   configSetting: ScanSetting,
+  listSource: ActSourceList
 };
 const MangaRaw: MangaLang = {
   typeName: _Prefix_Root_Raw,
   typeManga: _Prefix_Type_Raw,
-  apiPath: apiRootPath+"/kumaraw",
+  apiPath: apiRootPath + "/kumaraw",
   endPointPath: EndpointSetting,
   localKey: LocalKey,
 
   configPrefix: RawPrefix,
   activeSource: ActMangaSource,
   configSetting: RawSetting,
+  listSource: ActSourceList
 };
 const MangaAdult: MangaLang = {
   typeName: _Prefix_Root_Adult,
   typeManga: _Prefix_Type_Adult,
-  apiPath: apiRootPath+"/v3/en-hwa",
+  apiPath: apiRootPath + "/v3/en-hwa",
   /* apiPath: "http://localhost:5111/api/v3/en-hwa", */
   endPointPath: EndpointSetting,
   localKey: LocalKey,
@@ -178,12 +218,13 @@ const MangaAdult: MangaLang = {
   configPrefix: AdultPrefix,
   activeSource: ActMangaSource,
   configSetting: AdultSetting,
+  listSource: ActSourceList
 };
 
 const Novel: MangaLang = {
   typeName: _Prefix_Root_Novel,
   typeManga: _Prefix_Type_Novel,
-  apiPath: apiRootPath+"/novels",
+  apiPath: apiRootPath + "/novels",
   /*  apiPath:"https://api.truyendich.xyz/api/novels", */
   endPointPath: EndpointSetting,
   localKey: LocalKey,
@@ -191,18 +232,20 @@ const Novel: MangaLang = {
   configPrefix: NovelPrefix,
   activeSource: ActMangaSource,
   configSetting: NovelSetting,
+  listSource: ActSourceList
 };
 
 const MangaDc: MangaLang = {
   typeName: _Prefix_Root_Dc,
   typeManga: _Prefix_Type_Dc,
-  apiPath: apiRootPath+"/v3/en-dc",
+  apiPath: apiRootPath + "/v3/en-dc",
   endPointPath: EndpointSetting,
   localKey: LocalKey,
 
   configPrefix: DcPrefix,
   activeSource: ActMangaSource,
   configSetting: DcSetting,
+  listSource: ActSourceList
 };
 
 const NewsDc: MangaLang = {
@@ -216,6 +259,7 @@ const NewsDc: MangaLang = {
   configPrefix: NewsDcPrefix,
   activeSource: ActMangaSource,
   configSetting: NewsDcSetting,
+  listSource: ActSourceList
 };
 
 /*http://localhost:5110/manga/my-body-is-a-sword  --> type =manga*/

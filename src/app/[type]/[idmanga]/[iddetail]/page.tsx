@@ -104,7 +104,7 @@ export default function DetaiView({ params }: { params: { type: string, idmanga:
   return (
     <>
       <GlobalNavView />
-      <main className="px-2 mt-5 xs:mt-14 bg-slate-900/60 border border-slate-700">
+      <main className="px-2 xs:mt-14 bg-slate-900/60 border border-slate-700">
         {_dataManga.isLoading && breadcrumbSkeleton()}
         {!_dataManga.isLoading && breadcrumb()}
 

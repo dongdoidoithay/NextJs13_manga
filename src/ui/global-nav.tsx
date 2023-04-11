@@ -14,7 +14,7 @@ export function GlobalNav() {
 
   return (
     <>
-      <div className="sticky lg:pl-60 lg:pr-8 top-0 z-40 w-full flex-none transition-colors duration-500 lg:z-50 border-b border-slate-900/10 dark:border-slate-700 supports-backdrop-blur:bg-white/95 dark:bg-slate-900/75">
+      <div className="sticky lg:pl-60 lg:pr-8 top-0 z-40 w-full flex-none transition-colors duration-500 lg:z-50 border-b border-slate-900/10 dark:border-slate-700 supports-backdrop-blur:bg-white/95 dark:bg-slate-900/10">
         <div className="max-w-8xl mx-auto hidden lg:block">
           <div className="relative flex items-center">
             <div className="top-0 pointer-events-none text-xs rounded-full py-1 max-w-screen-lg">
@@ -35,24 +35,18 @@ export function GlobalNav() {
               <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                 <ul className="flex space-x-8">
                   <li>
-                    <a
-                      className="hover:text-sky-500 dark:hover:text-sky-400"
-                      href="/"
-                    >
+                    <a  href="/" className="hover:text-sky-500 dark:hover:text-sky-400" >
                       Login
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="/"
-                      className="hover:text-sky-500 dark:hover:text-sky-400"
-                    >
+                    <a href="/" className="hover:text-sky-500 dark:hover:text-sky-400">
                       Register
                     </a>
                   </li>
                 </ul>
               </nav>
-              <div className="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">
+              {/* <div className="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">
                 <button
                   type="button"
                   id="headlessui-listbox-button-4"
@@ -63,7 +57,7 @@ export function GlobalNav() {
                 >
                   icon login
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           
@@ -71,21 +65,32 @@ export function GlobalNav() {
       </div>
       <div className="sticky lg:fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-60 lg:border-b-0 lg:border-r lg:border-gray-800">
       
-      <div className="flex h-14 items-center py-4 px-4 lg:h-auto">
+      <div className="flex h-14 items-center py-4 px-4 lg:h-auto z-50">
+        <Link
+          href="/"
+          className="group flex w-full items-center gap-x-2.5"
+         /*  onClick={close} */
+        >
+          <div className="h-7 w-7 rounded-full border border-white/30 group-hover:border-white/50">
+         L
+          </div>
+
+          <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
+            App Name
+          </h3>
+        </Link>
         <button
             type="button"
             className="group absolute left-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden mr-7"
             onClick={() => setIsOpen(!isOpen)}
           >
-          
+         
           {isOpen ? (
             <XMarkIcon className="block w-6 text-gray-400" />
           ) : (
             <Bars4Icon className="block w-6 text-gray-400" />
           )}
         </button>
-       
-        
       </div>
         
        
