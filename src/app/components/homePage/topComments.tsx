@@ -18,7 +18,9 @@ import {
   _Prefix_Type_Scan,
 } from "@/constants/configPrefixBase";
 import ImageLoading from "@/ui/ImageLoading";
+import { Boundary } from "@/ui/boundary";
 import getDate from "@/utils/caldate";
+import Link from "next/link";
 import { useQuery } from "react-query";
 
 const FetchData = async (config: MangaLang) => {
@@ -52,9 +54,7 @@ const TopComment = () => {
   );
   return (
     <>
-      <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
-        {config.configSetting.lbl_inf_comment}
-      </div>
+      <Boundary labels={config.configSetting.lbl_inf_comment}/>
       {!isFetching && data && data.length > 0 && (
         <div id="blockComent" className="flex flex-wrap flex-col gap-2 ">
           {data &&
@@ -89,14 +89,14 @@ const TopComment = () => {
                     <div id="img" className="flex flex-row w-1/3 gap-2 text-start items-start">
                         <div className="border rounded w-10 text-center  my-7 mx-2 font-semibold">{indx+1}</div>
                         <div id="contenCmt" className="px-1 mx-1 my-1 flex flex-col">
-                            <a
+                            <Link
                             className="flex flex-1 text-lg text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-200"
                             rel="nofollow"
                             href={`${_urlPage}`}
                             title={`${config.configSetting.lbl_start_manga} ${item.name_manga}`}
                             >
                             {item.name_manga} 
-                            </a>
+                            </Link>
                             <div className="flex">
                                 {getDate(item.created_date, _config)}
                             </div>

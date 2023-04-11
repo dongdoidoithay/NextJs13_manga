@@ -7,6 +7,7 @@ import SliderHome from "./components/homePage/slideHome";
 import PopupHome from "./components/homePage/popupHome";
 import LastUpdateHome from "./components/homePage/lastUpdate";
 import TopComment from './components/homePage/topComments';
+import HistoryHome from './components/homePage/historyHome';
 export const metadata: Metadata = {
   title: "Home page",
   description: baseSeo.description,
@@ -53,6 +54,8 @@ export default function Home() {
         <main className="px-2">
          {/*  <Suspense fallback={<SlideSkeleton />}> */}
             <SliderHome typeManga={null}/>
+
+            <HistoryHome/>
           {/* </Suspense>
           <Suspense fallback={<SlideSkeleton />}> */}
             <PopupHome typeManga={null}/>

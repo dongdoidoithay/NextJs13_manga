@@ -355,7 +355,7 @@ export const ScanSetting:ConfigSetting={
     lbl_inf_Auth: "Author",
     lbl_inf_Type: "Type",
     lbl_inf_Year: "Released",
-    lbl_inf_Scan: "SCAN",
+    lbl_inf_Scan: "Scan",
     lbl_inf_Art: "Artist",
     lbl_inf_date: "Updated On",
     lbl_inf_status: "Status",

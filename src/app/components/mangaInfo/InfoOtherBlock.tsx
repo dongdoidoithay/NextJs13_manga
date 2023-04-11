@@ -1,5 +1,6 @@
 import ImageLoading from "@/ui/ImageLoading";
 import { BookOpenIcon, HashtagIcon, PlusIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 const InfoOtherBlock = ({
   id,
@@ -22,7 +23,7 @@ const InfoOtherBlock = ({
           </h3>
       </div>
       <div className="flex flex-row flex-wrap">
-        <a
+        <Link
             rel="nofollow"
             href={`https://www.facebook.com/sharer/sharer.php?u=${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}&t=${dataManga.name}`}
             target="_blank"
@@ -34,8 +35,8 @@ const InfoOtherBlock = ({
               <span  className="flex ">Facebook</span>
             </div>
            
-        </a>
-        <a
+        </Link>
+        <Link
           rel="nofollow"
           href={`https://www.twitter.com/intent/tweet?url=${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}&text=${dataManga.name}`}
           target="_blank"
@@ -47,8 +48,8 @@ const InfoOtherBlock = ({
               <span  className="flex ">Twitter</span>
             </div>
           
-        </a>
-        <a
+        </Link>
+        <Link
           rel="nofollow"
           href={`whatsapp://send?text=${dataManga.name} ${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}`}
           target="_blank"
@@ -60,8 +61,8 @@ const InfoOtherBlock = ({
               <span  className="flex ">WhatsApp</span>
             </div>
         
-        </a>
-          <a
+        </Link>
+          <Link
             rel="nofollow"
             href={`https://pinterest.com/pin/create/button/?url=${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}&media=${dataManga.image}&description=${dataManga.name}`}
             target="_blank"
@@ -72,7 +73,7 @@ const InfoOtherBlock = ({
                 <ImageLoading url={`/pinterest.svg`} title="Follow us on Pinterest" classStyle="w-6 inline flex"/>
                 <span  className="flex ">Pinterest</span>
               </div>
-          </a>
+          </Link>
       </div>
 
       <div className="ml-1 overflow flex flex-row flex-wrap">
@@ -87,7 +88,7 @@ const InfoOtherBlock = ({
                 (item: any, index: any) =>
                   item &&
                   item.id && (
-                    <a
+                    <Link
                       rel="tag nofollow"
                       href={`${config.configPrefix.url_host}${config.configPrefix.pageAuth}/${config.configPrefix.startAuth}${item.id}${config.configPrefix.endAuth}`}
                       key={item.id + index}
@@ -97,7 +98,7 @@ const InfoOtherBlock = ({
                         .replace("[Add, ]", "")}
                     >
                       {item.name?.replace("&nbsp;", "").replace("[Add, ]", "")}
-                    </a>
+                    </Link>
                   )
               )}
           </div>
@@ -113,7 +114,7 @@ const InfoOtherBlock = ({
                 (item: any, index: any) =>
                   item &&
                   item.id && (
-                    <a
+                    <Link
                       rel="tag nofollow"
                       href={`${config.configPrefix.url_host}${config.configPrefix.pageArt}/${config.configPrefix.startArt}${item.id}${config.configPrefix.endArt}`}
                       key={item.id + index}
@@ -123,7 +124,7 @@ const InfoOtherBlock = ({
                         .replace("[Add, ]", "")}
                     >
                       {item.name?.replace("&nbsp;", "").replace("[Add, ]", "")}
-                    </a>
+                    </Link>
                   )
               )}
           </div>
@@ -139,7 +140,7 @@ const InfoOtherBlock = ({
                 (item: any, index: any) =>
                   item &&
                   item.id && (
-                    <a
+                    <Link
                       rel="tag nofollow"
                       href={`${config.configPrefix.url_host}${config.configPrefix.pageStatus}/${config.configPrefix.startStatus}${item.id}${config.configPrefix.endStatus}`}
                       key={item.id + index}
@@ -149,7 +150,7 @@ const InfoOtherBlock = ({
                         .replace("[Add, ]", "")}
                     >
                       {item.name?.replace("&nbsp;", "").replace("[Add, ]", "")}
-                    </a>
+                    </Link>
                   )
               )}
           </div>
@@ -165,7 +166,7 @@ const InfoOtherBlock = ({
                 (item: any, index: any) =>
                   item &&
                   item.id && (
-                    <a
+                    <Link
                       rel="tag nofollow"
                       href={`${config.configPrefix.url_host}${config.configPrefix.pageType}/${config.configPrefix.startType}${item.id}${config.configPrefix.endType}`}
                       key={item.id + index}
@@ -175,7 +176,7 @@ const InfoOtherBlock = ({
                         .replace("[Add, ]", "")}
                     >
                       {item.name?.replace("&nbsp;", "").replace("[Add, ]", "")}
-                    </a>
+                    </Link>
                   )
               )}
           </div>

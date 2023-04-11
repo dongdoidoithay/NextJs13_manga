@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
   HomeIcon,
 } from "@heroicons/react/20/solid";
+import Link from "next/link";
 import { useQuery } from "react-query";
 const FetchData = async (config: MangaLang, idmanga: string, iddetail: string) => {
   // console.log("url trend", config.apiPath + config.endPointPath.checkTrend + idmanga)
@@ -35,31 +36,31 @@ export default function DetaiView({ params }: { params: { type: string, idmanga:
         <ol className="list-outside list-none flex flex-wrap gap-1" itemScope itemType="http://schema.org/BreadcrumbList">
           <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
             <HomeIcon className="block w-6 mx-1" />
-            <a href={`${config.configPrefix.url_host}`}
+            <Link href={`${config.configPrefix.url_host}`}
               className="hover:text-sky-500 dark:hover:text-sky-400"
               itemProp="name">
               {config.configSetting.lbl_domain_home}
-            </a>
+            </Link>
             <meta itemProp="position" content="1" />
           </li>
           <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
             <ChevronRightIcon className="block w-4 mx-1" />
-            <a href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}`}
+            <Link href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}`}
               className="hover:text-sky-500 dark:hover:text-sky-400"
               itemProp="name">
               {SelectMangaTypeName(config.typeName)}
 
-            </a>
+            </Link>
             <meta itemProp="position" content="2" />
           </li>
           <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
             <ChevronRightIcon className="block w-4 mx-1" />
-            <a href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${_dataManga.data.idDoc}${config.configPrefix.endManga}`}
+            <Link href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${_dataManga.data.idDoc}${config.configPrefix.endManga}`}
               className="hover:text-sky-500 dark:hover:text-sky-400"
               itemProp="name">
               {_dataManga.data.nameDoc}
 
-            </a>
+            </Link>
             <meta itemProp="position" content="3" />
           </li>
 
@@ -79,18 +80,18 @@ export default function DetaiView({ params }: { params: { type: string, idmanga:
         <ol className="list-outside list-none flex flex-wrap gap-1" itemScope itemType="http://schema.org/BreadcrumbList">
           <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
             <HomeIcon className="block w-6 mx-1 " />
-            <a href={`${config.configPrefix.url_host}`}
+            <Link href={`${config.configPrefix.url_host}`}
               className="hover:text-sky-500 dark:hover:text-sky-400"
               itemProp="name">
               {config.configSetting.lbl_domain_home}
-            </a>
+            </Link>
             <meta itemProp="position" content="1" />
           </li>
           <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
             <ChevronRightIcon className="block w-4 mx-1" />
-            <a href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}`} className="hover:text-sky-500 dark:hover:text-sky-400">
+            <Link href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}`} className="hover:text-sky-500 dark:hover:text-sky-400">
               {SelectMangaTypeName(config.typeName)}
-            </a>
+            </Link>
             <meta itemProp="position" content="2" />
           </li>
           <li className="flex flex-row rounded-full" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
@@ -104,7 +105,7 @@ export default function DetaiView({ params }: { params: { type: string, idmanga:
   return (
     <>
       <GlobalNavView />
-      <main className="px-2 xs:mt-14 bg-slate-900/60 border border-slate-700">
+      <main className="px-0 lg:px-2 bg-slate-900/60 border border-slate-700">
         {_dataManga.isLoading && breadcrumbSkeleton()}
         {!_dataManga.isLoading && breadcrumb()}
 

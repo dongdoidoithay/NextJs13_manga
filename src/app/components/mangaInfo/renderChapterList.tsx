@@ -12,7 +12,9 @@ import {
   ClockIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/20/solid";
+import clsx from "clsx";
 import Head from "next/head";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useQuery } from "react-query";
@@ -37,7 +39,7 @@ const FetchDataChaper = async (
     sort
   );
 };
-const RenderChapterList = ({ id, config, mangaName }: { id: string, config: MangaLang,mangaName: any }) => {
+const RenderChapterList = ({ id, config, mangaName,idchapter }: { id: string, config: MangaLang,mangaName: any,idchapter?:any }) => {
   const [idDetailFilter, setIdDetailFilter] = useState("all");
   const [sort, setSort] = useState("ASC");
   const [currentPage, SetCurrentPage] = useState(0);
@@ -138,8 +140,7 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
         {currentPage == 0 && <a
 
           title={`${config.configSetting.lbl_prev_data} ${currentPage - 1}`}
-          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"
-        >
+          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400" >
           <ChevronLeftIcon className="w-4 inline " />
           <b className="ml-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_prev_data}
@@ -150,8 +151,7 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
         {currentPage > 0 && <a
           onClick={FnPrevChapter}
           title={`${config.configSetting.lbl_text_chapter} ${currentPage - 1}`}
-          className="cursor-pointer hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400"
-        >
+          className="cursor-pointer hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400">
           <ChevronLeftIcon className="w-4 inline " />
           <b className="ml-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_prev_data}
@@ -160,8 +160,7 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
         {dataChapter && (currentPage >= dataChapter.totalPage - 1) && <a
 
           title={`${config.configSetting.lbl_prev_data} ${currentPage - 1}`}
-          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"
-        >
+          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400">
           <b className="mr-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_next_data}
           </b>
@@ -171,8 +170,7 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
           <a
             onClick={FnNextChapter}
             title={`${config.configSetting.lbl_text_chapter} ${currentPage + 1}`}
-            className="cursor-pointer hover:border-dashed  w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400"
-          >
+            className="cursor-pointer hover:border-dashed  w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400">
             <b className="mr-3 font-semibold first-letter:uppercase">
               {config.configSetting.lbl_next_data}
             </b>
@@ -262,6 +260,23 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
       </>
     )
   }
+
+
+  let histIdchap = "";
+var cookie_obj = JSON.parse(
+  getStorage(config.localKey.localReadView) as string
+);
+if (cookie_obj != null && _fixid ) {
+  for (var i = 0; i < cookie_obj.length; i++) {
+    var obj = cookie_obj[i];
+    if (obj["comicId"] == _fixid) {
+      histIdchap = obj["chapterId"];
+      break;
+    }
+  }
+}
+
+
   const comicJson={
     "@context": "https://schema.org/",
     "@type": "ComicSeries",
@@ -350,7 +365,7 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
             placeholder="Search Chapter. Example: 25 or 178"
             autoComplete="off" onChange={(e) => FnFindChapter(e)} value={valueFind}
           />
-          <a onClick={() => FnSortChapter()} className="cursor-pointer">
+          <a onClick={() => FnSortChapter()} className="cursor-pointer" >
             {sort == "ASC" ? (
               <BarsArrowUpIcon className="w-6 inline  text-sky-500 dark:text-sky-400" />
             ) : (
@@ -368,26 +383,37 @@ const RenderChapterList = ({ id, config, mangaName }: { id: string, config: Mang
             dataChapter &&
             dataChapter.data &&
             dataChapter.data.map((item: any, index: any) => {
+              let active=item.idDetail===idchapter || item.idDetail===histIdchap;
               return (
                 <div
                   className="w-1/2 md:w-1/4"
                   key={item.idDetail + "-" + index}
                 >
-                  <a
+                  <Link
                     href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}${config.configPrefix.endManga}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`}
                     title={`${config.configSetting.lbl_text_chapter} ${item.idDetail}`}
-                    className="rounded border-curent hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400 mr-2 mb-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700  p-1"
+                    className={clsx('rounded border-curent hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400 mr-2 mb-2 hover:text-sky-500 dark:hover:text-sky-400 flex border  p-1',{
+                        'border-slate-700':!active,
+                        'border-orange-500':active,
+                    })}
                   >
-                    <CheckCircleIcon className="w-4 inline " />
+                    <CheckCircleIcon className={clsx('w-4 inline',{
+                      ' text-orange-500 dark:text-orange-500':active,
+                    })}/>
                     <div className="flex-0">
-                      <p className="ml-3 font-semibold first-letter:uppercase gap-2  text-sky-500 dark:text-sky-400">
+                      <p className={clsx('ml-3 font-semibold first-letter:uppercase gap-2 ',{
+                         ' text-sky-500 dark:text-sky-400':!active,
+                         ' text-orange-500 dark:text-orange-500':active,
+                      })}>
                         <RectangleGroupIcon className="w-4 inline" /> {config.configSetting.lbl_text_chapter} {item.idDetail}
                       </p>
-                      <i className="ml-3">
+                      <i className={clsx('ml-3',{
+                      ' text-orange-500 dark:text-orange-500':active,
+                    })}>
                         <ClockIcon className="w-4 inline" /> {config.configSetting.lbl_inf_date}: {getDate(item.date, config)}
                       </i>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               );
             })}

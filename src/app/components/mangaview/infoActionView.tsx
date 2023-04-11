@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { MangaLang } from "@/constants/configBase";
 import { getStorage } from "@/utils/localFx";
 import { BookOpenIcon, BookmarkIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ExclamationTriangleIcon, HeartIcon, Square2StackIcon, Square3Stack3DIcon, TagIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 const FnSubscribe = () => {
     toast("🦄 Subscribe Functions under development", {
@@ -93,7 +94,7 @@ const InfoActionView = ({ config, data, fnChangeVidewMode, listImg, CurrentImage
                     {viewMode == 'N' &&<div>
                         {CurrentImage == 0 && <a 
                             title={`Next Chapter ${data.CurrentImage}`}
-                            href="#" 
+                         
                             className="line-through text-de px-2 text-sm hover:text-orange-500 dark:hover:text-orange-400 h-9">
                             <ChevronDoubleLeftIcon className="inline w-6" />  Prev Image
                         </a>}
@@ -108,14 +109,13 @@ const InfoActionView = ({ config, data, fnChangeVidewMode, listImg, CurrentImage
 
                         {(CurrentImage >= listImg.length-1) && <a 
                             title={`Next Chapter ${data.CurrentImage}`}
-                            href="#" 
                             className="line-through text-de px-2 text-sm hover:text-orange-500 dark:hover:text-orange-400 h-9">
                              Next Image <ChevronDoubleRightIcon className="w-6 inline " />
                         </a>}
                         {(CurrentImage < listImg.length-1) && <a 
                             title={`Prev Chapter ${data.idDetailPrev}`}
                             onClick={next_img}
-                            className="cursor-pointer px-2 text-sm hover:text-sky-500 dark:hover:text-sky-400 h-9">
+                            className="cursor-pointer px-2 text-sm hover:text-sky-500 dark:hover:text-sky-400 h-9" >
                              Next Image <ChevronDoubleRightIcon className="w-6 inline " />
                         </a>}
                     </div>
@@ -123,26 +123,24 @@ const InfoActionView = ({ config, data, fnChangeVidewMode, listImg, CurrentImage
                     {viewMode == 'Y' &&<div>
                         {data.idDetailPrev == '' && <a 
                             title={`Next Chapter ${data.idDetailPrev}`}
-                            href="#" 
                             className="line-through text-de px-2 text-sm hover:text-orange-500 dark:hover:text-orange-400 h-9">
                             <ChevronDoubleLeftIcon className="inline w-6" />  Prev Chapter
                         </a>}
-                        {data.idDetailPrev && <a 
+                        {data.idDetailPrev && <Link 
                             title={`Prev Chapter ${data.idDetailPrev}`}
                             href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${data.idDoc}/${config.configPrefix.startViewmanga}${data.idDetailPrev}${config.configPrefix.endViewmanga}`} 
                             className="cursor-pointer px-2 text-sm hover:text-sky-500 dark:hover:text-sky-400 h-9">
                             <ChevronDoubleLeftIcon className="inline w-6" /> Prev Chapter
-                        </a>}
+                        </Link>}
 
-                        {data.idDetailNext && <a 
+                        {data.idDetailNext && <Link 
                             title={`Next Chapter ${data.idDetailNext}`}
                             href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${data.idDoc}/${config.configPrefix.startViewmanga}${data.idDetailNext}${config.configPrefix.endViewmanga}`} 
                             className="cursor-pointer px-2 text-sm hover:text-sky-500 dark:hover:text-sky-400 h-9">
                             Next Chapter <ChevronDoubleRightIcon className="w-6 inline " />
-                        </a>}
+                        </Link>}
                         {data.idDetailNext == '' && <a 
                             title={`Next Chapter ${data.idDetailNext}`}
-                            href="#" 
                             className="line-through text-de px-2 text-sm hover:text-orange-500 dark:hover:text-orange-400 h-9">
                             Next Chapter <ChevronDoubleRightIcon className="w-6 inline " />
                         </a>}

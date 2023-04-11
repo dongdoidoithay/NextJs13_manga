@@ -2,6 +2,7 @@
 import { ITEM_PAGE_COUNT } from "@/constants/Endpoint";
 import { FetchApi } from "@/constants/FetchApi";
 import { MangaLang, SelectMangaTypeByPage } from "@/constants/configBase";
+import { Boundary } from "@/ui/boundary";
 import getDate from "@/utils/caldate";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
@@ -30,13 +31,14 @@ const [page, setPage] = useState(0);
   );
 
   if (!isFetching && data && page > 0) {
+   
     /*  setTimeout(
        () => scrollAction(), 
        100
      );  */
      setTimeout(() => {
       sectionRef.current?.scrollIntoView();
-    }, 0);
+    }, 100);
      
    }
 
@@ -57,14 +59,14 @@ const [page, setPage] = useState(0);
           </div>
         </td>
         <td className="w-1/2">
-          <a
+          <Link
             className="text-sm text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-200"
             rel="nofollow"
             href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
             title={`${config.configSetting.lbl_start_manga} ${data.name}`}
           >
             {data.name}
-          </a>
+          </Link>
         </td>
         <td className="hidden sm:block py-5 align-middle">
           <div>
@@ -84,7 +86,7 @@ const [page, setPage] = useState(0);
                     key={index + "" + item.idDetail}
                   >
                     <td className="py-2 mr-1">
-                      <a
+                      <Link
                         className="text-sm text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-300"
                         rel="nofollow"
                         href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`}
@@ -93,7 +95,7 @@ const [page, setPage] = useState(0);
                         {config.configSetting
                           ? config.configSetting.lbl_text_chapter
                           : ""} {item.idDetail}
-                      </a>
+                      </Link>
                     </td>
                     <td className="hidden sm:block justify-end float-right">
                       {getDate(item.date, config)}
@@ -112,8 +114,7 @@ const [page, setPage] = useState(0);
         {page == 0 && <a
 
           title={`${config.configSetting.lbl_prev_data} ${page - 1}`}
-          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"
-        >
+          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"  >
           <ChevronLeftIcon className="w-4 inline " />
           <b className="ml-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_prev_data}
@@ -124,8 +125,7 @@ const [page, setPage] = useState(0);
         {page > 0 && <a
           onClick={FnPrev}
           title={`${config.configSetting.lbl_text_chapter} ${page - 1}`}
-          className="cursor-pointer hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400"
-        >
+          className="cursor-pointer hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400"      >
           <ChevronLeftIcon className="w-4 inline " />
           <b className="ml-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_prev_data}
@@ -134,8 +134,7 @@ const [page, setPage] = useState(0);
         {(page >= data.totalPage - 1)  && <a
 
           title={`${config.configSetting.lbl_prev_data} ${page + 1}`}
-          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"
-        >
+          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"         >
           <b className="mr-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_next_data}
           </b>
@@ -145,8 +144,7 @@ const [page, setPage] = useState(0);
           <a
             onClick={FnNext}
             title={`${config.configSetting.lbl_text_chapter} ${page + 1}`}
-            className="cursor-pointer hover:border-dashed  w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400"
-          >
+            className="cursor-pointer hover:border-dashed  w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400"           >
             <b className="mr-3 font-semibold first-letter:uppercase">
               {config.configSetting.lbl_next_data}
             </b>
@@ -158,11 +156,9 @@ const [page, setPage] = useState(0);
   };
   return (
     <>
-      <div  ref={sectionRef} id="newUpdate" className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
-        {config.configSetting.Lbl_Home_New_Upadte}
-      </div>
-
-      <table className="w-full text-left border-collapse text-sm ">
+    <div ref={sectionRef}></div>
+      <Boundary labels={config.configSetting.Lbl_Home_New_Upadte} />
+      <table className="w-full text-left border-collapse text-sm " >
         <tbody>
           {isFetching &&  tableSkeleton()}
           {!isFetching && data && data.data && data.data.map((data: any, index: number) => (_renderItem(data, index)))} 

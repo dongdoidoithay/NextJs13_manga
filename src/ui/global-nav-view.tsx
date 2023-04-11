@@ -34,14 +34,14 @@ export function GlobalNavView() {
               <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                 <ul className="flex space-x-8">
                   <li>
-                    <a href="/" className="hover:text-sky-500 dark:hover:text-sky-400" >
+                    <Link href="/" className="hover:text-sky-500 dark:hover:text-sky-400" >
                       Login
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/" className="hover:text-sky-500 dark:hover:text-sky-400">
+                    <Link href="/" className="hover:text-sky-500 dark:hover:text-sky-400">
                       Register
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </nav>

@@ -154,10 +154,10 @@ export const ActMangaSource: MangaSource[] = [
 ];
 
 export const ActSourceList: MangaSource[] = [
-  {
+/*   {
     lable: "All",
     value: 'all',
-  }, 
+  },  */
   {
     lable: "Manga Scan",
     value: _Prefix_Root_Scan,

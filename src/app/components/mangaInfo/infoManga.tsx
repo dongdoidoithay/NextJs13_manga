@@ -60,18 +60,12 @@ import { Helmet } from 'react-helmet';
       .replace(/{domain}/g, config.configSetting.lbl_domain_name)
       .replace(/{chapter}/g, chapter_name_view);
   }
-  const _rate = dataManga.rate
-    ? dataManga.rate
-    : Math.round((Math.random() * (10 - 3) + 3) * 10) / 10;
-  const _ratingCount = Math.round((Math.random() * 90 + 90) * 100);
-  const _worstRating = Math.round((Math.random() * (10 - 3) + 3) * 10);
-  const _bestRating = _ratingCount - _worstRating;
+
 
  
 
   return (
     <>
-     
      <InfoHeaderBlock config={config} dataManga={dataManga}/>
      <InfoActionBlock id={id}  des_full={des_full} config={config} dataManga={dataManga}/>
      <RenderChapterList id={id} config={config} mangaName={dataManga.name} />

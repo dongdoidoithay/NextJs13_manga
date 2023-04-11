@@ -119,13 +119,13 @@ const InfoViewManga = ({ config, data ,loading}: { config: MangaLang, data: any,
         <>
             { loading &&<InfoActionViewSkeletion/>}
             {data && <InfoActionView  config={config} viewMode={viewMode}  data={data} fnChangeVidewMode={fnChangeVidewMode} listImg={listImg} CurrentImage={CurrentImage} SetCurrentImage={SetCurrentImage}  ImageSelect={ImageSelect} SetImageSelect={SetImageSelect} prev_img={prev_img} next_img={next_img}/>}
-            <div id="read-view" className="mt-2 mx-2 flex flex-col items-center">
+            <div id="read-view" className="mt-2 mx-1 flex flex-col items-center">
                 { loading &&<ContenViewSkeletion/>}
                 {data && <ContenView config={config} viewMode={viewMode} data={data} listImg={listImg} SetlistImg={SetlistImg} CurrentImage={CurrentImage} SetCurrentImage={SetCurrentImage} ImageSelect={ImageSelect} SetImageSelect={SetImageSelect} prev_img={prev_img} next_img={next_img} />}
             </div>
             {data && <InfoActionViewBt config={config} viewMode={viewMode}  data={data} fnChangeVidewMode={fnChangeVidewMode} listImg={listImg} CurrentImage={CurrentImage} SetCurrentImage={SetCurrentImage} ImageSelect={ImageSelect} SetImageSelect={SetImageSelect} prev_img={prev_img} next_img={next_img}/>}
            
-            {data && <RenderChapterList id={data.idDoc} config={config} mangaName={data?.nameDoc} />}
+            {data && <RenderChapterList id={data.idDoc} config={config} mangaName={data?.nameDoc} idchapter={data.idDetail}/>}
             {data &&<div id="manga-comments" className="w-full bg-slate-900/70 ">
             <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['_↗']">
                 {config.configSetting.lbl_inf_comment}

@@ -7,6 +7,7 @@ import {
   HashtagIcon,
   PlusIcon,
 } from "@heroicons/react/20/solid";
+import Link from "next/link";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 
@@ -14,9 +15,6 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
      return await FetchApi(config.apiPath + config.endPointPath.checkTrend + idmanga);
    }
  const InfoActionBlock = ({id,config, dataManga, des_full}:{id:any,config: any; dataManga: any; des_full: any}) => {
-    let histNamechap = "";
-    let histIdchap = "";
-    let histIddoc = "";
   
 
     const {
@@ -26,9 +24,10 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
     
 
       const AddTrend = async () => {
-        //toast("AddTrend Done!")
+        
         const _arraytype = ['trend', 'popular', 'slide'];
         const params = new URLSearchParams({ idDoc: id, type: _arraytype[Math.floor(Math.random() * _arraytype.length)] });
+        toast("AddTrend Done!"+config.apiPath + config.endPointPath.addTrend +"{"+params+"}")
        await AxiosPostApi(config.apiPath + config.endPointPath.addTrend, params).then(response => {
           console.log("post Trend-->response",response);
           toast("🦄Thank you for the nomination, manga / novels will be on the  Popular  list soon!", {
@@ -40,10 +39,13 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
             draggable: true,
             progress: undefined,
           });
-          //SetCheckTrend(false);
+          checkTrend.data=false;
         })
       }
-      
+      //hit
+      let histNamechap = "";
+      let histIdchap = "";
+      let histIddoc = "";
     var cookie_obj = JSON.parse(
       getStorage(config.localKey.localReadView) as string
     );
@@ -88,7 +90,7 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
                   (item: any, index: any) =>
                     item &&
                     item.id && (
-                      <a
+                      <Link
                         rel="tag nofollow"
                         href={`${config.configPrefix.url_host}${config.configPrefix.pageGenre}/${config.configPrefix.startGenre}${item.id}${config.configPrefix.endGenre}`}
                         key={item.id + index}
@@ -96,7 +98,7 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
                         title= {item.name}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     )
                 )}
             </div>
@@ -104,7 +106,7 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
               {config.configSetting.lbl_inf_Year}
               <HashtagIcon className="w-2 inline" />
             </h3>
-            <a
+            <Link
               rel="tag nofollow"
               href={`${config.configPrefix.url_host}${
                 config.configPrefix.pageYear
@@ -116,23 +118,23 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
               title={dataManga.year?.replace(",", "")}
             >
               {dataManga.year?.replace(",", "")}
-            </a>
+            </Link>
             <h3 className="font-semibold text-white/80 first-letter:uppercase">
               {`Action`}
               <HashtagIcon className="w-2 inline" />
             </h3>
-            {histIdchap && histIdchap != '' && <a
+            {histIdchap && histIdchap != '' && <Link
               rel="tag nofollow"
               href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${dataManga.idDoc}/${config.configPrefix.startViewmanga}${histIdchap}${config.configPrefix.endViewmanga}`}
               className="hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold after:content-['_↗']"
               title={`${config.configSetting.lbl_inf_continue} ${histNamechap}`}
             >
             <BookOpenIcon className="w-5 inline" />  {config.configSetting.lbl_inf_continue} {histNamechap}
-            </a>}
-            {checkTrend && checkTrend.pass == true && <a 
-             onClick={() => AddTrend()} 
-             className="cursor-pointer hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold after:content-['_↗']"
-             >
+            </Link>}
+            {checkTrend && checkTrend.pass == true && 
+            <a 
+                onClick={() => AddTrend()}
+                className="cursor-pointer hover:text-sky-500 dark:hover:text-sky-400 first-letter:uppercase pr-1 hover:font-semibold after:content-['_↗']" >
 
             <PlusIcon className="w-5 inline" /> Add Nominations
             </a>}

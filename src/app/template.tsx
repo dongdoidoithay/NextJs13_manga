@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 //react-query
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
 const queryClient = new QueryClient();
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -44,8 +45,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <QueryClientProvider client={queryClient}>
         <div ref={sectionRef}></div>
         {children}
-        <a onClick={Scroll} className={`${scroll} inset bottom-6 z-50 right-6 text-sky-400 hover:text-orange-500 cursor-pointer`} ><ArrowUpCircleIcon className="w-9" /> </a>
-
+       {/*  <a onClick={Scroll} className={`${scroll} inset bottom-6 z-50 right-6 text-sky-400 hover:text-orange-500 cursor-pointer`} ><ArrowUpCircleIcon className="w-9" /> </a> */}
+        <Link onClick={Scroll} scroll={true} className={`${scroll} inset bottom-6 z-50 right-6 text-sky-400 hover:text-orange-500 cursor-pointer`} href={"#"} >
+          <ArrowUpCircleIcon className="w-9" />
+        </Link>
       </QueryClientProvider>
 
     </>

@@ -1,4 +1,5 @@
 import ImageLoading from '@/ui/ImageLoading';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -7,7 +8,7 @@ const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage,
     const is_full = viewMode;
     let is_next = data.idDetailNext;
     let is_prev = data.idDetailPrev;
- 
+
     useEffect(() => {
         if (data != null && data.source != null && data.source != undefined) {
             let imagelist = data.source.split(',').filter((word: any) => word.length > 1);
@@ -107,37 +108,36 @@ const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage,
         const viewportHeight = window.innerHeight;
         // Calculate the position of the next screen
         const nextScreenPosition = Math.ceil((window.scrollY + 1) / viewportHeight) * viewportHeight;
-        
-        console.log("nextScreenPosition",nextScreenPosition)
+
+        console.log("nextScreenPosition", nextScreenPosition)
         // Scroll to the next screen
         window.scroll({
-          top: nextScreenPosition,
-          behavior: 'smooth' // Add smooth scrolling effect
+            top: nextScreenPosition,
+            behavior: 'smooth' // Add smooth scrolling effect
         });
     }
 
     useEffect(() => {
-        const handleKeyPress = (event:any) => {
-        
-          if (is_full == "N" && ImageSelect != '')
-            { 
+        const handleKeyPress = (event: any) => {
+
+            if (is_full == "N" && ImageSelect != '') {
                 if (event.code.toString() == 'ArrowRight') {
                     console.log('next_img!');
                     next_img();
-                  }
-                  if (event.code == 'ArrowLeft') {
+                }
+                if (event.code == 'ArrowLeft') {
                     console.log('prev_img!');
                     prev_img();
-                  }
-           }
+                }
+            }
         }
-    
+
         window.addEventListener('keydown', handleKeyPress);
-    
+
         return () => {
-          window.removeEventListener('keydown', handleKeyPress);
+            window.removeEventListener('keydown', handleKeyPress);
         };
-      }, []);
+    }, []);
 
     const loadOneImage = () => {
         // console.log("loadOneImage",{is_full,ImageSelect})
@@ -145,25 +145,26 @@ const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage,
             return (
                 <div className='flex flex-col items-center w-full relative'>
                     <ImageLoading url={ImageSelect} title={`${data.nameDoc}-${CurrentImage}`} classStyle="w-full h-full object-fill" />
-                    <a title='prev Img' className="absolute w-1/2 h-full left-0  cursor-[url('/pre.cur'),_pointer]" onClick={() => prev_img()}></a>
-                    <a title='next Img' className="absolute w-1/2 h-full right-0 cursor-[url('/next.cur'),_pointer]" onClick={() => next_img()}></a>
+                    <a title='prev Img' className="absolute w-1/2 h-full left-0  cursor-[url('/pre.cur'),_pointer]" onClick={() => prev_img()} ></a>
+                    <a title='next Img' className="absolute w-1/2 h-full right-0 cursor-[url('/next.cur'),_pointer]" onClick={() => next_img()} ></a>
                 </div>
             )
         }
     }
     const loadAllImage = () => {
         if (is_full == "Y" && listImg.length > 0) {
-            return (<>
-                {
-                    listImg.map((image: any, k: number) => {
-                        return (
-                            <div key={k} className="flex flex-col items-center w-full cursor-[url('/down.png'),_pointer]" onClick={()=>{next_pic(k + 1);next_pic_point()}} >
-                            <ImageLoading url={image} title={`${data.nameDoc}-${k}`} classStyle="w-full h-full object-fill" />
-                            </div>
-                        )
-                    })
-                }
-            </>
+            return (
+                <>
+                    {
+                        listImg.map((image: any, k: number) => {
+                            return (
+                                <div key={k} className="flex flex-col items-center w-full cursor-[url('/down.png'),_pointer]" onClick={() => { next_pic(k + 1); next_pic_point() }} >
+                                    <ImageLoading url={image} title={`${data.nameDoc}-${k}`} classStyle="w-full h-full object-fill" />
+                                </div>
+                            )
+                        })
+                    }
+                </>
             )
         }
     }

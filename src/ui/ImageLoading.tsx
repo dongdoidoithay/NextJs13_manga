@@ -41,7 +41,7 @@ const ImageLoading = ({url, title,classStyle}:any) => {
   return <Images  
             loader={myLoader}
             src={imgSrc}
-            alt={title}
+            alt={title||'No title'}
             width={20}
             height={20}
             className={`bg-white ${classStyle}`}

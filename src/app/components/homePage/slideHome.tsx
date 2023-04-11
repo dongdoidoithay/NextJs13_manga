@@ -16,6 +16,8 @@ import getDate from "@/utils/caldate";
 import ImageLoading from "@/ui/ImageLoading";
 import ImageString from "@/ui/ImageString";
 import { useState } from "react";
+import { Boundary } from "@/ui/boundary";
+import Link from "next/link";
 
 const FetchDataTrend = async (config: MangaLang) => {
   return await FetchApi(config.apiPath + config.endPointPath.homeTren);
@@ -53,11 +55,11 @@ const SliderHome = ({ typeManga }: any) => {
   const trending = (data: any) => {
 
     return (
-      <a
+      <Link
         key={data.idDoc}
         rel="nofollow"
         href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
-        className="border rounded-md hover:border-dashed hover:border-sky-400 w-full h-64 overflow-hidden"
+        className="border border-slate-700 rounded-md hover:border-dashed hover:border-sky-400 w-full h-64 overflow-hidden"
       >
         <div className="relative bg-red-950 ">
            <ImageLoading url={data.image} title="silde" classStyle="w-full object-cover"/>
@@ -75,7 +77,7 @@ const SliderHome = ({ typeManga }: any) => {
               </span>
             </div> 
         </div>
-      </a>
+      </Link>
     )
   };
 
@@ -85,7 +87,7 @@ const SliderHome = ({ typeManga }: any) => {
       dataArr.map((_data: any, indx: number) => {
         let data = _data.document;
         return (
-          <a
+          <Link
             className="flex h-1/2 w-full lg:w-1/2 text-sm text-sky-500 dark:text-sky-400  hover:text-sky-200"
             key={data.idDoc}
             rel="nofollow"
@@ -93,7 +95,7 @@ const SliderHome = ({ typeManga }: any) => {
           >
             <div
               id="box"
-              className="flex flex-row mx-1 my-1 border rounded-lg w-full hover:border-dashed hover:border-sky-400"
+              className="flex flex-row mx-1 my-1 border border-slate-700 rounded-lg w-full hover:border-dashed hover:border-sky-400"
             >
               <div id="image-box" className="flex w-1/3 h-28">
                 <ImageLoading
@@ -121,7 +123,7 @@ const SliderHome = ({ typeManga }: any) => {
                 </span>
               </div>
             </div>
-          </a>
+          </Link>
         );
       })
     );
@@ -169,9 +171,7 @@ const SliderHome = ({ typeManga }: any) => {
   };
   return (
     <>
-      <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
-        {config.configSetting.Lbl_Home_Hot}
-      </div>
+      <Boundary labels={config.configSetting.Lbl_Home_Hot}/>
       <div className="flex flex-col lg:flex-row">
         <div className="flex w-full lg:w-1/3 ">
           {_fetchDataTrend.isLoading && trendingkeleton()}

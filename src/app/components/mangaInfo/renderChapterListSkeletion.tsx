@@ -3,6 +3,7 @@ import { MangaLang } from "@/constants/configBase";
 import {
   BarsArrowUpIcon,
 } from "@heroicons/react/20/solid";
+import Link from "next/link";
 
 
  const RenderChapterListSkeletion = ({config}:{config: MangaLang}) => {

@@ -12,6 +12,8 @@ import { FetchApi } from "@/constants/FetchApi";
 import { useQuery } from "react-query";
 import getDate from "@/utils/caldate";
 import ImageLoading from "@/ui/ImageLoading";
+import { Boundary } from "@/ui/boundary";
+import Link from "next/link";
 
 const FetchDataPopular = async (config: MangaLang) => {
   return await FetchApi(config.apiPath + config.endPointPath.homePopular);
@@ -32,7 +34,7 @@ const PopupRelease = ({ typeManga }: any) => {
 
   const popular = (data: any, index: number) => {
     return (
-      <a
+      <Link
         rel="nofollow"
         href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
         title={`${config.configSetting.lbl_inf_start_manga} ${data.name}`}
@@ -61,7 +63,7 @@ const PopupRelease = ({ typeManga }: any) => {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     );
   };
   const skeleton = () => {
@@ -96,9 +98,7 @@ const PopupRelease = ({ typeManga }: any) => {
 
   return (
     <>
-      <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
-        {config.configSetting.Lbl_Home_Pop}
-      </div>
+      <Boundary labels={config.configSetting.Lbl_Home_Pop}/>
       <div className="flex flex-wrap  pt-1">
         {_fetchDataPopular.isLoading && popularSkeleton()}
         {!_fetchDataPopular.isLoading &&

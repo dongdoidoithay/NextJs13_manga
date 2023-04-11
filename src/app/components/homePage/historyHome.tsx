@@ -1,64 +1,44 @@
 "use client";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
-// import required modules
 
-import "@/styles/slide.css";
-
-import { MangaLang, SelectMangaTypeByPage } from "@/constants/configBase";
-import { FetchApi } from "@/constants/FetchApi";
-import { useQuery } from "react-query";
+import { SelectMangaTypeByPage } from "@/constants/configBase";
 import getDate from "@/utils/caldate";
 import ImageLoading from "@/ui/ImageLoading";
 import { Boundary } from "@/ui/boundary";
 import Link from "next/link";
+import { getStorage } from "@/utils/localFx";
+import { useEffect, useState } from "react";
 
-const FetchDataPopular = async (config: MangaLang) => {
-  return await FetchApi(config.apiPath + config.endPointPath.homePopular);
-};
-const PopupHome = ({ typeManga }: any) => {
-  let config = SelectMangaTypeByPage(typeManga);
-  const _fetchDataPopular = useQuery(
-    ["_fetchDataPopular", typeManga],
-    () => FetchDataPopular(config),
-    {
-      retry: 10,
-      staleTime: 10000,
-      cacheTime: 5000,
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    }
-  );
 
-  const popular = (data: any, index: number) => {
+const HistoryHome = () => {
+  let config = SelectMangaTypeByPage('');
+
+  const history = (item: any, index: number) => {
     return (
       <Link
         rel="nofollow"
-        href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
-        title={`${config.configSetting.lbl_inf_start_manga} ${data.name}`}
+        href={`${item.url_view}`}
+        title={`${config.configSetting.lbl_inf_start_manga} ${item.namecomic}`}
         key={index}
         className="relative lg:w-1/2 w-full text-sm text-sky-500 dark:text-sky-400 " 
       >
         <div className="overflow-auto my-1 mx-1 border-slate-700 border rounded-md hover:border-dashed hover:border-sky-400">
           <div className="overflow-hidden relative mx-auto flex items-center gap-6">
             <ImageLoading
-              url={data.image}
-              title={data.nameSeo}
-              classStyle="absolute  w-24 h-24 rounded-full shadow-lg"
+              url={item.image}
+              title={item.namecomic}
+              classStyle="absolute w-20 h-20 rounded-md shadow-lg"
             />
             <div className="flex flex-col py-5 pl-24 ">
               <h2 className="px-1 truncate .. font-semibold first-line:uppercase first-letter:text-xl hover:text-md hover:font-semibold hover:text-sky-200">
-                {data.name}
+                {item.namecomic} {item.namechapter && item.namechapter}
               </h2>
               <span className="px-1 text-slate-300 dark:text-slate-400">
-                {config.configSetting.lbl_inf_status}:{" "}
-                <strong>{data.status}</strong>
+                {config.configSetting.lbl_inf_continue}:{" "}
+                <strong>{item.namechapter}</strong>
               </span>
               <span className="px-1 text-slate-300 dark:text-slate-400">
                 {config.configSetting.lbl_inf_date}:{" "}
-                <strong>{getDate(data.date, config)}</strong>
+                <strong>{getDate(item.time, config)}</strong>
               </span>
             </div>
           </div>
@@ -95,21 +75,26 @@ const PopupHome = ({ typeManga }: any) => {
       </>
     );
   };
-
+  let _list = JSON.parse(getStorage(config.localKey.localReadView) as string);
+  const [list, setList] = useState([]);
+  useEffect(() => {
+      //console.log("_list",_list)
+      if (_list !== null && _list.length > 0) {
+          let incomlist = _list.filter((word: any) => word.comicId != null).reverse().slice(0, 6);
+          setList(incomlist);
+      }
+  }, []);
   return (
     <>
     
-      <Boundary labels={config.configSetting.Lbl_Home_Pop}/>
+      <Boundary labels={config.configSetting.lbl_bookmark}/>
       <div className="flex flex-wrap  pt-1">
-        {_fetchDataPopular.isLoading && popularSkeleton()}
-        {!_fetchDataPopular.isLoading &&
-          _fetchDataPopular.data &&
-          _fetchDataPopular.data.map((data: any, index: number) =>
-            popular(data.document, index)
+        {list && list.length > 0 && list.map((data: any, index: number) =>
+            history(data, index)
           )}
       </div>
     </>
   );
 };
 
-export default PopupHome;
+export default HistoryHome;
