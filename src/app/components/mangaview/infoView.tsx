@@ -22,7 +22,7 @@ const InfoViewManga = ({ config, data ,loading}: { config: MangaLang, data: any,
     const fnChangeVidewMode = () => {
         let value='';
         if(_viewmode=='Y')
-        value='N';
+            value='N';
         else
         value='Y'
         setStorage("View-Mode-Option", value, 30 * 24 * 60 * 60);

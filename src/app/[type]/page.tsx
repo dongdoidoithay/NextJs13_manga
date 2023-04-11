@@ -2,6 +2,10 @@ import baseSeo from "@/constants/baseSeo";
 import { GlobalNav } from "@/ui/global-nav";
 import { GroupStyle } from "@/ui/group-stype";
 import { Metadata } from "next";
+import SliderHome from "../components/homePage/slideHome";
+import PopupHome from "../components/homePage/popupHome";
+import LastUpdateHome from "../components/homePage/lastUpdate";
+import TopComment from "../components/homePage/topComments";
 
 export const metadata: Metadata = {
   title: "Type Page",
@@ -38,17 +42,24 @@ export const metadata: Metadata = {
   },
   icons: baseSeo.Icon,
 };
-export default function PageInTye() {
+export default function PageInTye({ params }: { params: { type: string } }) {
   return (
     <>
-     {/*  <GlobalNav />
-      <div className="lg:pl-60 ">
+      <GlobalNav />
+      <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
-          <GroupStyle labels="Manga Page type">
-            <div> Type</div>
-          </GroupStyle>
+          {/*  <Suspense fallback={<SlideSkeleton />}> */}
+          <SliderHome typeManga={params.type} />
+          {/* </Suspense>
+          <Suspense fallback={<SlideSkeleton />}> */}
+          <PopupHome typeManga={params.type} />
+          {/*  </Suspense>
+          <Suspense fallback={<SlideSkeleton />}> */}
+          <LastUpdateHome typeManga={params.type} />
+          {/* </Suspense> */}
+          <TopComment />
         </main>
-      </div> */}
+      </div>
     </>
   );
 }

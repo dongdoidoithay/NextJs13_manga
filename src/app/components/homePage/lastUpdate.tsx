@@ -50,7 +50,7 @@ const [page, setPage] = useState(0);
   }
   const _renderItem = (data: any, index: number) => {
     return (
-      <tr key={index + "-" + data.idDoc} className="border-b border-dashed hover:border-dashed hover:border-sky-400">
+      <tr key={index + "-" + data.idDoc} className="border-b border-dotted border-slate-600 hover:border-dashed hover:border-sky-400">
         <td className="w-1/12 justify-center text-center text-lg font-semibold">
           <div className="font-semibold border border-dotted rounded-full justify-center w-2/3 bg-slate-950/70 hover:border-dashed hover:border-sky-400">
             {(page * ITEM_PAGE_COUNT)+ index + 1}

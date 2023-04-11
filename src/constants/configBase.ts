@@ -24,6 +24,7 @@ import {
   _Prefix_Type_Novel,
   _Prefix_Type_Raw,
   _Prefix_Type_Scan,
+  _hostwww,
 } from "./configPrefixBase";
 import {
   AdultBrSetting,
@@ -46,7 +47,79 @@ import {
 export type MangaSource = {
   lable: string;
   value: string;
+  url?:string;
+  icon?:string;
 };
+export const MenuLeft: MangaSource[] = [
+  {
+    lable: "Home",
+    value: '',
+    icon:"home",
+  }, 
+  {
+    lable: "Popular Manga",
+    value: 'popular',
+    icon:"popular",
+  }, 
+  {
+    lable: "Latest Releases",
+    value: 'latest-releases',
+    icon:"latestrelease",
+  }, 
+  {
+    lable: "Advanced Search",
+    value: 'advanced-search',
+    icon:"advanced-search",
+  }, 
+  {
+    lable: "Collections",
+    value: 'collections',
+    icon:"collections",
+  }, 
+  //Collections
+  {
+    lable: "Manga Scan",
+    value: _Prefix_Root_Scan,
+    icon:"cate"
+  }, 
+  {
+    lable: "Manga Raw",
+    value: _Prefix_Root_Raw,
+    icon:"cate"
+  }, 
+  {
+    lable: "Comic DC/MARVEL ",
+    value: _Prefix_Root_Dc, 
+    icon:"cate"
+  },
+  {
+    lable: "Manga Adult",
+    value: _Prefix_Root_Adult,
+    icon:"cate"
+  },
+/*   {
+    lable: "Novel Light",
+    value: _Prefix_Root_Novel,
+    url:`${_hostwww}/${_Prefix_Root_Novel}`
+  }, */
+  {
+    lable: "Mangás português",
+    value: _Prefix_Root_Manga_Br,
+    icon:"cate"
+  },
+/*   {
+    lable: "Mangás adulto",
+    value: _Prefix_Root_Adult_Br,
+    url:`${_hostwww}/${_Prefix_Root_Adult_Br}`
+  }, */
+
+  {
+    lable: "Community",
+    value: "https://discord.gg/DtbX5EfwQc",
+    icon:"community"
+  },
+  
+];
 export const ActMangaSource: MangaSource[] = [
  
   {

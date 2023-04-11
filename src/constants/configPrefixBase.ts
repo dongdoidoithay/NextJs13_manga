@@ -1,5 +1,5 @@
-const _host="http://localhost:5075";
-const _hostwww="http://localhost:5075";  
+export const _host="http://localhost:5075";
+export const _hostwww="http://localhost:5075";  
 /* const _host="https://www.mangayabu.xyz";
 const _hostwww="https://www.mangayabu.xyz"; */
 
@@ -21,6 +21,8 @@ export const _Prefix_Type_Adult='adult';
 export const _Prefix_Type_Dc='comic';
 export const _Prefix_Type_Novel='novel';
 export const _Prefix_Type_NewsDc='blog';
+
+
 
 
 export type ConfigPrefix ={

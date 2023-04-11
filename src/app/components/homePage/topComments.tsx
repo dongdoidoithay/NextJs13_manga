@@ -50,7 +50,6 @@ const TopComment = () => {
       refetchOnWindowFocus: false,
     }
   );
-console.log("data",data)
   return (
     <>
       <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
@@ -81,7 +80,7 @@ console.log("data",data)
                   break;
               }
               _urlPage = `${_config.configPrefix.url_host}${_config.configPrefix.pageManga}/${_config.configPrefix.startManga}${item.id_manga}${_config.configPrefix.endManga}`;
-              console.log("comment Img", item.image_manga);
+             
               return (
                 <>
                   <div id="box" key={indx}
