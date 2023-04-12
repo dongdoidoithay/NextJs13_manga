@@ -1,11 +1,11 @@
 import baseSeo from "@/constants/baseSeo";
 import { GlobalNav } from "@/ui/global-nav";
-import { GroupStyle } from "@/ui/group-stype";
 import { Metadata } from "next";
 import SliderHome from "../components/homePage/slideHome";
 import PopupHome from "../components/homePage/popupHome";
 import LastUpdateHome from "../components/homePage/lastUpdate";
 import TopComment from "../components/homePage/topComments";
+import HistoryHome from "../components/homePage/historyHome";
 
 export const metadata: Metadata = {
   title: "Type Page",
@@ -50,6 +50,7 @@ export default function PageInTye({ params }: { params: { type: string } }) {
         <main className="px-2">
           {/*  <Suspense fallback={<SlideSkeleton />}> */}
           <SliderHome typeManga={params.type} />
+          <HistoryHome/>
           {/* </Suspense>
           <Suspense fallback={<SlideSkeleton />}> */}
           <PopupHome typeManga={params.type} />

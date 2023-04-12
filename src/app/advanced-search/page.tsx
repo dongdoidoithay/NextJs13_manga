@@ -1,5 +1,6 @@
 "use client";
-import { FetchApi } from "@/constants/FetchApi";
+import { ITEM_SERIES } from "@/constants/Endpoint";
+import { AxiosPostApi, FetchApi } from "@/constants/FetchApi";
 import { MangaLang, SelectMangaTypeByPage } from "@/constants/configBase";
 import ImageLoading from "@/ui/ImageLoading";
 import { Boundary } from "@/ui/boundary";
@@ -8,7 +9,6 @@ import getDate from "@/utils/caldate";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
@@ -16,24 +16,13 @@ import { useQuery } from "react-query";
 
 const FetchData = async (
   config: MangaLang,
-  keysearch: string,
-  pageParam: number
+  dataInput: any
 ) => {
-  const _test = config.typeName;
-  if (keysearch == null || keysearch == "") {
-    return null;
-  }
-  // console.log("call API:",{keysearch,pageParam,_test});
-  return await FetchApi(
-    config.apiPath +
-      config.endPointPath.mangaListSearch +
-      keysearch +
-      "/" +
-      pageParam
-  );
+  console.log("Fetch data",JSON.stringify(dataInput));
+  return await AxiosPostApi(config.apiPath +config.endPointPath.mangaAdvanceSearch,dataInput);
 };
 const FetchDataGenres = async (config: MangaLang) => {
-  console.log("call API:", config.apiPath);
+  //console.log("call API:", config.apiPath);
   return await FetchApi(config.apiPath + config.endPointPath.genres);
 };
 
@@ -44,10 +33,13 @@ export default function SearchAdvancePage() {
   let block = config.activeSource;
   const [selectedOption, setSelectedOption] = useState("");
   const [page, setPage] = useState(0);
-  const [valueFind, setValueFind] = useState<string>();
-
+  const [valueFind, setValueFind] = useState<string>("");
+  const [status, setStatus] = useState<string>("");
+  const [genresdValues, setGenresValues] = useState<string[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dataSearch,setDataSearch]=useState<any>();
   const {
-    isFetching: isgenresLoading ,
+     isFetching: isgenresLoading ,
      data:genresData
   } = useQuery(
     ["Genres Data", config.typeName],
@@ -61,10 +53,10 @@ export default function SearchAdvancePage() {
     }
   );
 
-  const { isLoading, error, isError, status, data, isFetching, refetch } =
+  const {data, isFetching, refetch } =
     useQuery(
-      ["Query Page", valueFind, config.typeName, page],
-      () => FetchData(config, valueFind || "", page),
+      ["Query Page",JSON.stringify(dataSearch), config.typeName, page],
+      () => FetchData(config,dataSearch),
       {
         enabled: false,
         retry: 10,
@@ -75,27 +67,28 @@ export default function SearchAdvancePage() {
       }
     );
 
-  //console.log("useQuery",{isLoading,error,isError,status});
-  const [genresdValues, setGenresValues] = useState([]);
+  console.log("useQuery",{data,isFetching});
+  
 
   const handleCheckboxChange = (event: any) => {
-    /*  const value = event.target.value;
+     const value = event.target.value;
     if (event.target.checked) {
       setGenresValues([...genresdValues, value]);
     } else {
       setGenresValues(genresdValues.filter((v) => v !== value));
-    } */
+    }
   };
   const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value);
-    console.log("option change or:", event.target.value);
-    console.log("option change:", selectedOption);
     setConfig(SelectMangaTypeByPage(event.target.value));
-    console.log("type", config?.typeName);
     refetch();
   };
-
-  const inputRef = useRef<HTMLInputElement>(null);
+  const handleStatusChange = (event: any) => {
+    console.log("e status",event.target.value);
+    setStatus(event.target.value);
+    refetch();
+  };
+ 
 
   const handleChange = (event: any) => {
     setValueFind(event.target.value);
@@ -110,22 +103,29 @@ export default function SearchAdvancePage() {
   const funcSearchData = (e: any) => {
     e.preventDefault();
     setPage(0);
-    //console.log("call ",{page,valueFind,selectedOption})
+    const _genres=genresdValues.join();
+    const datasert={
+      keyword:valueFind,
+      status:status,
+      genres:_genres,
+      page:page,
+      count:ITEM_SERIES
+    };
+    console.log("datase",datasert)
+    setDataSearch(datasert);
+    console.log("dataSearch",dataSearch)
     refetch();
   };
 
   //render
   const FnNext = () => {
-    if (data && page + 1 < data.totalPage) setPage(page + 1);
+    /* if (data && page + 1 < data.totalPage) setPage(page + 1); */
   };
   const FnPrev = () => {
-    if (page > 0) setPage(page - 1);
+   /*  if (page > 0) setPage(page - 1); */
   };
   if (!isFetching && data && page > 0) {
-    /*  setTimeout(
-     () => scrollAction(), 
-     100
-   );  */
+
     setTimeout(() => {
       sectionRef.current?.scrollIntoView();
     }, 0);
@@ -236,7 +236,7 @@ export default function SearchAdvancePage() {
   const PageAction = () => {
     return (
       <>
-        <div id="next-prev" className="my-3 flex flex-row gap-2 mr-2">
+        {/* <div id="next-prev" className="my-3 flex flex-row gap-2 mr-2">
           {page == 0 && (
             <a
               title={`${config.configSetting.lbl_prev_data} ${page - 1}`}
@@ -283,7 +283,7 @@ export default function SearchAdvancePage() {
               <ChevronRightIcon className="w-4 inline " />
             </a>
           )}
-        </div>
+        </div> */}
       </>
     );
   };
@@ -319,7 +319,7 @@ export default function SearchAdvancePage() {
     );
   };
 
-  console.log("genresData", {genresData,isgenresLoading});
+  
 
   return (
     <>
@@ -330,8 +330,8 @@ export default function SearchAdvancePage() {
       >
         <main className="px-2">
           <Boundary labels={config.configSetting.lbl_Find_list} />
-          <form onSubmit={funcSearchData}>
-            <table className="table-fixed">
+          <form >
+            <table className="table-fixed mt-5">
               <tbody>
                 <tr>
                   <td className="w-36 ">Name</td>
@@ -340,14 +340,14 @@ export default function SearchAdvancePage() {
                       type="text"
                       ref={inputRef}
                       onChange={(e) => handleChange(e)}
-                      className="w-full pl-5 focus:outline-dotted text-sky-500 rounded-s-md
+                      className="w-full h-9 pl-5 focus:outline-dotted text-sky-500 rounded-s-md
                     hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
-                      placeholder="name manga"
+                      placeholder="Name manga"
                     />
                   </td>
                 </tr>
                 <tr>
-                  <td>Group</td>
+                  <td>Type</td>
                   <td>
                     <div
                       id="find-option"
@@ -362,25 +362,65 @@ export default function SearchAdvancePage() {
                             checked={selectedOption === option.value}
                             onChange={(e) => handleOptionChange(e)}
                           />
-                          {option.lable}
+                          <span className="pl-2">{option.lable}</span> 
                         </label>
                       ))}
                     </div>
                   </td>
                 </tr>
                 <tr>
-                  <td>Genres</td>
+                  <td>Status</td>
                   <td>
-                    <div  className="flex flex-row flex-wrap" >
-                      {!isgenresLoading && genresData.map((g:any, index:number) => {
+                    <div
+                      id="find-option"
+                      className="items-center flex flex-row flex-wrap "
+                    >
+                        <label className="flex p-2">
+                          <input
+                            type="radio"
+                            name="status"
+                            value="ongoing"
+                            checked={"ongoing" === status}
+                            onChange={(e:any) =>handleStatusChange(e)}
+                          />
+                          <span className="pl-2">Ongoing</span> 
+                        </label>
+                        <label className="flex p-2">
+                          <input
+                            type="radio"
+                            name="status"
+                            value="completed"
+                            checked={"completed" === status}
+                            onChange={(e:any) => handleStatusChange(e)}
+                          />
+                          <span className="pl-2">Completed</span> 
+                        </label>
+                     
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Categories</td>
+                  <td>
+                    <div  className="flex flex-row flex-wrap pl-2" >
+                      {!isgenresLoading && genresData.filter((x:any)=>x.show=='Y').map((g:any, index:number) => {
                         return (
                                 <div key={index} className="flex w-1/3">
                                     <input type="checkbox"  name="Genres" value={g.id} onChange={handleCheckboxChange} />
-                                    <label htmlFor="value1">{g.name}</label>
+                                    <label className="pl-2">{g.name}</label>
                                 </div>
                               );
                           })}
                     </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td className="justify-center">
+                    <button
+                     type="button" 
+                     onClick={funcSearchData}
+                     className="bg-slate-600 h-10 w-48 border-dotted border-sky-900 hover:bg-slate-500 text-md font-semibold text-white">Search </button>
                   </td>
                 </tr>
               </tbody>
@@ -391,20 +431,20 @@ export default function SearchAdvancePage() {
           <table className="w-full text-left border-collapse text-sm ">
             <tbody>
               {isFetching && tableSkeleton()}
-              {!isFetching &&
+            {/*   {!isFetching &&
                 data &&
                 data.data &&
                 data.data.map((data: any, index: number) =>
                   _renderItem(data, index)
-                )}
+                )} */}
             </tbody>
           </table>
           {/*load more*/}
-          {!isFetching &&
+         {/*  {!isFetching &&
             data &&
             data.data &&
             data.data.length > 0 &&
-            PageAction()}
+            PageAction()} */}
         </main>
       </div>
     </>

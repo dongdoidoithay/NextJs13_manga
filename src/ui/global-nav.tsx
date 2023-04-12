@@ -17,7 +17,7 @@ import {
 } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { useState } from "react";
-import { ActMangaSource, MangaSource, MenuLeft } from "@/constants/configBase";
+import { ActMangaSource, MangaSource, MenuLeft, SelectMangaTypeByPage } from "@/constants/configBase";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { _hostwww } from "@/constants/configPrefixBase";
 import { usePathname } from 'next/navigation';
@@ -26,25 +26,24 @@ import { SubnNav } from "./sub-nav";
 export function GlobalNav() {
   const [isOpen, setIsOpen] = useState(false);
   const close = () => setIsOpen(false);
-
+  let config = SelectMangaTypeByPage('');
   return (
     <>
       <SubnNav />
       <div className="sticky lg:fixed top-0 z-40 flex w-full bg-slate-950 flex-col border-b border-gray-800 lg:bottom-0 lg:z-auto lg:w-60 lg:border-b-0 lg:border-r lg:border-gray-800 ">
 
         <div className="flex h-14 items-center py-4 px-4 lg:h-auto z-50">
-          <Link href="/"
+          <a
             className="group flex w-full items-center gap-x-2.5"
             onClick={close}
           >
             <div className="h-7 w-7 ">
               
             </div>
-
-            <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50">
-              App Name
+            <h3 className="font-semibold tracking-wide text-gray-400 group-hover:text-gray-50 text-xl first-line:uppercase first-letter:text-2xl first-letter:font-bold">
+              <div dangerouslySetInnerHTML={{ __html: config.configSetting.lbl_Name_Page }}></div>
             </h3>
-          </Link>
+          </a>
           <button
             type="button"
             className="group absolute left-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden mr-7"
@@ -67,7 +66,7 @@ export function GlobalNav() {
           })}
         >
           <nav className="lg:text-sm lg:leading-6 relative">
-            <div className="font-semibold">MENU</div>
+            <div className="font-semibold items-center pb-3">MENU</div>
             <ul>
               {MenuLeft.map((navItem, idx) => {
                 return <NavItem item={navItem} idx={idx} key={idx} />;

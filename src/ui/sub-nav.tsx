@@ -1,13 +1,18 @@
+import { SelectMangaTypeByPage } from "@/constants/configBase";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import { useEffect } from "react";
 
 export const SubnNav = () => {
-
+    let config = SelectMangaTypeByPage('');
     return (<>
         <div className="sticky lg:pr-8 top-0 flex flex-row flex-wrap z-30 w-full flex-none transition-colors duration-500 lg:z-30 border-b border-slate-900/10 dark:border-slate-700 supports-backdrop-blur:bg-white/95 dark:bg-slate-900">
-            <div className="hidden lg:flex w-56 items-center">Logo</div>
-            <div className="lg:pl-60 flex-1 max-w-8xl mx-auto hidden lg:block">
+            <div className="hidden lg:flex w-56 items-center text-xl font-semibold first-line:uppercase first-letter:text-2xl first-letter:font-bold">
+              <a href="/" title={config.configSetting.lbl_Name_Page}>
+                <div dangerouslySetInnerHTML={{ __html: config.configSetting.lbl_Name_Page }}></div>
+              </a> 
+            </div>
+            <div className="pl-5 flex-1 max-w-8xl mx-auto hidden lg:block">
                 <div className="relative flex items-center ">
                     <div className="top-0 pointer-events-none text-xs rounded-full py-1 max-w-screen-lg left-0">
                         <div className="bg-current dark:bg-slate-900 pointer-events-auto rounded w-96">
@@ -36,11 +41,7 @@ export const SubnNav = () => {
                                         Register
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href={'/search'} className="hover:text-sky-500 dark:hover:text-sky-400">
-                                        Search
-                                    </Link>
-                                </li>
+                               
                             </ul>
                         </nav>
                         {/* <div className="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">

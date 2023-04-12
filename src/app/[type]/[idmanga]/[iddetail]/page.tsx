@@ -32,7 +32,7 @@ export default function DetaiView({ params }: { params: { type: string, idmanga:
 
   const breadcrumb = () => {
     return (
-      <div id="breadcrumb" className="group block xs:hidden font-semibold mb-4 mt-4">
+      <div id="breadcrumb" className="group block xs:hidden font-semibold mb-4 mt-4 4-50">
         <ol className="list-outside list-none flex flex-wrap gap-1" itemScope itemType="http://schema.org/BreadcrumbList">
           <li className="flex flex-row flex-nowrap  hover:text-sky-500 dark:hover:text-sky-400" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
             <HomeIcon className="block w-6 mx-1" />

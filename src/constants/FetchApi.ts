@@ -70,11 +70,11 @@ export async function AxiosPostApi(path:string,data:any)
      _headerpost._path=path;
      _headerpost._tranId=_hashPath; 
       //TODO: - check HASH
-      await axios.post(path, data,{headers: _headerpost});
-      /*.then(response => {
+      await axios.post(path, data,{headers: _headerpost})
+     .then(response => {
        console.log("post cmd-->response",response);
        return response;
-     }) */
+     }) 
     
     
 }

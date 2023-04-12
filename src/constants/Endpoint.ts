@@ -28,7 +28,8 @@ export type EndpointType={
     sitemapAll:string;
     mangaQuickSearch: string;
     mangaListSearch: string;
-
+    mangaAdvanceSearch: string,
+    
     configAddcomment: string;
     configGetAllDomain: string;
     configGetTopComment: string;
@@ -61,7 +62,7 @@ export const EndpointSetting:EndpointType={
     sitemapAll: `/SiteMapDoc/`,
     mangaQuickSearch: `/searchterm/`,
     mangaListSearch: `/searchforms/${ITEM_SERIES}/`,
-
+    mangaAdvanceSearch: `/advanceSearch`,
 
     configAddcomment: `/addCommentsDomain`,
     configGetAllDomain: `/alldomain`,

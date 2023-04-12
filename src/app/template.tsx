@@ -10,6 +10,8 @@ import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 const queryClient = new QueryClient();
 
+
+
 export default function Template({ children }: { children: React.ReactNode }) {
   let config = SelectMangaTypeByPage("");
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -39,8 +41,26 @@ export default function Template({ children }: { children: React.ReactNode }) {
       sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 0);
   }
+
+  //check
+  const [loading, setLoading] = useState(false);
+
+/*   useEffect(() => {
+    console.log("check change rounter");
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
+
+    window.addEventListener('popstate', handleStart);
+    window.addEventListener('load', handleComplete);
+
+    return () => {
+      window.removeEventListener('popstate', handleStart);
+      window.removeEventListener('load', handleComplete);
+    };
+  }, []); */
   return (
     <>
+     {/* {loading && <div>Loading...</div>} */}
       <ToastContainer />
       <QueryClientProvider client={queryClient}>
         <div ref={sectionRef}></div>

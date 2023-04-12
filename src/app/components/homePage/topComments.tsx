@@ -27,9 +27,7 @@ const FetchData = async (config: MangaLang) => {
   return await FetchApi(
     apiConfigPath +
       config.endPointPath.configGetTopComment +
-      "0/" +
-      "mangahere.fit"
-    /* config.configSetting.lbl_domain_Page */
+      "0/" +config.configSetting.lbl_domain_Page 
   );
 };
 
@@ -54,7 +52,7 @@ const TopComment = () => {
   );
   return (
     <>
-      <Boundary labels={config.configSetting.lbl_inf_comment}/>
+      <Boundary labels={`Top ${config.configSetting.lbl_inf_comment}`}/>
       {!isFetching && data && data.length > 0 && (
         <div id="blockComent" className="flex flex-wrap flex-col gap-2 ">
           {data &&
@@ -82,10 +80,8 @@ const TopComment = () => {
               _urlPage = `${_config.configPrefix.url_host}${_config.configPrefix.pageManga}/${_config.configPrefix.startManga}${item.id_manga}${_config.configPrefix.endManga}`;
              
               return (
-                <>
                   <div id="box" key={indx}
-                   className="flex border-b border-dotted rounded-md flex-row flex-wrap"
-                  >
+                   className="flex border-b border-dotted rounded-md flex-row flex-wrap">
                     <div id="img" className="flex flex-row w-1/3 gap-2 text-start items-start">
                         <div className="border rounded w-10 text-center  my-7 mx-2 font-semibold">{indx+1}</div>
                         <div id="contenCmt" className="px-1 mx-1 my-1 flex flex-col">
@@ -110,7 +106,6 @@ const TopComment = () => {
                         </div>
                     </div>
                   </div>
-                </>
               );
             })}
         </div>
