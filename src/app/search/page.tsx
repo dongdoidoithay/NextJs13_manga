@@ -255,9 +255,7 @@ return (
       <GlobalNav />
       <div ref={sectionRef} className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
-          <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
-            {config.configSetting.lbl_Find_list}
-          </div>
+          <Boundary labels={config.configSetting.lbl_Find_list} />
           <form onSubmit={funcSearchData}>
             <div id="box-search"
               className="flex flex-wrap flex-row  my-3 mx-14  h-12 rounded-sm"
@@ -286,9 +284,8 @@ return (
               ))}
             </div>
           </form>
-          <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
-            {`Result ${config.configSetting.lbl_Find_list}`}
-          </div>
+        
+          <Boundary labels={`Result`} />
           <table className="w-full text-left border-collapse text-sm ">
             <tbody>
               {isFetching && tableSkeleton()}
