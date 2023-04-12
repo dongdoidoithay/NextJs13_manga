@@ -16,7 +16,7 @@ const FetchData = async (config: MangaLang, keysearch: string, pageParam: number
   if(keysearch==null || keysearch==''){
     return null;
   }
-    console.log("call API:",{keysearch,pageParam,_test});
+   // console.log("call API:",{keysearch,pageParam,_test});
   return await FetchApi(config.apiPath + config.endPointPath.mangaListSearch + keysearch + '/' + pageParam);
 }
 export default function SearchPage({
@@ -24,16 +24,16 @@ export default function SearchPage({
 }: {
   searchParams: { q: string };
 }) {
-  const controller = new AbortController();
-  const signal = controller.signal;
 
-  let config = SelectMangaTypeByPage('');
+  const _cons=SelectMangaTypeByPage('');
+  const[config,setConfig]=useState(_cons);
   const sectionRef = useRef<HTMLDivElement>(null);
-  let block = config.listSource;
+  let block=config.activeSource;
   const [selectedOption, setSelectedOption] = useState('');
   const [page, setPage] = useState(0);
   const [valueFind, setValueFind] = useState<string>();
-  const [queryKey, setQueryKey] = useState(`${valueFind}-${config.typeName}-${page}`);
+
+
   const {
       isLoading,
       error,
@@ -41,18 +41,17 @@ export default function SearchPage({
       status,
       data,
       isFetching,
-      refetch 
-  } = useQuery(queryKey, () => FetchData(config, valueFind||'', page), { retry: 10,staleTime: 10000, cacheTime: 5000, keepPreviousData: true, refetchOnWindowFocus: false });
+      refetch
+  } = useQuery(["Query Page",valueFind,config.typeName,page], () => FetchData(config, valueFind||'', page), {enabled:false,retry: 10,staleTime: 10000, cacheTime: 5000, keepPreviousData: true, refetchOnWindowFocus: false });
 
-  console.log("useQuery",{isLoading,error,isError,status});
+  //console.log("useQuery",{isLoading,error,isError,status});
 
   const handleOptionChange = (event: any) => {
-    controller.abort();
     setSelectedOption(event.target.value);
     console.log('option change or:',event.target.value);
     console.log('option change:',selectedOption);
-    config = SelectMangaTypeByPage(event.target.value);
-    setQueryKey(`${valueFind}-${event.target.value}-${page}`);
+    setConfig(SelectMangaTypeByPage(event.target.value));
+    console.log("type",config?.typeName);
     refetch();
   };
 
@@ -60,11 +59,10 @@ export default function SearchPage({
 
   const handleChange = (event: any) => {
     setValueFind(event.target.value);
-    setQueryKey(`${event.target.value}-${config.typeName}-${page}`);
   };
   useEffect(() => {
-    config= SelectMangaTypeByPage('');
-    setSelectedOption(config.typeName);
+    setConfig(SelectMangaTypeByPage(''));
+    setSelectedOption(config?.typeName);
     inputRef.current?.focus();
     setValueFind(searchParams.q);
   }, []);
@@ -72,10 +70,8 @@ export default function SearchPage({
   //FN
   const funcSearchData = (e:any) => {
     e.preventDefault()
-    controller.abort();
     setPage(0);
-    console.log("call ",{page,valueFind,selectedOption});
-    setQueryKey(`${valueFind}-${config.typeName}-${page}`);
+    //console.log("call ",{page,valueFind,selectedOption})
     refetch();
   }
 
@@ -141,11 +137,13 @@ partsother.filter(String).map((part:any, i:number) => {
         <div dangerouslySetInnerHTML={{ __html: resultOther }} className="break-word overflow-hidden first-line:uppercase line-clamp-2"></div>
       </td>
       <td className="hidden sm:block py-5 align-middle">
-        <div>
-          {config.configSetting.lbl_inf_status}: <strong className="  text-sky-600 dark:text-sky-500">{data.status}</strong>
-        </div>
-        <div>
-          {config.configSetting.lbl_inf_View}: <strong className=" text-sky-600 dark:text-sky-500">{data.view}</strong>
+        <div className="items-center">
+          <div>
+            {config.configSetting.lbl_inf_status}: <strong className="  text-sky-600 dark:text-sky-500">{data.status}</strong>
+          </div>
+          <div>
+            {config.configSetting.lbl_inf_View}: <strong className=" text-sky-600 dark:text-sky-500">{data.view}</strong>
+          </div>
         </div>
       </td>
       <td className="w-1/5 xs:1/2">
@@ -182,48 +180,50 @@ partsother.filter(String).map((part:any, i:number) => {
 };
 const PageAction = () => {
   return (
-    <div id="next-prev" className="my-3 flex flex-row gap-2 mr-2">
-      {page == 0 && <a
+    <>
+      <div id="next-prev" className="my-3 flex flex-row gap-2 mr-2">
+        {page == 0 && <a
 
-        title={`${config.configSetting.lbl_prev_data} ${page - 1}`}
-        className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"  >
-        <ChevronLeftIcon className="w-4 inline " />
-        <b className="ml-3 font-semibold first-letter:uppercase">
-          {config.configSetting.lbl_prev_data}
-        </b>
-      </a>
+          title={`${config.configSetting.lbl_prev_data} ${page - 1}`}
+          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400"  >
+          <ChevronLeftIcon className="w-4 inline " />
+          <b className="ml-3 font-semibold first-letter:uppercase">
+            {config.configSetting.lbl_prev_data}
+          </b>
+        </a>
 
-      }
-      {page > 0 && <a
-        onClick={FnPrev}
-        title={`${config.configSetting.lbl_text_chapter} ${page - 1}`}
-        className="cursor-pointer hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400" >
-        <ChevronLeftIcon className="w-4 inline " />
-        <b className="ml-3 font-semibold first-letter:uppercase">
-          {config.configSetting.lbl_prev_data}
-        </b>
-      </a>}
-      {(page >= data.totalPage - 1) && <a
+        }
+        {page > 0 && <a
+          onClick={FnPrev}
+          title={`${config.configSetting.lbl_text_chapter} ${page - 1}`}
+          className="cursor-pointer hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400" >
+          <ChevronLeftIcon className="w-4 inline " />
+          <b className="ml-3 font-semibold first-letter:uppercase">
+            {config.configSetting.lbl_prev_data}
+          </b>
+        </a>}
+        {(page >= data.totalPage - 1) && <a
 
-        title={`${config.configSetting.lbl_prev_data} ${page + 1}`}
-        className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400" >
-        <b className="mr-3 font-semibold first-letter:uppercase">
-          {config.configSetting.lbl_next_data}
-        </b>
-        <ChevronRightIcon className="w-4 inline " />
-      </a>}
-      {(page < data.totalPage - 1) && (
-        <a
-          onClick={FnNext}
-          title={`${config.configSetting.lbl_text_chapter} ${page + 1}`}
-          className="cursor-pointer hover:border-dashed  w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400" >
+          title={`${config.configSetting.lbl_prev_data} ${page + 1}`}
+          className="cursor-pointer line-through hover:border-dashed w-1/2 block border border-slate-700 rounded p-2 text-center hover:border-orange-500 dark:hover:orange-sky-400  hover:text-orange-500 dark:hover:text-orange-400" >
           <b className="mr-3 font-semibold first-letter:uppercase">
             {config.configSetting.lbl_next_data}
           </b>
           <ChevronRightIcon className="w-4 inline " />
-        </a>
-      )}
-    </div>
+        </a>}
+        {(page < data.totalPage - 1) && (
+          <a
+            onClick={FnNext}
+            title={`${config.configSetting.lbl_text_chapter} ${page + 1}`}
+            className="cursor-pointer hover:border-dashed  w-1/2 block border border-slate-700 rounded p-2 text-center  hover:border-sky-500 dark:hover:border-sky-400  hover:text-sky-500 dark:hover:text-sky-400" >
+            <b className="mr-3 font-semibold first-letter:uppercase">
+              {config.configSetting.lbl_next_data}
+            </b>
+            <ChevronRightIcon className="w-4 inline " />
+          </a>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -258,32 +258,34 @@ return (
           <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
             {config.configSetting.lbl_Find_list}
           </div>
-          <div id="box-search"
-            className="flex flex-wrap flex-row  my-3 mx-14  h-12 rounded-sm"
-          >
-            <input type="text" ref={inputRef} onChange={(e)=>handleChange(e)} className="flex flex-1 w-1 pl-5 focus:outline-dotted text-sky-500 rounded-s-md
-            hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700" placeholder="Keyword find manga" />
-            <button 
-            onClick={(e)=>funcSearchData(e)}
-            className="flex w-12 p-2 items-center  font-bold text-sky-500 bg-gray-700 rounded-e-md hover:dark:bg-slate-700 hover:bg-slate-600">
-              <MagnifyingGlassIcon className="w-7 font-semibold" />
-            </button>
-          </div>
-          <div id="find-option" className="items-center flex flex-row flex-wrap mx-14 ">
+          <form onSubmit={funcSearchData}>
+            <div id="box-search"
+              className="flex flex-wrap flex-row  my-3 mx-14  h-12 rounded-sm"
+            >
+              <input type="text" ref={inputRef} onChange={(e)=>handleChange(e)} className="flex flex-1 w-1 pl-5 focus:outline-dotted text-sky-500 rounded-s-md
+              hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700" placeholder="Keyword find manga" />
+              <button 
+              onClick={(e)=>funcSearchData(e)}
+              className="flex w-12 p-2 items-center  font-bold text-sky-500 bg-gray-700 rounded-e-md hover:dark:bg-slate-700 hover:bg-slate-600">
+                <MagnifyingGlassIcon className="w-7 font-semibold" />
+              </button>
+            </div>
+            <div id="find-option" className="items-center flex flex-row flex-wrap mx-14 ">
 
-            {block.map((option) => (
-              <label key={option.value} className="flex p-2">
-                <input
-                  type="radio"
-                  name="options"
-                  value={option.value}
-                  checked={selectedOption === option.value}
-                  onChange={(e)=>handleOptionChange(e)}
-                />
-                {option.lable}
-              </label>
-            ))}
-          </div>
+              {block.map((option:any) => (
+                <label key={option.value} className="flex p-2">
+                  <input
+                    type="radio"
+                    name="options"
+                    value={option.value}
+                    checked={selectedOption === option.value}
+                    onChange={(e)=>handleOptionChange(e)}
+                  />
+                  {option.lable}
+                </label>
+              ))}
+            </div>
+          </form>
           <div className="py-1 font-semibold first-line:uppercase text-md text-sky-300 border-t border-b border-t-transparent border-b-sky-300 items-center first-letter:text-2xl first-letter:font-bold">
             {`Result ${config.configSetting.lbl_Find_list}`}
           </div>

@@ -41,7 +41,7 @@ export async function FetchApi(path:string)
     if (res.ok) {
       return await res.json();
     }else{
-      console.log("Call ex",res)
+      throw new Error('404 Not Found');
     }
     return await res.json();
 }

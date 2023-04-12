@@ -213,7 +213,7 @@ export const FontSource: MangaSource[] = [
 
 export const apiConfigPath = "https://graph.pandamanga.xyz/api/v1/config";
 /* const apiRootPath="https://api.truyendich.xyz/api"; */
-const apiRootPath="https://api.pandamanga.xyz/api/app";
+const apiRootPath="https://api.pandamanga.xyz/api";
 export type MangaLang = {
   typeName: string;
   typeManga: string;
