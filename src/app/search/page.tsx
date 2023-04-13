@@ -35,30 +35,26 @@ export default function SearchPage({
 
 
   const {
-      isLoading,
-      error,
-      isError,
-      status,
       data,
-      isFetching,
-      refetch
-  } = useQuery(["Query Page",valueFind,config.typeName,page], () => FetchData(config, valueFind||'', page), {enabled:false,retry: 10,staleTime: 10000, cacheTime: 5000, keepPreviousData: true, refetchOnWindowFocus: false });
+      isFetching
+  } = useQuery(["Query Page",valueFind,config.typeName,page], () => FetchData(config, valueFind||'', page), {retry: 10,staleTime: 10000, cacheTime: 5000, keepPreviousData: true, refetchOnWindowFocus: false });
 
   //console.log("useQuery",{isLoading,error,isError,status});
 
   const handleOptionChange = (event: any) => {
     setSelectedOption(event.target.value);
-    console.log('option change or:',event.target.value);
-    console.log('option change:',selectedOption);
+   /*  console.log('option change or:',event.target.value);
+    console.log('option change:',selectedOption); */
     setConfig(SelectMangaTypeByPage(event.target.value));
-    console.log("type",config?.typeName);
-    refetch();
+   /*  console.log("type",config?.typeName); */
+    //refetch();
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: any) => {
     setValueFind(event.target.value);
+    //refetch();
   };
   useEffect(() => {
     setConfig(SelectMangaTypeByPage(''));
@@ -72,17 +68,18 @@ export default function SearchPage({
     e.preventDefault()
     setPage(0);
     //console.log("call ",{page,valueFind,selectedOption})
-    refetch();
   }
 
 //render
 const FnNext = () => {
   if (data && (page + 1) < data.totalPage )
     setPage(page + 1)
+  //refetch();
 }
 const FnPrev = () => {
   if (page > 0)
     setPage(page - 1)
+   // refetch();
 }
 if (!isFetching && data && page > 0) {
   /*  setTimeout(

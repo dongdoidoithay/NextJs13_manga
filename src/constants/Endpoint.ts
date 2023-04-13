@@ -5,7 +5,7 @@ export const ITEM_POPULAR=6
 export const ITEM_SERIES=6
 
 export const ITEM_HOME_COUNT=12
-export const ITEM_PAGE_COUNT=24
+export const ITEM_PAGE_COUNT=12
 export type EndpointType={
     homeSlide:string;
     homeTren:string;

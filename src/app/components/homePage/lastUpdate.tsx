@@ -38,7 +38,7 @@ const [page, setPage] = useState(0);
      );  */
      setTimeout(() => {
       sectionRef.current?.scrollIntoView();
-    }, 100);
+    }, 0);
      
    }
 

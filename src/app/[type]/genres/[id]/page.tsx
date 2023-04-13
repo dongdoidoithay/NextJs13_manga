@@ -1,4 +1,7 @@
+import MangaByGroup from "@/app/components/groupPage/mangaByGroup";
 import baseSeo from "@/constants/baseSeo";
+import { SelectMangaTypeByPage } from "@/constants/configBase";
+import { GlobalNav } from "@/ui/global-nav";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -36,17 +39,18 @@ export const metadata: Metadata = {
   },
   icons: baseSeo.Icon,
 };
-export default function PageInTye() {
+export default function PageInGenres({ params,searchParams }: { params: { type: string, id: string } ,searchParams:{page?:number}}) {
+ 
   return (
     <>
-     {/*  <GlobalNav />
+      <GlobalNav />
       <div className="lg:pl-60 ">
-        <main className="px-2">
-          <GroupStyle labels="Manga Page type">
-            <div> Type</div>
-          </GroupStyle>
+        <main className=" bg-slate-900/60 border border-slate-700">
+          <div id="wapper" className="mt-4 px-2">
+            <MangaByGroup typeManga={params.type} typeApi='genres' idFind={params.id} pageIndex={searchParams.page} />
+          </div>
         </main>
-      </div> */}
+      </div>
     </>
   );
 }

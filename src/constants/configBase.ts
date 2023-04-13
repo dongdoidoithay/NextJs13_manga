@@ -67,10 +67,15 @@ export const MenuLeft: MangaSource[] = [
     icon:"latestrelease",
   }, 
   {
+    lable: "Manga List",
+    value: 'manga-list',
+    icon:"mangalist",
+  }, 
+ /*  {
     lable: "Advanced Search",
     value: 'advanced-search',
     icon:"advanced-search",
-  }, 
+  },  */
   {
     lable: "Collections",
     value: 'collections',

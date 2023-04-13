@@ -11,6 +11,7 @@ import {
   MagnifyingGlassCircleIcon,
   MagnifyingGlassIcon,
   QueueListIcon,
+  RectangleGroupIcon,
   SquaresPlusIcon,
   TagIcon,
   XMarkIcon,
@@ -131,6 +132,9 @@ function NavItem({
     _target = "_blank";
     _link = item.value;
     Icon = <ChatBubbleLeftIcon className="w-6 text-white" />
+  }
+  if(item.icon=="mangalist"){
+    Icon = <RectangleGroupIcon className="w-6 text-white" />
   }
   /*   console.log("nav-item-10",item.value)
     console.log("nav-item",{segment,isActive,}) */
