@@ -48,16 +48,10 @@ export default function PageInTye({ params }: { params: { type: string } }) {
       <GlobalNav />
       <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
-          {/*  <Suspense fallback={<SlideSkeleton />}> */}
           <SliderHome typeManga={params.type} />
           <HistoryHome/>
-          {/* </Suspense>
-          <Suspense fallback={<SlideSkeleton />}> */}
           <PopupHome typeManga={params.type} />
-          {/*  </Suspense>
-          <Suspense fallback={<SlideSkeleton />}> */}
           <LastUpdateHome typeManga={params.type} />
-          {/* </Suspense> */}
           <TopComment />
         </main>
       </div>

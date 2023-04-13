@@ -87,7 +87,7 @@ const SliderHome = ({ typeManga }: any) => {
         let data = _data.document;
         return (
           <Link
-            className="flex h-1/2 w-full lg:w-1/2 text-sm text-sky-500 dark:text-sky-400  hover:text-sky-200"
+            className="flex h-1/2 w-full lg:w-1/2 text-sm text-sky-500 dark:text-sky-400  hover:text-sky-200 "
             key={data.idDoc}
             rel="nofollow"
             href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
@@ -104,7 +104,7 @@ const SliderHome = ({ typeManga }: any) => {
                 />
               </div>
               <div id="conten" className="flex flex-col w-2/3">
-                <h2 className="px-1 truncate .. font-semibold first-line:uppercase first-letter:text-xl hover:text-md hover:font-semibold hover:text-sky-200">
+                <h2 className="px-1 truncate .. font-semibold first-line:uppercase first-letter:text-xl hover:text-md hover:font-semibold hover:text-sky-200 w-full">
                   {data.name}
                 </h2>
                 <span className="px-1  text-slate-300 dark:text-slate-400">

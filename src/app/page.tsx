@@ -2,12 +2,12 @@
 import { Metadata } from 'next'; 
 import baseSeo from "@/constants/baseSeo";
 import  {GlobalNav}  from "@/ui/global-nav";
-import { Suspense } from "react";
 import SliderHome from "./components/homePage/slideHome";
 import PopupHome from "./components/homePage/popupHome";
 import LastUpdateHome from "./components/homePage/lastUpdate";
 import TopComment from './components/homePage/topComments';
 import HistoryHome from './components/homePage/historyHome';
+
 export const metadata: Metadata = {
   title: "Home page",
   description: baseSeo.description,
@@ -52,18 +52,12 @@ export default function Home() {
       <GlobalNav />
       <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
-         {/*  <Suspense fallback={<SlideSkeleton />}> */}
             <SliderHome typeManga={null}/>
-
             <HistoryHome/>
-          {/* </Suspense>
-          <Suspense fallback={<SlideSkeleton />}> */}
             <PopupHome typeManga={null}/>
-         {/*  </Suspense>
-          <Suspense fallback={<SlideSkeleton />}> */}
             <LastUpdateHome typeManga={null}/>
-          {/* </Suspense> */}
             <TopComment />
+           
         </main>
       </div>
     </>

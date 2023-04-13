@@ -1,6 +1,4 @@
 import baseSeo from "@/constants/baseSeo";
-import { GlobalNav } from "@/ui/global-nav";
-import { GroupStyle } from "@/ui/group-stype";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

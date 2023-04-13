@@ -86,13 +86,12 @@ const HistoryHome = () => {
   }, []);
   return (
     <>
-    
-      <Boundary labels={config.configSetting.lbl_bookmark}/>
-      <div className="flex flex-wrap  pt-1">
+      {list && list.length > 0 && <Boundary labels={config.configSetting.lbl_bookmark}/>}
+      {list && list.length > 0 && <div className="flex flex-wrap  pt-1">
         {list && list.length > 0 && list.map((data: any, index: number) =>
             history(data, index)
           )}
-      </div>
+      </div>}
     </>
   );
 };

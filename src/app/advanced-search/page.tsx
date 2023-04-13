@@ -67,7 +67,7 @@ export default function SearchAdvancePage() {
       }
     );
 
-  console.log("useQuery",{data,isFetching});
+  //console.log("useQuery",{data,isFetching});
   
 
   const handleCheckboxChange = (event: any) => {
