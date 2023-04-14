@@ -6,6 +6,9 @@ import PopupHome from "../components/homePage/popupHome";
 import LastUpdateHome from "../components/homePage/lastUpdate";
 import TopComment from "../components/homePage/topComments";
 import HistoryHome from "../components/homePage/historyHome";
+import AdsTop from "../components/ads/ads_top_body";
+import AdsDetail from "../components/ads/ads_detail";
+import AdsViews from "../components/ads/ads_view";
 
 export const metadata: Metadata = {
   title: "Type Page",
@@ -48,10 +51,13 @@ export default function PageInTye({ params }: { params: { type: string } }) {
       <GlobalNav />
       <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
+        <AdsTop/>
           <SliderHome typeManga={params.type} />
           <HistoryHome/>
-          <PopupHome typeManga={params.type} />
+          <PopupHome typeManga={params.type} nameLable={null}/>
+          <AdsDetail/>
           <LastUpdateHome typeManga={params.type} />
+          <AdsViews/>
           <TopComment />
         </main>
       </div>

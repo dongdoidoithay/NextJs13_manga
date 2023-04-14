@@ -6,6 +6,7 @@ import RenderChapterList from "./renderChapterList";
 import InfoHeaderBlock from "./InfoHeaderBlock";
 import InfoOtherBlock from "./InfoOtherBlock";
 import { Helmet } from 'react-helmet';
+import AdsDetail from "../ads/ads_detail";
 
 
  const InfoManga = ({id,config,dataManga}:{id: string;config: MangaLang;dataManga: any}) => {
@@ -69,6 +70,7 @@ import { Helmet } from 'react-helmet';
      <InfoHeaderBlock config={config} dataManga={dataManga}/>
      <InfoActionBlock id={id}  des_full={des_full} config={config} dataManga={dataManga}/>
      <RenderChapterList id={id} config={config} mangaName={dataManga.name} />
+     <AdsDetail/>
      <InfoOtherBlock id={id}  key_word={key_word} config={config} dataManga={dataManga}/>
     </>
   );

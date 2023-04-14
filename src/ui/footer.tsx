@@ -1,3 +1,4 @@
+import AdsFooter from "@/app/components/ads/ads_footer";
 import { FetchApi } from "@/constants/FetchApi";
 import {
   MangaLang,
@@ -9,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 const FetchAllDataDomain = async (config: MangaLang) => {
-    console.log("call Data Domain");
+   // console.log("call Data Domain");
   return await FetchApi(apiConfigPath + config.endPointPath.configGetAllDomain);
 };
 
@@ -33,7 +34,7 @@ const FotterPage = () => {
       let _data=JSON.parse(_domainData);
       setDataDomain(_data);
     }else{
-        console.log("active call Api");
+        //console.log("active call Api");
         refetch();
     }
 
@@ -85,12 +86,13 @@ const FotterPage = () => {
       <div className="w-full h-80 pl-56 mt-14 bottom-0">
         <div id="heder" className="h-7 rounded bg-slate-700/70 align-middle justify-center ">
           <ul className="flex flex-row gap-3 align-middle justify-center items-center">
-            <li ><a title="Site map " href={`${config.configPrefix.url_host}/server-sitemap.xml`}>SiteMap</a></li>
+            <li ><a title="Site map " href={`${config.configPrefix.url_host}/api/server-sitemap.xml`}>SiteMap</a></li>
             <li ><a title="Site map " href={`${config.configPrefix.url_host}/api/sitemap.html`}>Google SiteMap</a></li>
             <li ><a title="Site map " href={`${config.configPrefix.url_host}/api/urllist.txt`}>Bing SiteMap</a></li>
           </ul>
         </div>
         <div id="box-inf" className="flex flex-col gap-3  bg-slate-900/70 border border-slate-700">
+          <AdsFooter/>
           <div className="flex flex-row">
             <div id="box-left" className="w-1/5 flex flex-col gap-2 flex-1 items-center">
               <a href="/" title={config.configSetting.lbl_Name_Page}>

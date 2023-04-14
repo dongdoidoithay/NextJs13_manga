@@ -1,4 +1,5 @@
 "use client"
+import AdsTop from "@/app/components/ads/ads_top_body";
 import InfoViewManga from "@/app/components/mangaview/infoView";
 import { FetchApi } from "@/constants/FetchApi";
 import { MangaLang, SelectMangaTypeByPage, SelectMangaTypeName } from "@/constants/configBase";
@@ -108,7 +109,7 @@ export default function DetaiView({ params }: { params: { type: string, idmanga:
       <main className="px-0 lg:px-2 bg-slate-900/60 border border-slate-700">
         {_dataManga.isLoading && breadcrumbSkeleton()}
         {!_dataManga.isLoading && breadcrumb()}
-
+          <AdsTop/>
          <InfoViewManga config={config} data={_dataManga.data} loading={_dataManga.isLoading} />
 
         <div id="manga suggets"></div>

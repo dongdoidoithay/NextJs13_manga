@@ -2,6 +2,8 @@ import ImageLoading from '@/ui/ImageLoading';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import AdsViews from '../ads/ads_view';
+import AdsDetail from '../ads/ads_detail';
 
 const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage, ImageSelect, SetCurrentImage, SetImageSelect, prev_img, next_img }: any) => {
 
@@ -144,7 +146,9 @@ const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage,
         if (is_full == "N" && ImageSelect != '') {
             return (
                 <div className='flex flex-col items-center w-full relative'>
+
                     <ImageLoading url={ImageSelect} title={`${data.nameDoc}-${CurrentImage}`} classStyle="w-full h-full object-fill" />
+                    <AdsViews/>
                     <a title='prev Img' className="absolute w-1/2 h-full left-0  cursor-[url('/pre.cur'),_pointer]" onClick={() => prev_img()} ></a>
                     <a title='next Img' className="absolute w-1/2 h-full right-0 cursor-[url('/next.cur'),_pointer]" onClick={() => next_img()} ></a>
                 </div>
@@ -160,6 +164,8 @@ const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage,
                             return (
                                 <div key={k} className="flex flex-col items-center w-full cursor-[url('/down.png'),_pointer]" onClick={() => { next_pic(k + 1); next_pic_point() }} >
                                     <ImageLoading url={image} title={`${data.nameDoc}-${k}`} classStyle="w-full h-full object-fill" />
+                                    {(k%3==0)&&<AdsViews/>} 
+                                    {(k==7)&&<AdsDetail/>}
                                 </div>
                             )
                         })

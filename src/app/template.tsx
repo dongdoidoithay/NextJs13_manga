@@ -7,7 +7,6 @@ import { ToastContainer } from "react-toastify";
 //react-query
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
-import Link from "next/link";
 import FotterPage from "@/ui/footer";
 const queryClient = new QueryClient();
 

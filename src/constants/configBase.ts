@@ -75,12 +75,12 @@ export const MenuLeft: MangaSource[] = [
     lable: "Advanced Search",
     value: 'advanced-search',
     icon:"advanced-search",
-  },  */
+  }, 
   {
     lable: "Collections",
     value: 'collections',
     icon:"collections",
-  }, 
+  },  */
   //Collections
   {
     lable: "Manga Scan",
@@ -93,7 +93,7 @@ export const MenuLeft: MangaSource[] = [
     icon:"cate"
   }, 
   {
-    lable: "Comic DC/MARVEL ",
+    lable: "Manga Comic",
     value: _Prefix_Root_Dc, 
     icon:"cate"
   },
@@ -136,7 +136,7 @@ export const ActMangaSource: MangaSource[] = [
     value: _Prefix_Root_Raw,
   }, 
   {
-    lable: "Comic DC/MARVEL ",
+    lable: "Manga Comic",
     value: _Prefix_Root_Dc, 
   },
   {
@@ -148,7 +148,7 @@ export const ActMangaSource: MangaSource[] = [
     value: _Prefix_Root_Novel,
   }, */
   {
-    lable: "Mangás português",
+    lable: "Português",
     value: _Prefix_Root_Manga_Br,
   },
 /*   {

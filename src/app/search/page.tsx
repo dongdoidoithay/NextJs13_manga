@@ -9,6 +9,8 @@ import { ChevronLeftIcon, ChevronRightIcon, MagnifyingGlassIcon } from "@heroico
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { useQuery } from "react-query";
+import AdsTop from "../components/ads/ads_top_body";
+import AdsDetail from "../components/ads/ads_detail";
 
 const FetchData = async (config: MangaLang, keysearch: string, pageParam: number) => {
 
@@ -252,6 +254,7 @@ return (
       <GlobalNav />
       <div ref={sectionRef} className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">
+           <AdsTop/>
           <Boundary labels={config.configSetting.lbl_Find_list} />
           <form onSubmit={funcSearchData}>
             <div id="box-search"
@@ -291,6 +294,7 @@ return (
           </table>
           {/*load more*/}
           {!isFetching && data&& data.data && data.data.length>0 && PageAction()}
+          <AdsDetail/>
         </main>
       </div>
     </>

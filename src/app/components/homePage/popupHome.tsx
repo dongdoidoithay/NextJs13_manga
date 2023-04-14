@@ -18,7 +18,11 @@ import Link from "next/link";
 const FetchDataPopular = async (config: MangaLang) => {
   return await FetchApi(config.apiPath + config.endPointPath.homePopular);
 };
-const PopupHome = ({ typeManga }: any) => {
+const PopupHome = ({ typeManga,nameLable }:{typeManga:any;nameLable?:any}) => {
+  if(nameLable==undefined)
+  {
+    nameLable='';
+  }
   let config = SelectMangaTypeByPage(typeManga);
   const _fetchDataPopular = useQuery(
     ["_fetchDataPopular", typeManga],
@@ -99,7 +103,7 @@ const PopupHome = ({ typeManga }: any) => {
   return (
     <>
     
-      <Boundary labels={config.configSetting.Lbl_Home_Pop}/>
+      <Boundary labels={`${config.configSetting.Lbl_Home_Pop} ${nameLable}`}/>
       <div className="flex flex-wrap  pt-1">
         {_fetchDataPopular.isLoading && popularSkeleton()}
         {!_fetchDataPopular.isLoading &&

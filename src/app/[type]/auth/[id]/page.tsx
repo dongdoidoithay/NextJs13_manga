@@ -1,6 +1,7 @@
+import AdsDetail from "@/app/components/ads/ads_detail";
+import AdsTop from "@/app/components/ads/ads_top_body";
 import MangaByGroup from "@/app/components/groupPage/mangaByGroup";
 import baseSeo from "@/constants/baseSeo";
-import { SelectMangaTypeByPage } from "@/constants/configBase";
 import { GlobalNav } from "@/ui/global-nav";
 import { Metadata } from "next";
 
@@ -47,7 +48,9 @@ export default function PageInGenres({ params,searchParams }: { params: { type: 
       <div className="lg:pl-60 ">
         <main className=" bg-slate-900/60 border border-slate-700">
           <div id="wapper" className="mt-4 px-2">
+            <AdsTop/>
             <MangaByGroup typeManga={params.type} typeApi='auth' idFind={params.id} pageIndex={searchParams.page} />
+            <AdsDetail/>
           </div>
         </main>
       </div>

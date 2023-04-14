@@ -1,4 +1,5 @@
 "use client"
+import AdsTop from "@/app/components/ads/ads_top_body";
 import DisqusComments from "@/app/components/mangaInfo/disquscomment";
 import InfoManga from "@/app/components/mangaInfo/infoManga";
 import InfoMangaSkeletion from "@/app/components/mangaInfo/infoMangaSkeletion";
@@ -94,6 +95,7 @@ const Info = ({ params }: { params: { type: string, idmanga: string } }) => {
       <div className="lg:pl-60 ">
         <main className=" bg-slate-900/60 border border-slate-700">
           <div id="wapper" className="mt-4 px-2">
+            <AdsTop/>
             {_dataManga.isLoading && breadcrumbSkeleton()}
             {!_dataManga.isLoading && breadcrumb()}
             {_dataManga.isLoading && <InfoMangaSkeletion config={config} />}

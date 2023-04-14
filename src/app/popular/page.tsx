@@ -1,12 +1,15 @@
-import AdsDetail from "@/app/components/ads/ads_detail";
-import AdsTop from "@/app/components/ads/ads_top_body";
-import MangaByGroup from "@/app/components/groupPage/mangaByGroup";
+
 import baseSeo from "@/constants/baseSeo";
 import { GlobalNav } from "@/ui/global-nav";
 import { Metadata } from "next";
+import PageMangaList from "../components/groupPage/mangaList";
+import { SelectMangaTypeByPage } from "@/constants/configBase";
+import PopupHome from "../components/homePage/popupHome";
+import AdsTop from "../components/ads/ads_top_body";
+import AdsDetail from "../components/ads/ads_detail";
 
 export const metadata: Metadata = {
-  title: "Type Page",
+  title: "Alpha Page",
   description: baseSeo.description,
   keywords: baseSeo.keywords,
   openGraph: {
@@ -40,8 +43,8 @@ export const metadata: Metadata = {
   },
   icons: baseSeo.Icon,
 };
-export default function PageInGenres({ params,searchParams }: { params: { type: string, id: string } ,searchParams:{page?:number}}) {
- 
+export default function PageAlpha() {
+  const config=SelectMangaTypeByPage('');
   return (
     <>
       <GlobalNav />
@@ -49,7 +52,10 @@ export default function PageInGenres({ params,searchParams }: { params: { type: 
         <main className=" bg-slate-900/60 border border-slate-700">
           <div id="wapper" className="mt-4 px-2">
             <AdsTop/>
-            <MangaByGroup typeManga={params.type} typeApi='art' idFind={params.id} pageIndex={searchParams.page} />
+            {config.activeSource.map((item:any,index:number)=>{
+
+              return <PopupHome typeManga={item.value} nameLable={item.lable} key={index}/>
+            })}
             <AdsDetail/>
           </div>
         </main>
