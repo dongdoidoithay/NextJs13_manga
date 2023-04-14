@@ -1,16 +1,17 @@
 "use client";
-
 import { SelectMangaTypeByPage } from "@/constants/configBase";
-import getDate from "@/utils/caldate";
 import ImageLoading from "@/ui/ImageLoading";
 import { Boundary } from "@/ui/boundary";
+import getDate from "@/utils/caldate";
 import Link from "next/link";
-import { getStorage } from "@/utils/localFx";
 import { useEffect, useState } from "react";
+import AdsTop from "../components/ads/ads_top_body";
+import AdsDetail from "../components/ads/ads_detail";
+import { getStorage } from "@/utils/localFx";
+import { GlobalNav } from "@/ui/global-nav";
 
-
-const HistoryHome = () => {
-  let config = SelectMangaTypeByPage('');
+export default function SearchPage() {
+  let config = SelectMangaTypeByPage("");
 
   const history = (item: any, index: number) => {
     return (
@@ -19,7 +20,7 @@ const HistoryHome = () => {
         href={`${item.url_view}`}
         title={`${config.configSetting.lbl_inf_start_manga} ${item.namecomic}`}
         key={index}
-        className="relative lg:w-1/2 w-full text-sm text-sky-500 dark:text-sky-400 " 
+        className="relative lg:w-1/2 w-full text-sm text-sky-500 dark:text-sky-400 "
       >
         <div className="overflow-auto my-1 mx-1 border-slate-700 border rounded-md hover:border-dashed hover:border-sky-400">
           <div className="overflow-hidden relative mx-auto flex items-center gap-6">
@@ -78,22 +79,33 @@ const HistoryHome = () => {
   let _list = JSON.parse(getStorage(config.localKey.localReadView) as string);
   const [list, setList] = useState([]);
   useEffect(() => {
-      //console.log("_list",_list)
-      if (_list !== null && _list.length > 0) {
-          let incomlist = _list.filter((word: any) => word.comicId != null).reverse().slice(0, 6);
-          setList(incomlist);
-      }
+    //console.log("_list",_list)
+    if (_list !== null && _list.length > 0) {
+      let incomlist = _list
+        .filter((word: any) => word.comicId != null)
+        .reverse();
+      setList(incomlist);
+    }
   }, []);
   return (
     <>
-      {list && list.length > 0 && <Boundary labels={config.configSetting.lbl_bookmark} linkNext={`${config.configPrefix.url_host}/bookmark`} lableLink={config.configSetting.lbl_view_more}/>}
-      {list && list.length > 0 && <div className="flex flex-wrap  pt-1">
-        {list && list.length > 0 && list.map((data: any, index: number) =>
-            history(data, index)
+      <GlobalNav />
+      <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
+        <main className="px-2">
+          <AdsTop />
+          {list && list.length > 0 && (
+            <Boundary labels={config.configSetting.lbl_bookmark} />
           )}
-      </div>}
+          {list && list.length > 0 && (
+            <div className="flex flex-wrap  pt-1">
+              {list &&
+                list.length > 0 &&
+                list.map((data: any, index: number) => history(data, index))}
+            </div>
+          )}
+          <AdsDetail />
+        </main>
+      </div>
     </>
   );
-};
-
-export default HistoryHome;
+}
