@@ -1,10 +1,12 @@
+import Script from "next/script";
+
 /* import parse from 'html-react-parser'; */
 const AdsDetail=()=>{
     //destop
     return(
       <>
       {/*  galaksion.com */}
-    {   /*   <div><script data-cfasync="false" async type="text/javascript" src="//konasaphie.com/t7zxPG97dIUY/52030"></script></div> */}
+      <div><Script data-cfasync="false" async type="text/javascript" src="//shutesaroph.com/try8VP7D9Azrfk8W/52030"/></div>
       </>
       );
 }

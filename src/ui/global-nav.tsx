@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import {
+  ArrowPathIcon,
   Bars2Icon,
   Bars4Icon,
   ChatBubbleLeftIcon,
@@ -97,6 +98,14 @@ export function GlobalNav() {
   );
 };
 
+
+function LoadingIcon(){
+  return(<>
+    <ArrowPathIcon className="w-4 animate-spin font-semibold"/> ...
+    </>
+  )
+}
+
 function NavItem({
   item,
   idx
@@ -104,6 +113,12 @@ function NavItem({
   item: MangaSource,
   idx: number
 }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleClick = () => {
+    setLoading(true);
+  };
+
   const segment = usePathname();
   const isActive = segment.includes("/" + item.value);
   let _link = `${_hostwww}/${item.value}`;
@@ -143,6 +158,8 @@ function NavItem({
       target={_target}
       href={_link}
       key={idx}
+      onClick={handleClick}
+
       className={clsx(
         'group flex items-center lg:text-sm lg:leading-6 mb-4 pl-5  py-1',
         {
@@ -161,6 +178,7 @@ function NavItem({
         {Icon}
       </div>
       {item.lable}
+      {loading ? LoadingIcon(): ''}
     </Link>
   );
 }

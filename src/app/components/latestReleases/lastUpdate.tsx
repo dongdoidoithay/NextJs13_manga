@@ -5,7 +5,7 @@ import { MangaLang, SelectMangaTypeByPage } from "@/constants/configBase";
 import ImageLoading from "@/ui/ImageLoading";
 import { Boundary } from "@/ui/boundary";
 import getDate from "@/utils/caldate";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import { ArrowPathIcon, ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { useQuery } from "react-query";
@@ -31,17 +31,8 @@ const LastRelease = ({ typeManga }: any) => {
       refetchOnWindowFocus: false,
     }
   );
-  const scrollAction = () => {
-    const anchor = document.querySelector('#newReleaseUpdate')
-    if (anchor) {
-      anchor.scrollIntoView( /* { behavior: 'smooth' } */)
-    }
-  }
+
   if (!isFetching && data && page > 0) {
-    /*  setTimeout(
-       () => scrollAction(), 
-       100
-     );  */
     setTimeout(() => {
       sectionRef.current?.scrollIntoView();
     }, 0);
@@ -56,8 +47,28 @@ const LastRelease = ({ typeManga }: any) => {
     if (page > 0)
       setPage(page - 1)
   }
+
+  const [loading, setLoading] = useState(false);
+  const [itemLoading, setItemLoading] = useState<number>();
+  const handleClick = (index:number) => {
+    setLoading(true);
+    setItemLoading(index);
+  };
+  const skeletonLoadding = () => {
+    return (
+      <tr className="animate-pulse border border-blue-300 shadow rounded-md">
+      <td className="w-1"><div className="h-5 bg-slate-700 rounded-full "><ArrowPathIcon className="w-4 animate-spin font-semibold"/></div></td>
+      <td className="w-1/2 ml-1"><div className="h-3 bg-slate-700 rounded ">Loadding..</div></td>
+      <td className="w-1/5"><div className="h-7 bg-slate-700 rounded"></div></td>
+      <td className="w-1/5"><div className="h-3 bg-slate-700 rounded "></div></td>
+    </tr>
+    )
+  };  
+
   const _renderItem = (data: any, index: number) => {
     return (
+      <>
+      {loading && index==itemLoading ? skeletonLoadding():
       <tr key={index + "-" + data.idDoc} className="border-b border-dotted border-slate-700 hover:border-dashed hover:border-sky-400">
         <td className="w-1/12 justify-center text-center text-lg font-semibold">
           <div className="border border-dashed justify-center w-10/12 bg-slate-950/70 overflow-hidden rounded-md p-1 m-2">
@@ -70,6 +81,7 @@ const LastRelease = ({ typeManga }: any) => {
             rel="nofollow"
             href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
             title={`${config.configSetting.lbl_start_manga} ${data.name}`}
+            onClick={()=>handleClick(index)}
           >
             {data.name}
           </Link>
@@ -86,10 +98,10 @@ const LastRelease = ({ typeManga }: any) => {
           <table className="w-full text-left border-collapse text-sm ">
             <tbody>
               {data.detail_documents &&
-                data.detail_documents.slice(0, 2).map((item: any, index: number) => (
+                data.detail_documents.slice(0, 2).map((item: any, ind: number) => (
                   <tr
                     className="m-3 border-b border-dotted border-slate-600 hover:border-dashed hover:border-sky-400"
-                    key={index + "" + item.idDetail}
+                    key={ind + "" + item.idDetail}
                   >
                     <td className="py-2 mr-1">
                       <Link
@@ -97,6 +109,8 @@ const LastRelease = ({ typeManga }: any) => {
                         rel="nofollow"
                         href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`}
                         title={`${config.configSetting.lbl_start_manga} ${data.name} ${config.configSetting.lbl_start_chapter} ${item.idDetail}`}
+
+                        onClick={()=>handleClick(index)}
                       >
                         {config.configSetting
                           ? config.configSetting.lbl_text_chapter
@@ -112,6 +126,8 @@ const LastRelease = ({ typeManga }: any) => {
           </table>
         </td>
       </tr>
+      }
+     </>
     );
   };
   const PageAction = () => {

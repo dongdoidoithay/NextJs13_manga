@@ -27,9 +27,8 @@ const FetchCheckTrend = async (config: MangaLang, idmanga: string) => {
         
         const _arraytype = ['trend', 'popular', 'slide'];
         const params = new URLSearchParams({ idDoc: id, type: _arraytype[Math.floor(Math.random() * _arraytype.length)] });
-        toast("AddTrend Done!"+config.apiPath + config.endPointPath.addTrend +"{"+params+"}")
        await AxiosPostApi(config.apiPath + config.endPointPath.addTrend, params).then(response => {
-          console.log("post Trend-->response",response);
+         
           toast("🦄Thank you for the nomination, manga / novels will be on the  Popular  list soon!", {
             position: "bottom-center",
             autoClose: 5000,

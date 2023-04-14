@@ -14,6 +14,8 @@ import getDate from "@/utils/caldate";
 import ImageLoading from "@/ui/ImageLoading";
 import { Boundary } from "@/ui/boundary";
 import Link from "next/link";
+import { useState } from "react";
+import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 const FetchDataPopular = async (config: MangaLang) => {
   return await FetchApi(config.apiPath + config.endPointPath.homePopular);
@@ -32,14 +34,34 @@ const PopupRelease = ({ typeManga }: any) => {
     }
   );
 
+  const [loading, setLoading] = useState(false);
+  const [itemLoading, setItemLoading] = useState<number>();
+  const handleClick = (index:number) => {
+    setLoading(true);
+    setItemLoading(index);
+  };
+  const skeletonLoadding = () => {
+    return (
+      <tr className="animate-pulse border border-blue-300 shadow rounded-md">
+      <td className="w-1"><div className="h-5 bg-slate-700 rounded-full "><ArrowPathIcon className="w-4 animate-spin font-semibold"/></div></td>
+      <td className="w-1/2 ml-1"><div className="h-3 bg-slate-700 rounded ">Loadding..</div></td>
+      <td className="w-1/5"><div className="h-7 bg-slate-700 rounded"></div></td>
+      <td className="w-1/5"><div className="h-3 bg-slate-700 rounded "></div></td>
+    </tr>
+    )
+  };  
+
   const popular = (data: any, index: number) => {
     return (
-      <Link
+      <>
+       {loading && index==itemLoading ? skeletonLoadding():
+        <Link
         rel="nofollow"
         href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
         title={`${config.configSetting.lbl_inf_start_manga} ${data.name}`}
         key={index}
         className="relative rounded-xl lg:w-1/2 w-full text-sm text-sky-500 dark:text-sky-400 " 
+        onClick={()=>handleClick(index)}
       >
         <div className="overflow-auto my-1 mx-1 border rounded-lg  hover:border-dashed hover:border-sky-400">
           <div className="overflow-hidden relative mx-auto flex items-center gap-6">
@@ -63,7 +85,9 @@ const PopupRelease = ({ typeManga }: any) => {
             </div>
           </div>
         </div>
-      </Link>
+        </Link>
+      }
+      </>
     );
   };
   const skeleton = () => {

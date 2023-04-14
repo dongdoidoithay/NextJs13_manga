@@ -69,7 +69,7 @@ import AdsDetail from "../ads/ads_detail";
     <>
      <InfoHeaderBlock config={config} dataManga={dataManga}/>
      <InfoActionBlock id={id}  des_full={des_full} config={config} dataManga={dataManga}/>
-     <RenderChapterList id={id} config={config} mangaName={dataManga.name} />
+     <RenderChapterList id={id} config={config} mangaName={dataManga.name}  dataManga={dataManga} isSeo={true}/>
      <AdsDetail/>
      <InfoOtherBlock id={id}  key_word={key_word} config={config} dataManga={dataManga}/>
     </>

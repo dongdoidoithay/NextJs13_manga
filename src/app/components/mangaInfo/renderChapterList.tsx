@@ -1,9 +1,11 @@
 "use client";
 import { FetchApi } from "@/constants/FetchApi";
+import baseSeo from "@/constants/baseSeo";
 import { MangaLang } from "@/constants/configBase";
 import getDate from "@/utils/caldate";
 import { getStorage, setStorage } from "@/utils/localFx";
 import {
+  ArrowPathIcon,
   BarsArrowDownIcon,
   BarsArrowUpIcon,
   CheckCircleIcon,
@@ -39,7 +41,7 @@ const FetchDataChaper = async (
     sort
   );
 };
-const RenderChapterList = ({ id, config, mangaName,idchapter }: { id: string, config: MangaLang,mangaName: any,idchapter?:any }) => {
+const RenderChapterList = ({ id, config, mangaName,idchapter,dataManga,isSeo}: { id: string, config: MangaLang,mangaName: any,idchapter?:any,dataManga:any,isSeo:boolean }) => {
   const [idDetailFilter, setIdDetailFilter] = useState("all");
   const [sort, setSort] = useState("ASC");
   const [currentPage, SetCurrentPage] = useState(0);
@@ -262,7 +264,7 @@ const RenderChapterList = ({ id, config, mangaName,idchapter }: { id: string, co
   }
 
 
-  let histIdchap = "";
+let histIdchap = "";
 var cookie_obj = JSON.parse(
   getStorage(config.localKey.localReadView) as string
 );
@@ -275,83 +277,186 @@ if (cookie_obj != null && _fixid ) {
     }
   }
 }
+let json_ld={};
+if(isSeo){
+  let des_full='';
+  if (dataManga.desc != null && dataManga.desc != "") {
+    des_full = dataManga.desc
+      .replace(/"/gi, "")
+      .replace(/{domain}/g, config.configSetting.lbl_domain_name);
+  } else {
+    des_full = config.configSetting.desc_info_manga
+      .replace(/{name}/gi, dataManga.name)
+      .replace(/{nameOther}/g, dataManga.nameOther)
+      .replace(/{auth}/g, '')
+      .replace(/{domain}/g, config.configSetting.lbl_domain_name)
+      .replace(/{chapter}/g, '');
+  }
+  const key_word =
+  config.configSetting.keyword_info_manga
+    .replace(/{name}/gi, dataManga.name)
+    .replace(/{nameOther}/g, dataManga.nameOther)
+    .replace(/{auth}/g, '')
+    .replace(/{domain}/g, config.configSetting.lbl_domain_name)
+    .replace(/{chapter}/g, idchapter) + dataManga.tags;
+    const title = config.configSetting.info_name_manga_title
+  .replace(/{name}/gi, dataManga.name)
+  .replace(/{nameOther}/g, dataManga.nameOther)
+  .replace(/{auth}/g, '')
+  .replace(/{domain}/g, config.configSetting.lbl_domain_name)
+  .replace(/{chapter}/g, idchapter);
+  const url=`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${dataManga.idDoc}${config.configPrefix.endManga}`;
+ 
+ 
+  let _arrPart:any=[];
+  if(!isFetchingChapter &&
+    !isLoadingChapter &&
+    dataChapter &&
+    dataChapter.data ){
+      dataChapter.data.map((item: any, index: number) => {
+        const url_part=`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}${config.configPrefix.endManga}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`;
+        const _itenpart={
+            "@type": "ComicIssue",
+            "name": dataManga.name+" #"+item.idDetail,
+            "url": url_part,
+            "issueNumber": item.idDetail,
+            "datePublished": new Date(dataManga.date).toUTCString(),
+            "image": dataManga.image,
+            "description": des_full,
+            "about": {
+              "@type": "Thing",
+              "name": title,
+              "url": url
+            }
+        };
 
-
-  const comicJson={
+        _arrPart.push(_itenpart);
+      })
+    }
+ 
+ 
+  json_ld={
     "@context": "https://schema.org/",
     "@type": "ComicSeries",
-    "name": "The Amazing Spider-Man",
-    "url": "https://example.com/comics/spider-man",
-    "image": "https://example.com/comics/spider-man.jpg",
-    "description": "The Amazing Spider-Man is a comic book series featuring the character Spider-Man, published by Marvel Comics.",
+    "name": title,
+    "url": url,
+    "image": dataManga.image,
+    "description": des_full,
     "publisher": {
       "@type": "Organization",
-      "name": "Marvel Comics",
-      "url": "https://www.marvel.com/",
+      "name": baseSeo.publisher,
+      "url": baseSeo.canonical,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.marvel.com/etc/designs/marvel/clientlibs/images/logo-marvel.svg",
+        "url": "/icon.svg",
         "width": 283,
         "height": 81
       }
     },
     "creator": {
       "@type": "Person",
-      "name": "Stan Lee"
+      "name": baseSeo.publisher
     },
-    "keywords": "comic book, superhero, Spider-Man",
+    "keywords": key_word,
     "genre": "Superhero",
     "inLanguage": "English",
     "isPartOf": {
       "@type": "ComicSeries",
-      "name": "Spider-Man Universe",
-      "url": "https://example.com/comics/spider-man-universe"
+      "name": dataManga.name,
+      "url": url
     },
-    "alternateName": "The Amazing Spiderman",
-    "startDate": "1963-03-10",
+    "alternateName": dataManga.nameOther,
+    "startDate": dataManga.year,
     "endDate": "present",
     "sameAs": [
-      "https://www.wikidata.org/wiki/Q262204",
-      "https://en.wikipedia.org/wiki/The_Amazing_Spider-Man"
+      "https://www.wikidata.org/wiki/"+dataManga.idDoc
     ],
     
-    "hasPart": [
+    "hasPart": _arrPart
+  }
+}
+
+let json_chapter_ld={}
+if(!isFetchingChapter &&
+  !isLoadingChapter &&
+  dataChapter &&
+  dataChapter.data ){
+  let chapter_js:any=[];
+  dataChapter.data.map((item: any, index: number) => {
+    const url_part=`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}${config.configPrefix.endManga}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`;
+    const _itenpart={
+        "@type": "ListItem",
+        "position": index+4,
+        "name": `${config.configSetting.lbl_text_chapter} ${item.idDetail}`,
+        "item": url_part
+      };
+
+      chapter_js.push(_itenpart);
+  })
+  json_chapter_ld={
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
       {
-        "@type": "ComicIssue",
-        "name": "The Amazing Spider-Man #1",
-        "url": "https://example.com/comics/spider-man/1",
-        "issueNumber": "1",
-        "datePublished": "1963-03-10",
-        "image": "https://example.com/comics/spider-man/1.jpg",
-        "description": "The Amazing Spider-Man #1 is the first issue of the comic book series The Amazing Spider-Man, published by Marvel Comics.",
-        "about": {
-          "@type": "Thing",
-          "name": "Spider-Man",
-          "url": "https://example.com/characters/spider-man"
-        }
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": baseSeo.canonical
       },
       {
-       "@type": "ComicIssue",
-        "name": "The Amazing Spider-Man #2",
-        "url": "https://example.com/comics/spider-man/1",
-        "issueNumber": "1",
-        "datePublished": "1963-03-10",
-        "image": "https://example.com/comics/spider-man/1.jpg",
-        "description": "The Amazing Spider-Man #1 is the first issue of the comic book series The Amazing Spider-Man, published by Marvel Comics.",
-        "about": {
-          "@type": "Thing",
-          "name": "Spider-Man",
-          "url": "https://example.com/characters/spider-man"
-        }
-      }
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Type Manga",
+        "item": `${config.configPrefix.url_host}${config.configPrefix.pageManga}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": mangaName,
+        "item": `${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${_fixid}${config.configPrefix.endManga}`
+      },
+      ...chapter_js
     ]
-  };
+  }
+} 
+//onclick loadding
+
+const [loading, setLoading] = useState(false);
+const [itemLoading, setItemLoading] = useState<number>();
+const handleClick = (index:number) => {
+  setLoading(true);
+  setItemLoading(index);
+};
+const skeletonLoadding = () => {
+  return (
+    <div className="w-1/2 md:w-1/4 animate-pulse">
+      <div className="rounded border-curent hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400 mr-2 mb-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700  p-1" >
+        <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 bg-slate-700 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <ArrowPathIcon className="w-4 animate-spin font-semibold"/> Loadding...
+              <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+};  
+
 
   return (
     <>
-     <Helmet>
-        <script type="application/ld+json">{JSON.stringify(comicJson)}</script>
+     {isSeo && <Helmet>
+        <script type="application/ld+json">{JSON.stringify(json_ld)}</script>
       </Helmet>
+      }
+ <Helmet>
+        <script type="application/ld+json">{JSON.stringify(json_chapter_ld)}</script>
+      </Helmet>
+
       <div id="chapter-list" className="">
         <div id="header-list" className="flex flex-row h-8 my-3">
           <h3 className="font-semibold text-white/80 first-letter:uppercase before:content-['≣_'] mr-3">
@@ -382,10 +487,11 @@ if (cookie_obj != null && _fixid ) {
             !isLoadingChapter &&
             dataChapter &&
             dataChapter.data &&
-            dataChapter.data.map((item: any, index: any) => {
+            dataChapter.data.map((item: any, index: number) => {
               let active=item.idDetail===idchapter || item.idDetail===histIdchap;
               return (
-                <div
+                <>
+                 {loading && index==itemLoading ? skeletonLoadding():<div
                   className="w-1/2 md:w-1/4"
                   key={item.idDetail + "-" + index}
                 >
@@ -396,6 +502,7 @@ if (cookie_obj != null && _fixid ) {
                         'border-slate-700':!active,
                         'border-orange-500':active,
                     })}
+                    onClick={()=>handleClick(index)}
                   >
                     <CheckCircleIcon className={clsx('w-4 inline',{
                       ' text-orange-500 dark:text-orange-500':active,
@@ -415,6 +522,8 @@ if (cookie_obj != null && _fixid ) {
                     </div>
                   </Link>
                 </div>
+                }
+              </>
               );
             })}
         </div>

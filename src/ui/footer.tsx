@@ -6,6 +6,7 @@ import {
   apiConfigPath,
 } from "@/constants/configBase";
 import { getStorage, setStorage } from "@/utils/localFx";
+import Script from "next/script";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
@@ -110,6 +111,7 @@ const FotterPage = () => {
                  <a href="//www.dmca.com/Protection/Status.aspx?ID=e4da793f-4aab-437a-85bc-033cbafb0b7c" title="DMCA.com Protection Status" className="dmca-badge">
                     <img src="https://images.dmca.com/Badges/dmca_protected_sml_120m.png?ID=e4da793f-4aab-437a-85bc-033cbafb0b7c" alt="DMCA.com Protection Status" />
                 </a> 
+                <Script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js" async/> 
             </div>
             <div id="box-right" className="w-4/5">
                 <div className="block py-1 text-sm justify-center">

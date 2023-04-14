@@ -10,6 +10,8 @@ const PageMangaList = () => {
     const changeAction = (item: any) => {
         setItemAct(item);
     }
+
+    
     return (
         <>
             <div className="flex flex-row flex-wrap gap-3">

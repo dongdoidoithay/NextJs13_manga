@@ -1,14 +1,14 @@
-export const _host="http://localhost:5075";
-export const _hostwww="http://localhost:5075";  
-/* const _host="https://www.mangayabu.xyz";
-const _hostwww="https://www.mangayabu.xyz"; */
+/* export const _host="http://localhost:5075";
+export const _hostwww="http://localhost:5075";   */
+export const _host="https://www.mangahere.fit";
+export const _hostwww="https://www.mangahere.fit";
 
 
 export const _Prefix_Root_Manga_Br='manga-br';
 export const _Prefix_Root_Adult_Br='adult-br';
-export const _Prefix_Root_Scan='scan-hua';
-export const _Prefix_Root_Raw='raw-hua';
-export const _Prefix_Root_Adult='adult-hua';
+export const _Prefix_Root_Scan='manga';
+export const _Prefix_Root_Raw='raw';
+export const _Prefix_Root_Adult='adult';
 export const _Prefix_Root_Dc='comics';
 export const _Prefix_Root_Novel='novel';
 export const _Prefix_Root_NewsDc='blog';
@@ -21,6 +21,7 @@ export const _Prefix_Type_Adult='adult';
 export const _Prefix_Type_Dc='comic';
 export const _Prefix_Type_Novel='novel';
 export const _Prefix_Type_NewsDc='blog';
+
 
 
 

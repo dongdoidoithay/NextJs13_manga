@@ -1,9 +1,9 @@
-const _sb_seo_df_title= "🍀 Manga HUA English |Raw|Scan|Adult|Comics For Free  📖 mangayabu.xyz";
-const _sb_seo_page_default_key= "1stheavenmanga.xyz,manga raw,read manga,Panda Manga, Manga Panda, Manga, Read Manga, Manga Online, Read Manga Free, Manga Scans, Free Manga, Read Manga Online, Read Manga Japan";
-const _sb_seo_page_default_desc= "❶✔️ Read manga online for free ✅. On 1stheavenmanga.xyz you can find hundreds of english translated manga which releases online - free daily updates 100% official";
+const _sb_seo_df_title= "MangaHere - Read Free Official Manga Online💯 mangahere.fit";
+const _sb_seo_page_default_key= "mangahere.fit,manga raw,read manga,MangaHere, Manga Here, Manga, Read Manga, Manga Online, Manga Online, Read Manga Free, Manga Scans, Free Manga, Read Manga Online, Read Manga Japan";
+const _sb_seo_page_default_desc= "MangaHere - Read hottest manga releases online - free daily updates ✅. On mangahere.fit you can find hundreds of english translated manga which releases online - free daily updates 100% official";
 
-const _sb_seo_page_group_title= "🔶 Read Manga in Group {groupname} | {key} {domain}";
-const _sb_seo_page_group_desc= "❶✔️ Read your favorite {groupname} by {key} 📖 Page {page} for {domain}";
+const _sb_seo_page_group_title= "🔶 Manga Browse by {groupname} | {key} {domain}";
+const _sb_seo_page_group_desc= "✨ Read {groupname} by {key} 📖 Page {page} for {domain}";
 const _sb_seo_page_group_key= "{groupname} {key},{groupname} {key} Page {page},manga raw,read manga,View Comics Online,free online manga,Naruto manga";
 
 const _info_name_manga_title="Read {name} 🍀 {chapter} {domain} ✅ {nameOther} Read Online";
@@ -18,14 +18,14 @@ const _keyword_view_name_chapter= "{name} {chapter}, {name} {chapter} of {auth},
 const _tag_view_name_chapter= "read {name} Chapter {chapter}, comic {name} Chapter {chapter}, read {name} volume {chapter} online, {name} Chapter {chapter} high quality, {name} Chapter {chapter} manga scan";
 const _desc_view_chapter= "Read the latest Novel or Manga and Comic <b> {name} {chapter} </b> at <b> {namePage} </b>. Manga <b> {name} </b> is always updated at <b> {namePage} </b>. Dont forget to read the other manga updates. A list of manga collections <b> {namePage} </b> is in the Manga List menu. </p>";
 
-const _lbl_Name_Page=`<span style="color:#CC5207">1ST</span>🐳HEAVEN`;
-const _lbl_domain_Page="mangayabu.xyz";
-const _lbl_domain_name="mangayabu.xyz";
-const _sb_seo_default_image="https://mangayabu.xyz/image/bg.jpg";
+const _lbl_Name_Page=`<span style="color:#CC5207">Manga</span>🐇Here`;
+const _lbl_domain_Page="mangahere.fit";
+const _lbl_domain_name="mangahere.fit";
+const _sb_seo_default_image="https://mangahere.fit/bg.jpg";
 
 //BR
-const _sb_seo_df_title_br= "🎃Union Mangás Grátis Online - Raw |Translate| Comic | Novels - Blogs at 💯 ✅ mangayabu.xyz";
-const _sb_seo_page_default_key_br= "mangayabu.xyz,mangá union, 4koma, acao, adulto, artes marciais, aventura, comedia, criancas, culinaria, demonios, drama, ecchi, escolar, espaco, esportes, fantasia, ficcao, gender bender, harem";
+const _sb_seo_df_title_br= "🎃Union Mangás Grátis Online - Raw |Translate| Comic | Novels - Blogs at 💯 ✅ mangahere.fit";
+const _sb_seo_page_default_key_br= "mangahere.fit,mangá union, 4koma, acao, adulto, artes marciais, aventura, comedia, criancas, culinaria, demonios, drama, ecchi, escolar, espaco, esportes, fantasia, ficcao, gender bender, harem";
 const _sb_seo_page_default_desc_br= "✅ Você pode ler quadrinhos online em português aqui.Mangás Raw,Adult,Translate,Novels,Comic .A história é atualizada diariamente e é um recurso conveniente para anunciar novas traduções - free daily updates 💯% official";
 
 

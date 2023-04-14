@@ -9,7 +9,6 @@ import TopComment from './components/homePage/topComments';
 import HistoryHome from './components/homePage/historyHome';
 import AdsTop from './components/ads/ads_top_body';
 import AdsDetail from './components/ads/ads_detail';
-import { Helmet } from 'react-helmet';
 
 export const metadata: Metadata = {
   title: baseSeo.title,
@@ -45,6 +44,12 @@ export const metadata: Metadata = {
     },
   },
   icons: baseSeo.Icon,
+  publisher:baseSeo.publisher,
+  viewport:baseSeo.viewport,
+  robots:baseSeo.robots,
+  alternates:baseSeo.alternates,
+  bookmarks:baseSeo.bookmarks,
+  
 };
 
 
@@ -52,9 +57,7 @@ export default function Home() {
   
   return (
     <>
-    {/* <Helmet>
-
-    </Helmet> */}
+  
       <GlobalNav />
       <div className="lg:pl-60  bg-slate-900/70 border border-slate-700">
         <main className="px-2">

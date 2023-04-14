@@ -7,9 +7,9 @@ export const SubnNav = () => {
     let config = SelectMangaTypeByPage('');
     return (<>
         <div className="sticky lg:pr-8 top-0 flex flex-row flex-wrap z-30 w-full flex-none transition-colors duration-500 lg:z-30 border-b border-slate-900/10 dark:border-slate-700 supports-backdrop-blur:bg-white/95 dark:bg-slate-900">
-            <div className="hidden lg:flex w-56 items-center text-xl font-semibold first-line:uppercase first-letter:text-2xl first-letter:font-bold">
-              <a href="/" title={config.configSetting.lbl_Name_Page}>
-                <div dangerouslySetInnerHTML={{ __html: config.configSetting.lbl_Name_Page }}></div>
+            <div className="hidden lg:flex w-56 items-center ">
+              <a href="/" title={config.configSetting.lbl_domain_Page} >
+                <div dangerouslySetInnerHTML={{ __html: config.configSetting.lbl_Name_Page }} className="w-full text-xl font-semibold first-line:uppercase first-letter:text-2xl first-letter:font-bold"></div>
               </a> 
             </div>
             <div className="pl-5 flex-1 max-w-8xl mx-auto hidden lg:block">
