@@ -41,6 +41,26 @@ const FetchDataChaper = async (
     sort
   );
 };
+const SkeletonLoadding = () => {
+  return (
+    <div className="w-1/2 md:w-1/4 animate-pulse">
+      <div className="rounded border-curent hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400 mr-2 mb-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700  p-1" >
+        <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+        <div className="flex-1 space-y-6 py-1">
+          <div className="h-2 bg-slate-700 rounded"></div>
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-4">
+              <ArrowPathIcon className="w-4 animate-spin font-semibold"/> Loadding...
+              <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+};  
+
+
 const RenderChapterList = ({ id, config, mangaName,idchapter,dataManga,isSeo}: { id: string, config: MangaLang,mangaName: any,idchapter?:any,dataManga:any,isSeo:boolean }) => {
   const [idDetailFilter, setIdDetailFilter] = useState("all");
   const [sort, setSort] = useState("ASC");
@@ -427,24 +447,6 @@ const handleClick = (index:number) => {
   setLoading(true);
   setItemLoading(index);
 };
-const skeletonLoadding = () => {
-  return (
-    <div className="w-1/2 md:w-1/4 animate-pulse">
-      <div className="rounded border-curent hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400 mr-2 mb-2 hover:text-sky-500 dark:hover:text-sky-400 flex border border-slate-700  p-1" >
-        <div className="rounded-full bg-slate-700 h-10 w-10"></div>
-        <div className="flex-1 space-y-6 py-1">
-          <div className="h-2 bg-slate-700 rounded"></div>
-          <div className="space-y-3">
-            <div className="grid grid-cols-3 gap-4">
-              <ArrowPathIcon className="w-4 animate-spin font-semibold"/> Loadding...
-              <div className="h-2 bg-slate-700 rounded col-span-1"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-};  
 
 
   return (
@@ -453,7 +455,7 @@ const skeletonLoadding = () => {
         <script type="application/ld+json">{JSON.stringify(json_ld)}</script>
       </Helmet>
       }
- <Helmet>
+      <Helmet>
         <script type="application/ld+json">{JSON.stringify(json_chapter_ld)}</script>
       </Helmet>
 
@@ -491,11 +493,12 @@ const skeletonLoadding = () => {
               let active=item.idDetail===idchapter || item.idDetail===histIdchap;
               return (
                 <>
-                 {loading && index==itemLoading ? skeletonLoadding():<div
+                {/*  {loading && index==itemLoading ? <SkeletonLoadding key={item.idDetail + "-" + index}/>: */}
+                 <div
                   className="w-1/2 md:w-1/4"
                   key={item.idDetail + "-" + index}
                 >
-                  <Link
+                  <a
                     href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}${config.configPrefix.endManga}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`}
                     title={`${config.configSetting.lbl_text_chapter} ${item.idDetail}`}
                     className={clsx('rounded border-curent hover:border-dashed hover:border-sky-400 dark:hover:border-sky-400 mr-2 mb-2 hover:text-sky-500 dark:hover:text-sky-400 flex border  p-1',{
@@ -520,9 +523,9 @@ const skeletonLoadding = () => {
                         <ClockIcon className="w-4 inline" /> {config.configSetting.lbl_inf_date}: {getDate(item.date, config)}
                       </i>
                     </div>
-                  </Link>
+                  </a>
                 </div>
-                }
+               {/*  } */}
               </>
               );
             })}

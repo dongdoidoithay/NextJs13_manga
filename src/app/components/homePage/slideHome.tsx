@@ -57,7 +57,7 @@ const SliderHome = ({ typeManga }: any) => {
   const trending = (data: any) => {
 
     return (
-      <Link
+      <a
         key={data.idDoc}
         rel="nofollow"
         href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
@@ -79,7 +79,7 @@ const SliderHome = ({ typeManga }: any) => {
               </span>
             </div> 
         </div>
-      </Link>
+      </a>
     )
   };
 
@@ -89,7 +89,7 @@ const SliderHome = ({ typeManga }: any) => {
       dataArr.map((_data: any, indx: number) => {
         let data = _data.document;
         return (
-          <Link
+          <a
             className="flex h-1/2 w-full lg:w-1/2 text-sm text-sky-500 dark:text-sky-400  hover:text-sky-200 "
             key={data.idDoc}
             rel="nofollow"
@@ -125,7 +125,7 @@ const SliderHome = ({ typeManga }: any) => {
                 </span>
               </div>
             </div>
-          </Link>
+          </a>
         );
       })
     );

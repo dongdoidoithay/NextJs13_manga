@@ -54,13 +54,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark [--scroll-mt:9.875rem] lg:[--scroll-mt:6.3125rem] js-focus-visible lg:mx-24">
+      
       <body className="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900 bg-[url('/grid.svg')]">
         {children}
       </body>
+      <Head>
+          {/*Meta*/}
+          {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" /> */}
+          <meta name="format-detection" content="telephone=no" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="referrer" content="never" />
 
-      {/* Google tag */}
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-CZX1SL5X3D" id="G-1"/>
-        <Script
+        {/* Google tag */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZX1SL5X3D"></script>
+        <script
           dangerouslySetInnerHTML={{
             __html: `
             document.addEventListener("DOMContentLoaded", function() 
@@ -74,10 +81,11 @@ export default function RootLayout({
           }}
         id="G-2"
         /> 
+      </Head>
+     
        {/* https://adcash.myadcash.com/ */}
-       <Script data-cfasync="false" type="text/javascript" src="//onclickprediction.com/a/display.php?r=6014526" id="G-ads"/>
-      {/* propellerads Talented tag */}
-      <Script async data-cfasync="false" src="//arsnivyr.com/1?z=5103992" id="G-pop"/>
+      {/*  <Script data-cfasync="false" type="text/javascript" src="//onclickprediction.com/a/display.php?r=6014526" id="G-ads"/> */}
+     
      
     </html>
   );

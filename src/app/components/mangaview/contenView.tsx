@@ -111,7 +111,7 @@ const ContenView = ({ config, viewMode, data, listImg, SetlistImg, CurrentImage,
         // Calculate the position of the next screen
         const nextScreenPosition = Math.ceil((window.scrollY + 1) / viewportHeight) * viewportHeight;
 
-        console.log("nextScreenPosition", nextScreenPosition)
+       // console.log("nextScreenPosition", nextScreenPosition)
         // Scroll to the next screen
         window.scroll({
             top: nextScreenPosition,

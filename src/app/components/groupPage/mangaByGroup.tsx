@@ -145,7 +145,7 @@ const MangaByGroup = ({ typeManga, typeApi, idFind, pageIndex}:any) => {
               </div>
             </td>
             <td className="w-1/2">
-              <Link
+              <a
                 className="text-sm  text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-200"
                 rel="nofollow"
                 href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
@@ -153,7 +153,7 @@ const MangaByGroup = ({ typeManga, typeApi, idFind, pageIndex}:any) => {
                 onClick={()=>handleClick(index)}
               >
                 <div dangerouslySetInnerHTML={{ __html: data.name }}></div>
-              </Link>
+              </a>
               <div dangerouslySetInnerHTML={{ __html: resultOther }} className="break-word overflow-hidden first-line:uppercase line-clamp-2"></div>
             </td>
             <td className="hidden sm:block py-5 align-middle">
@@ -176,7 +176,7 @@ const MangaByGroup = ({ typeManga, typeApi, idFind, pageIndex}:any) => {
                         key={index + "" + item.idDetail}
                       >
                         <td className="py-2 mr-1">
-                          <Link
+                          <a
                             className="text-sm text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-300"
                             rel="nofollow"
                             href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`}
@@ -186,7 +186,7 @@ const MangaByGroup = ({ typeManga, typeApi, idFind, pageIndex}:any) => {
                             {config.configSetting
                               ? config.configSetting.lbl_text_chapter
                               : ""} {item.idDetail}
-                          </Link>
+                          </a>
                         </td>
                         <td className="hidden sm:block justify-end float-right">
                           {getDate(item.date, config)}

@@ -55,7 +55,7 @@ const PopupRelease = ({ typeManga }: any) => {
     return (
       <>
        {loading && index==itemLoading ? skeletonLoadding():
-        <Link
+        <a
         rel="nofollow"
         href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
         title={`${config.configSetting.lbl_inf_start_manga} ${data.name}`}
@@ -85,7 +85,7 @@ const PopupRelease = ({ typeManga }: any) => {
             </div>
           </div>
         </div>
-        </Link>
+        </a>
       }
       </>
     );

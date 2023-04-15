@@ -65,6 +65,7 @@ export default function Home() {
             <AdsTop/>
             <HistoryHome/>
             <PopupHome typeManga={null} nameLable={null}/>
+            
             <LastUpdateHome typeManga={null}/>
             <AdsDetail/>
             <TopComment />

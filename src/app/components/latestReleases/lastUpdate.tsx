@@ -76,7 +76,7 @@ const LastRelease = ({ typeManga }: any) => {
           </div>
         </td>
         <td className="w-1/2">
-          <Link
+          <a
             className="text-sm text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-200"
             rel="nofollow"
             href={`${config.configPrefix.url_host}${config.configPrefix.pageManga}/${config.configPrefix.startManga}${data.idDoc}${config.configPrefix.endManga}`}
@@ -84,7 +84,7 @@ const LastRelease = ({ typeManga }: any) => {
             onClick={()=>handleClick(index)}
           >
             {data.name}
-          </Link>
+          </a>
         </td>
         <td className="hidden sm:block py-5 align-middle">
           <div>
@@ -104,7 +104,7 @@ const LastRelease = ({ typeManga }: any) => {
                     key={ind + "" + item.idDetail}
                   >
                     <td className="py-2 mr-1">
-                      <Link
+                      <a
                         className="text-sm text-sky-500 dark:text-sky-400 hover:text-md hover:font-semibold hover:text-sky-300"
                         rel="nofollow"
                         href={`${config.configPrefix.url_host}${config.configPrefix.pageViewManga}/${config.configPrefix.startManga}${item.idDoc}/${config.configPrefix.startViewmanga}${item.idDetail}${config.configPrefix.endViewmanga}`}
@@ -115,7 +115,7 @@ const LastRelease = ({ typeManga }: any) => {
                         {config.configSetting
                           ? config.configSetting.lbl_text_chapter
                           : ""} {item.idDetail}
-                      </Link>
+                      </a>
                     </td>
                     <td className="hidden sm:block justify-end float-right">
                       {getDate(item.date, config)}

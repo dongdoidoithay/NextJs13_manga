@@ -1,5 +1,5 @@
-/* export const _host="http://localhost:5075";
-export const _hostwww="http://localhost:5075";   */
+/* export const _host="http://localhost:5004";
+export const _hostwww="http://localhost:5004";   */
 export const _host="https://www.mangahere.fit";
 export const _hostwww="https://www.mangahere.fit";
 
