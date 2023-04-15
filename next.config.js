@@ -28,7 +28,7 @@ const nextConfig = {
   },
 
   // stream
-  reactMode: 'concurrent', //chưa rõ
+  //reactMode: 'concurrent', //chưa rõ
   workerThreads: true,
   streams: true,
   pageDataReceived: true,

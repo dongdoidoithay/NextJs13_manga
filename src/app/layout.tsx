@@ -64,29 +64,23 @@ export default function RootLayout({
           <meta name="format-detection" content="telephone=no" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="referrer" content="never" />
-
-        {/* Google tag */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CZX1SL5X3D"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            document.addEventListener("DOMContentLoaded", function() 
-            {
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-CZX1SL5X3D');
-            }); `,
-          }}
-        id="G-2"
-        /> 
       </Head>
      
        {/* https://adcash.myadcash.com/ */}
+      {/*  <Script data-cfasync="false" type="text/javascript" src="//onclickprediction.com/a/display.php?r=6014526" strategy="afterInteractive"></Script> */}
       {/*  <Script data-cfasync="false" type="text/javascript" src="//onclickprediction.com/a/display.php?r=6014526" id="G-ads"/> */}
      
-     
+      {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-CZX1SL5X3D" strategy="afterInteractive"/>
+      <Script id="google-analytics" strategy="afterInteractive">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CZX1SL5X3D');
+      `}
+      </Script>
     </html>
   );
 }

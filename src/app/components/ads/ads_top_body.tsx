@@ -4,14 +4,18 @@ import { Helmet } from "react-helmet"
 const AdsTop=()=>{
 
     return(<>
-            {/* adsterra.com */}
-          {/*   <Script async data-cfasync="false" src="//marathonpleadparachute.com/bebe4fadb0e79ac8dae1ea9cfa5feaac/invoke.js"/>
-            <div id="container-bebe4fadb0e79ac8dae1ea9cfa5feaac" className="block"></div> */}
-        
-        <div className="block">
-                <Script data-cfasync="false" type="text/javascript" src="//onclickprediction.com/a/display.php?r=6013634"/>
-        </div>
-         
+            {/*pubfuture.com */}
+            <Script
+      async data-cfasync="false" src="https://cdn.adschill.com/v2/unit/pt.js" type="text/javascript"
+        strategy="afterInteractive"
+      />
+            <div id="pf-1769-1"><Script id="google-analytics" strategy="afterInteractive">
+        {`
+        window.pubfuturetag = window.pubfuturetag || [];window.pubfuturetag.push({unit: "62bc1cc71f48e100270a3764", id: "pf-1769-1"})
+        `}
+      </Script></div>
+     
+           
     </>)
     
     }

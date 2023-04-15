@@ -18,7 +18,7 @@ const _keyword_view_name_chapter= "{name} {chapter}, {name} {chapter} of {auth},
 const _tag_view_name_chapter= "read {name} Chapter {chapter}, comic {name} Chapter {chapter}, read {name} volume {chapter} online, {name} Chapter {chapter} high quality, {name} Chapter {chapter} manga scan";
 const _desc_view_chapter= "Read the latest Novel or Manga and Comic <b> {name} {chapter} </b> at <b> {namePage} </b>. Manga <b> {name} </b> is always updated at <b> {namePage} </b>. Dont forget to read the other manga updates. A list of manga collections <b> {namePage} </b> is in the Manga List menu. </p>";
 
-const _lbl_Name_Page=`<span style="color:#CC5207">Manga</span>🐇Here`;
+const _lbl_Name_Page=`<span class="text-sky-400 font-bold">Manga</span>🐇<span class="text-orange-600 font-bold">Here</span>`;
 const _lbl_domain_Page="mangahere.fit";
 const _lbl_domain_name="mangahere.fit";
 const _sb_seo_default_image="https://mangahere.fit/bg.jpg";

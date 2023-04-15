@@ -20,8 +20,8 @@ export async function GET(request: Request) {
     });
     //xoa All file sitemap.xml
     targetFiles.forEach(item => {
-        //console.log("delete==>", publicDirectory + "/" + item)
-        fs.unlink(publicDirectory + "/" + item)
+      //  console.log("delete==>", publicDirectory + "/" + item)
+      //  fs.unlink(publicDirectory + "/" + item)
     });
 
 
@@ -115,7 +115,7 @@ async function genIndexSite(config: any) {
     try {
         await fs.unlink(publicDirectory + "/robots.txt")
     } catch (e) {
-        console.log(e);
+       // console.log("xxxx", e);
     }
     await fs.writeFile(
         publicDirectory + "/robots.txt",

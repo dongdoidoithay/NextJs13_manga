@@ -24,6 +24,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { _hostwww } from "@/constants/configPrefixBase";
 import { usePathname } from 'next/navigation';
 import { SubnNav } from "./sub-nav";
+import Byline from "./byline";
 
 export function GlobalNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,11 +69,12 @@ export function GlobalNav() {
           })}
         >
           <nav className="lg:text-sm lg:leading-6 relative">
-            <div className="font-semibold items-center pb-3">MENU</div>
+           {/*  <div className="font-semibold items-center pb-3">MENU</div> */}
             <ul>
               {MenuLeft.map((navItem, idx) => {
                 return <NavItem item={navItem} idx={idx} key={idx} />;
               })}
+              <Byline className=""/>
               {/* <li>
                 <Link href="/docs/installation" 
                   className="group flex items-center lg:text-sm lg:leading-6 mb-4 ">
@@ -151,6 +153,10 @@ function NavItem({
   if(item.icon=="mangalist"){
     Icon = <RectangleGroupIcon className="w-6 text-white" />
   }
+  if(item.icon=="bookmark"){
+    Icon = <SquaresPlusIcon className="w-6 text-white" />
+  }
+  
   /*   console.log("nav-item-10",item.value)
     console.log("nav-item",{segment,isActive,}) */
   return (
